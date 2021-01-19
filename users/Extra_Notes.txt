@@ -1,0 +1,19 @@
+Here i will put some extra informations about all things that a i have done.
+Almost all of then, is related about apps and how and where i took that instructions
+The structure from wich files will be <MainFile><file>
+
+users genreal informations
+
+<users> User - https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html
+
+##Extending User Model Using a Custom Model Extending AbstractUser
+https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#abstractuser
+
+##Fields - from User model
+https://docs.djangoproject.com/en/3.1/ref/contrib/auth/
+
+##DetailView - get_absolute_url
+https://stackoverflow.com/questions/43179875/when-to-use-django-get-absolute-url-method
+https://medium.com/swlh/implement-crud-in-our-django-app-1c9109591f0c
+https://levelup.gitconnected.com/django-quick-tips-get-absolute-url-1c22321f806b
+

@@ -1,0 +1,13 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <h2>You have been Logged Out</h2>
+    <div class="boder-top pt-3">
+        <!-- <small class="text-muted"> -->
+            <a class="md-2" href="{% url 'login' %}">Log In Again</a>
+        <!-- </small> -->
+    </div>
+    
+{% endblock content %}
+
+<!-- form.email|as_crispy_field -->
