@@ -22,7 +22,7 @@ class Post(models.Model):
     
     # blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
     #===============================================================================
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     # authors = models.ManyToManyField(Author)
     # author_email = models.EmailField(null=True, default='')
     title = models.CharField(max_length=100, blank=False)

@@ -1,7 +1,8 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <h1>Fake No More</h1>
+    <h1 class="mb-3">Fake No More</h1> <!-- para pegar o username from url -->
+    <h6 class="mb-3">Posts by - {{ view.kwargs.username|capfirst }} - {{ page_obj.paginator.count }}</h6>
     {% for post in posts %}
         <article class="media content-section">
             <img class='rounded-cicle article-img' src="{{ post.author.profile.image.url }}" alt="profile_img">

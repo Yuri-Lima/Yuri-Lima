@@ -124,7 +124,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-
+LOGOUT_REDIRECT_URL = 'blog-home'#After login they goes to home page
 LOGIN_REDIRECT_URL = 'blog-home'#After login they goes to home page
 LOGIN_URL = 'login'#if the user is not logged in, they redirect to login page
 

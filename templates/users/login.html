@@ -1,24 +1,42 @@
-{% extends 'blog/base.html' %}
+{% extends 'blog/base_login.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% block content %}
-    <div class="content-section">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="boder-bottom mb-6">Login</legend>                
-                {{ form|crispy }}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-infor" type="submit">Login</button>
-            </div>
-            <div class="boder-top pt-3">
-                <small class="text-muted">Need An Account 
-                    <a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
-                </small>
-            </div>
-        </form>
+<form class="form-signin" method="POST">
+    {% csrf_token %}
+    <img class="mb-4" src="https://cdn.boldomatic.com/content/post/tynAQw/FAKE-NO-MORE?size=800" alt="" width="150" height="150">
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    {{ form.username|as_crispy_field }}
+    {{ form.password|as_crispy_field }}
+    <div class="checkbox mb-3">
+        <label>
+        <input type="checkbox" value="remember-me"> Remember me
+        </label>
     </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2020-2021</p>
+    </form>
+    
 {% endblock content %}
 
-<!-- form.email|as_crispy_field -->
+
+<!-- 
+
+<div class="content-section">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="boder-bottom mb-6">Login</legend>                
+            aqui ficava o  formulario
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-infor" type="submit">Login</button>
+        </div>
+        <div class="boder-top pt-3">
+            <small class="text-muted">Need An Account 
+                <a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
+            </small>
+        </div>
+    </form>
+</div> -->

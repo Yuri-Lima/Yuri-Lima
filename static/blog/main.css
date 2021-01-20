@@ -88,3 +88,17 @@ body {
   .account-heading {
     font-size: 2.5rem;
   }
+  /*
+ * Footer
+ */
+.blog-footer {
+  position: relative;
+  padding: 2.5rem 0;
+  color: rgb(107, 104, 104);
+  text-align: center;
+  background-color: #f9f9f9;
+  border-top: .05rem solid #e5e5e5;
+}
+.blog-footer p:last-child {
+  margin-bottom: 0;
+}

@@ -7,7 +7,10 @@
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="boder-bottom mb-6">Blog Post</legend> 
-                {{ form|crispy }}
+                {{ form.title|as_crispy_field }}
+                {{ form.content|as_crispy_field }}
+                {{ form.url|as_crispy_field }}
+                {{ form.contact_number|as_crispy_field }}
             </fieldset>
             <div class="form-group">
                 <button class="btn btn-outline-infor" type="submit">Post</button>
@@ -20,3 +23,4 @@
         </div> -->
     </div>
 {% endblock content %}
+

@@ -6,9 +6,19 @@
             <img class='rounded-cicle article-img' src="{{ object.author.profile.image.url }}" alt="profile_img">
             <div class="media-body">
             <div class="article-metadata">
-                <small class="text-muted"><b>Author: </b><a class="mr-2" href="#">{{ object.author|capfirst }}</a></small>
+                {% if object.author == user %}
+                <small class="text-muted"><b>Author: </b><a class="mr-2" href="{% url 'user-posts' object.author.username %}">{{ object.author|capfirst }}</a></small>
+                {% else %}
+                    <small class="text-muted"><b>Author: </b><a class="mr-2" href="#">{{ object.author|capfirst }}</a></small>
+                {% endif %}
+                
                 <small class="text-muted"><b>Posted: </b> {{ object.date_posted|date:'N d, Y H:i:s' }}</small>
                 <small class="text-muted"><b>Last Updated: </b> {{ object.date_updated|date:'N d, Y H:i:s' }}</small>
+                {% if object.author == user %}
+                    <a class="btn btn-info btn-sm mt-0 mb-0" href="{% url 'post-update' object.id %}">Update</a>
+                    <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
+                {% endif %}
+
             </div>
             <h2 class="article-title">{{ object.title }}</h2>
             <p class="article-content">{{ object.content }}</p>
