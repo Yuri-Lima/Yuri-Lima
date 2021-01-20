@@ -9,12 +9,10 @@
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     {{ form.username|as_crispy_field }}
     {{ form.password|as_crispy_field }}
-    <div class="checkbox mb-3">
-        <label>
-        <input type="checkbox" value="remember-me"> Remember me
-        </label>
-    </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <small class="text-muted ml-2">
+        <a href="{% url 'password_reset' %}">Fortgot Password</a>    
+    </small>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
     <p class="mt-5 mb-3 text-muted">&copy; 2020-2021</p>
     </form>
     
