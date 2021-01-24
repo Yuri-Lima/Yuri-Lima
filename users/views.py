@@ -28,13 +28,13 @@ def register(request):
 def profile(request):#https://www.youtube.com/watch?v=CQ90L5jfldw&list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p&index=9
     if request.method =='POST':
         u_form = UserUpdateForm(request.POST,instance=request.user)
-        p_form = ProfileUpdateForm(request.POST, instance=request.user.profile)#request.FILES, 
-        if u_form.is_valid():
+        p_form = ProfileUpdateForm(request.POST,request.FILES, instance=request.user.profile)#request.FILES, 
+        #print('p_form',p_form)
+        if u_form.is_valid() and p_form.is_valid():
             u_form.save()
-            if p_form.is_valid():
-                p_form.save()
-                messages.success(request, f'Your account has beend updated!')
-                return redirect('profile')
+            p_form.save()
+            messages.success(request, f'Your account has beend updated!')
+            return redirect('profile',)
         else:
             messages.error(request, f'Something Went Wrong, Try update it Again')
             return redirect('profile')

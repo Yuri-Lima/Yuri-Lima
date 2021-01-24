@@ -31,5 +31,5 @@ class Profile(models.Model):#https://docs.djangoproject.com/pt-br/3.1/ref/models
         img =Image.open(self.image.path)#Just to rezise the profile image
         if img.height > 300 or img.width > 300:
             output_size = (300, 300)
-            img.thumbnail(output_size,reducing_gap=2.0)
-            img.save(self.image.path, filename = "yuri_lima")
+            img.thumbnail(output_size)
+            img.save(self.image.path)#filename = "yuri_lima"

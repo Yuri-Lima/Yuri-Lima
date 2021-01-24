@@ -1,0 +1,26 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="boder-bottom mb-6">Blog Contact</legend> 
+                {{ email_form.from_email|as_crispy_field }}
+                {{ email_form.subject|as_crispy_field }}
+                {{ email_form.message|as_crispy_field }}
+                
+                
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-infor" type="submit">Send</button>
+            </div>
+        </form>
+        <!-- <div class="boder-top pt-3">
+            <small class="text-muted">Already Have An Account 
+                <a class="ml-2" href="{% url 'login' %}">Sign In</a>
+            </small>
+        </div> -->
+    </div>
+{% endblock content %}

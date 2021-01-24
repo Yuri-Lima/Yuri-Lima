@@ -36,7 +36,6 @@
                 {% if user.is_authenticated %}
                 <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
                 <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
-                <a class="nav-item nav-link"><b>Last Login: </b> {{ user.last_login|date:'N d, Y H:i' }}</small></a>
                 {% else %}
                 <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
                 <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
@@ -49,7 +48,6 @@
                 <a class="nav-item nav-link" href="{% url 'post-create' %}">New Post</a>
                 <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
                 <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
-                <!-- <small class="text"><b>Last Login: </b> {{ user.last_login|date:'N d, Y H:i' }}</small> -->
                 {% else %}
                   <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
                   <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
@@ -75,29 +73,30 @@
             {% block content %}
             
             {% endblock %}
-<!-- ======================================================================== -->
           </div>
           <div class="col-md-4">
             <div class="content-section">
               <h3>Our Sidebar</h3>
               <p class='text-muted'>You can put any information here you'd like.
                 <ul class="list-group">
-                  <li class="list-group-item list-group-item-light">Latest Posts</li>
+                  {% if user.is_authenticated %}
+                  <li class="list-group-item list-group-item-light">Latest Login {{ user.last_login|date:'N d, Y H:i' }}</small></li>
+                  {% else %}
                   <li class="list-group-item list-group-item-light">Announcements</li>
                   <li class="list-group-item list-group-item-light">Calendars</li>
                   <li class="list-group-item list-group-item-light">etc</li>
+                  {% endif %}
                 </ul>
               </p>
             </div>
           </div>
-        </div>
+        </div> 
       </main>
 <!-- ======================================================================== -->
     <footer class="blog-footer">
-      <p>Blog <a href="#">Fake No More</a> by <a href="#">Yuri Lima</a>.</p>
-      <p>
-        <a href="#">Back to top</a>
-      </p>
+      <p>Blog <a href="{% url 'blog-about' %}">Fake No More</a> by <a href="#">Yuri Lima</a>.</p>
+      <p>Blog <a href="{% url 'email-contact' %}">Contact</a></p>
+      <p><a href="#">Back to top</a></p>
     </footer>   
 
     <!-- Optional JavaScript -->

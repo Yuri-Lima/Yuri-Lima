@@ -48,7 +48,13 @@ urlpatterns = [
     #Main Page Blog
     path('blog/', include('blog.urls')),
     path('', include('blog.urls')),
+
+    #Blog Emails
+    path('', include('emails.urls')),
+
+    #Blog richtextfield
+    path('djrichtextfield/', include('djrichtextfield.urls'))
 ]
 
-if settings.DEBUG:
+if settings.DEBUG is True:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

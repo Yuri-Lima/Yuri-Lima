@@ -2,6 +2,7 @@
 
 {% block content %}
     <h1>Fake No More</h1>
+
     {% for post in posts %}
         <article class="media content-section">
             <img class='rounded-cicle article-img' src="{{ post.author.profile.image.url }}" alt="profile_img">
@@ -12,11 +13,13 @@
                 <small class="text-muted"><b>Last Updated: </b> {{ post.date_updated|date:'N d, Y H:i:s' }}</small>
             </div>
             <h2><a class="article-title" href="{{post.get_absolute_url}}">{{ post.title }}</a></h2>
-            <p class="article-content">{{ post.content }}</p>
+            <p class="article-content">{{ post.content2|linebreaks|truncatewords:10 }}</p>
             </div>
         </article>
     {% endfor %}
 
+
+<!-- Paginations -->
     {% if is_paginated %}
 
         {% if page_obj.has_previous %}<!-- Esse o objeto que nossa Views passa dentro do nosso template -->
@@ -40,6 +43,4 @@
 
     {% endif %}
 {% endblock content %}
-
-<!-- django template filters -->
 

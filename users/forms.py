@@ -11,7 +11,7 @@ class UserSignup(UserCreationForm):
         #         'username', 'first_name', 'middle_name', 'last_name', 'email',
         #          'country', 'state', 'city', 'password1', 'password2'
         #          )
-        fields = ('username','first_name','last_name', 'email', 'password1','password2',)
+        fields = ('username','first_name','last_name', 'email','password1','password2',)
         # # fields = '__all__'
         # EMAIL_FIELD = 'email'
         # USERNAME_FIELD = 'username'
@@ -22,7 +22,6 @@ class UserUpdateForm(UserChangeForm):
         model = User
         fields = ('first_name','last_name','username', 'email',)
         # exclude = ('password',)
-        
 
 class ProfileUpdateForm(UserChangeForm):
     class Meta(UserChangeForm.Meta):

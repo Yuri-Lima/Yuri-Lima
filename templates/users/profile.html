@@ -14,6 +14,7 @@
         {% csrf_token %}
         <fieldset class="form-group">
             <legend class="boder-bottom mb-6">Profile Infor</legend>
+            
             <!-- UserUpdateForm -->
             {{u_form.username|as_crispy_field}}
             {{u_form.first_name|as_crispy_field}}
@@ -21,7 +22,7 @@
             {{u_form.email|as_crispy_field}} 
 
             <!-- ProfileUpdateForm -->
-            <!-- p_form.image|as_crispy_field -->
+            {{p_form.image|as_crispy_field}}
             {{p_form.bio|as_crispy_field}} 
 
         </fieldset>
