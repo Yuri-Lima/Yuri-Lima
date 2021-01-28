@@ -1,3 +1,0 @@
-Django==3.1.5
-django-crispy-forms==1.10.0
-pip install django-richtextfield
