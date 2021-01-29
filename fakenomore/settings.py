@@ -162,3 +162,12 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD') #77c3208e6c476466efe096f7e38
 DEFAULT_FROM_EMAIL = "y.m.lima19@gmail.com"  # if you don't already have this in settings
 SERVER_EMAIL = "y.m.lima19@gmail.com"  # ditto (default from-email for Django errors)
 
+
+#AWS S3
+# https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
