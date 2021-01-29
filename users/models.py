@@ -26,10 +26,10 @@ class Profile(models.Model):#https://docs.djangoproject.com/pt-br/3.1/ref/models
     def __str__(self):
         return f'{self.user.username} Profile'
     
-    def save(self, *args, **kwargs):#Django - TypeError - save() got an unexpected keyword argument 'force_insert'
-        super(Profile,self).save(*args,**kwargs) #https://www.youtube.com/watch?v=A7LtgqbO9m8
-        img =Image.open(self.image.path)#Just to rezise the profile image
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
-            img.thumbnail(output_size)
-            img.save(self.image.path)#filename = "yuri_lima"
+    # def save(self, *args, **kwargs):#Django - TypeError - save() got an unexpected keyword argument 'force_insert'
+    #     super(Profile,self).save(*args,**kwargs) #https://www.youtube.com/watch?v=A7LtgqbO9m8
+    #     img =Image.open(self.image.path)#Just to rezise the profile image
+    #     if img.height > 300 or img.width > 300:
+    #         output_size = (300, 300)
+    #         img.thumbnail(output_size)
+    #         img.save(self.image.path)#filename = "yuri_lima"
