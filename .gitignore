@@ -105,6 +105,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+venv-test-heroku/
 .env
 .venv
 env/
@@ -136,3 +137,7 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+#Deply to HEROKU
+static/
+
