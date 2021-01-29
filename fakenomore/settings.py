@@ -163,7 +163,7 @@ DEFAULT_FROM_EMAIL = "y.m.lima19@gmail.com"  # if you don't already have this in
 SERVER_EMAIL = "y.m.lima19@gmail.com"  # ditto (default from-email for Django errors)
 
 
-#AWS S3
+#AWS S3 Buckets Config
 # https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
