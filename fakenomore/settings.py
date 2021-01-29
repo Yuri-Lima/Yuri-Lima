@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+from decouple import config
 from pathlib import Path
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,10 +20,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'zst*02+=9=c(_yv@4aspkg#sq)ut8tnfta%si@k*yf#qpalk=s'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = []
 
@@ -136,6 +136,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
+#AWS S3
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
+
 #Media Paths #https://overiq.com/django-1-10/handling-media-files-in-django/
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
@@ -146,36 +149,16 @@ AUTH_USER_MODEL = 'users.User'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 #Settings SMTP email
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST ='smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = 'y.m.lima19@gmail.com'
-# EMAIL_HOST_PASSWORD = 'kdtgduffsapwuypd'
-
-
 #https://www.youtube.com/watch?v=NxARIts_wls
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST ='smtp.mailgun.org'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'postmaster@mg.fakenomore.com.br' #'postmaster@mg.yurilima.com.br'
-EMAIL_HOST_PASSWORD = 'f559e334b270756850257cea8ee3505f-e438c741-a4b87964' #77c3208e6c476466efe096f7e386ce2b-28d78af2-84901324'
+EMAIL_HOST =config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT', cast=int)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD') #77c3208e6c476466efe096f7e386ce2b-28d78af2-84901324'
 
 #Settings API email
 # EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"  # or sendgrid.EmailBackend, or...
 DEFAULT_FROM_EMAIL = "y.m.lima19@gmail.com"  # if you don't already have this in settings
 SERVER_EMAIL = "y.m.lima19@gmail.com"  # ditto (default from-email for Django errors)
 
-
-# ANYMAIL = {
-#     # (exact settings here depend on your ESP...)
-#     "MAILGUN_API_KEY": "<76ad8f8256a0ff5e14ad24664acdfca5-28d78af2-979c7031>",
-#     "MAILGUN_SENDER_DOMAIN": 'mg.fakenomore.com.br',  # your Mailgun domain, if needed
-# }
-
-# ANYMAIL = {
-#     "MAILGUN_API_KEY": "76ad8f8256a0ff5e14ad24664acdfca5-28d78af2-979c7031",
-#     'MAILGUN_SENDER_DOMAIN': 'https://api.eu.mailgun.net/v3/mg.yurilima.com.br',
-    
-# }

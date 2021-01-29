@@ -22,7 +22,7 @@ def send_email(request):
             to_email = 'y.m.lima19@gmail.com'
             if subject and message and from_email:
                 try:
-                    send_mail(subject, message, from_email, [to_email],fail_silently=False,)
+                    send_mail(subject, message, from_email, [to_email], fail_silently=False,)
                     
                 except BadHeaderError:
                     return HttpResponse('Invalid header found.')
