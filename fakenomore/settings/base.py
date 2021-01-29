@@ -156,7 +156,7 @@ EMAIL_HOST =config('EMAIL_HOST')
 EMAIL_PORT = config('EMAIL_PORT', cast=int)
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD') #77c3208e6c476466efe096f7e386ce2b-28d78af2-84901324'
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 #Settings API email
 # EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"  # or sendgrid.EmailBackend, or...
