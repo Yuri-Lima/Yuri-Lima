@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.urls import reverse
+from django.utils.text import slugify
 
 # Create your models here.
 
@@ -39,6 +40,9 @@ class Post(models.Model):
     # number_of_pingbacks = models.IntegerField(null=True)
     #===============================================================================
     # rating = models.IntegerField(null=True)
+    def save(self):
+        self.slug = slugify(self.title)
+        super(Post, self).save
 
     def __str__(self):
         return self.title
