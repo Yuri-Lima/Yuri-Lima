@@ -1,8 +1,6 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <h1>Fake No More</h1>
-
     {% for post in posts %}
         <article class="media content-section">
             <img class='rounded-cicle article-img' src="{{ post.author.profile.image.url }}" alt="profile_img">
@@ -16,6 +14,7 @@
             <p class="article-content">{{ post.content|linebreaks|truncatewords:30 }}</p>
             </div>
         </article>
+        
     {% endfor %}
 
 
