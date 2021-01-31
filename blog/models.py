@@ -19,16 +19,18 @@ from django.utils.text import slugify
 #     def __str__(self):
 #         return self.name
 
+class Painel(models.Model):
+    hashtag = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, unique=True, on_delete=models.CASCADE)
+    # categories = models.TextChoices()
+
 class Post(models.Model):
-    
-    # blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
     #===============================================================================
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     title = models.CharField(max_length=100, blank=False)
     slug = models.SlugField(max_length=100 ,null=True)
     #===============================================================================
     content = models.TextField(null=True, help_text='Write your Post', blank=False)
-    url = models.URLField(help_text='Paste here the link, witch you saw that news?', blank=False, default='www.exemplo.com')
+    url = models.URLField(help_text='Paste here the link, witch you saw that news?', blank=False)
     contact_number = models.CharField(max_length=20,blank=True, help_text='If you have another way to comunicate.')
     #===============================================================================
     date_posted = models.DateTimeField(auto_now_add= True)
