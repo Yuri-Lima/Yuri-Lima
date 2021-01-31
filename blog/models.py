@@ -27,7 +27,7 @@ class Post(models.Model):
     # authors = models.ManyToManyField(Author)
     # author_email = models.EmailField(null=True, default='')
     title = models.CharField(max_length=100, blank=False)
-    slug = models.SlugField(max_length=100 ,null=True)
+    slug = models.SlugField(max_length=100 ,null=True, )
     #===============================================================================
     content = models.TextField(null=True, help_text='Write your Post', blank=False)
     url = models.URLField(help_text='Paste here the link, witch you saw that news?', blank=False, default='www.exemplo.com')
@@ -40,10 +40,7 @@ class Post(models.Model):
     # number_of_pingbacks = models.IntegerField(null=True)
     #===============================================================================
     # rating = models.IntegerField(null=True)
-    def save(self):
-        self.slug = slugify(self.title)
-        super(Post, self).save
-
+    
     def __str__(self):
         return self.title
     
