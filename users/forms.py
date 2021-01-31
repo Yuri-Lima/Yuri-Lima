@@ -11,11 +11,11 @@ class UserSignup(UserCreationForm):
         #         'username', 'first_name', 'middle_name', 'last_name', 'email',
         #          'country', 'state', 'city', 'password1', 'password2'
         #          )
-        fields = ('username','first_name','last_name', 'email','password1','password2',)
+        fields = ('username','email','first_name','last_name','password1','password2',)
         # # fields = '__all__'
         # EMAIL_FIELD = 'email'
         # USERNAME_FIELD = 'username'
-        # REQUIRED_FIELDS = ['email','username']
+        REQUIRED_FIELDS = ['email','username','first_name','last_name']
 
 class UserUpdateForm(UserChangeForm):
     class Meta(UserChangeForm.Meta):

@@ -20,7 +20,8 @@ from django.utils.text import slugify
 #         return self.name
 
 class Painel(models.Model):
-    hashtag = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, unique=True, on_delete=models.CASCADE)
+    pass
+    # hashtag = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, unique=True, on_delete=models.CASCADE)
     # categories = models.TextChoices()
 
 class Post(models.Model):

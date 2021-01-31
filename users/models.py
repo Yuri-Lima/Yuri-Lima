@@ -8,7 +8,9 @@ from django.contrib.auth import get_user_model
 # Create your models here. https://www.geeksforgeeks.org/creating-custom-user-model-using-abstractuser-in-django_restframework/
 class User(AbstractUser):
     #Perfil
-    middle_name = models.CharField(max_length=150, blank=False)
+    email = models.EmailField(max_length=255, unique=True)
+    first_name = models.CharField(max_length=150)
+    last_name = models.CharField(max_length=150 )
     #Address
     country = models.CharField(max_length=150, blank=False)
     state = models.CharField(max_length=150, blank=False)
