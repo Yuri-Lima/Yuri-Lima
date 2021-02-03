@@ -14,8 +14,8 @@ class Painel(models.Model):
     def __str__(self):
         return self.hashtag
 
-    # def get_absolute_url(self):
-    #     return reverse('painel-detail', kwargs={'pk': self.pk})
+    def get_absolute_url(self):
+        return reverse('painel-detail', kwargs={'pk': self.pk})
 
 class Post(models.Model):
     #===============================================================================

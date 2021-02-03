@@ -11,24 +11,42 @@ from django.views.generic import (
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
-from .models import Post
+from .models import Post, Painel
 from users.models import Profile
 from django.urls import reverse
+from django.urls import reverse_lazy
 
-# Create your views here.
-# def home(request):
-#     context = {
-#         'posts':Post.objects.all(),
-#         'Profile': Profile.objects.all(),
-#     }
-#     return render(request, 'blog/home.html', context)
+
+
+class PainelCreate(LoginRequiredMixin,CreateView):
+    model = Painel
+    fields = ['hashtag','date_posted','date_updated']
+    
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)
+
+class PainelUpdate(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
+    model = Painel
+    fields = ['created_by','hashtag','date_posted','date_updated']
+
+class PainelDelete(LoginRequiredMixin, UserPassesTestMixin,DeleteView):
+    model = Painel
+    success_url = reverse_lazy('painel-list')
+
+
+
+
+
+
+
 
 class PostLisView(ListView):
     model: Post
     template_name = 'blog/home.html'# <app>/<model>_<viewtype>.html
     context_object_name = 'posts' #{% for post in posts %}
     paginate_by = 5 #the number of posts per page 
-    
+    print(Post.objects.all())
 
     def get_queryset(self):
         return Post.objects.all().order_by('-date_posted')
@@ -53,8 +71,6 @@ class PostCreateView(LoginRequiredMixin,CreateView):
 
     def get_queryset(self):
         return Post.objects.all()
-    # def get_object(self, queryset=None): 
-    #     return Post.objects.get(pk=self.kwargs.get("pk"))
 
 class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model: Post
