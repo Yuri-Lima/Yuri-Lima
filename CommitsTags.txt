@@ -8,3 +8,5 @@ test: para testes, ok?
 chore: geralmente o mais emblemático. Serve para coisas relacionados a build, configs e afins. 
 Por exemplo, mexeu em algo no package.json? Use esse cara, seja atualizando a versão do pacote ou 
 instalando novas dependências
+
+https://docs.djangoproject.com/en/dev/topics/class-based-views/generic-editing/
