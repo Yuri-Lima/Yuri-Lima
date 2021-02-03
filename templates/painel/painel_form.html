@@ -6,7 +6,8 @@
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="boder-bottom mb-6">New Painel</legend> 
+                <legend class="boder-bottom mb-6">New Painel</legend>
+                {{ painel_list.hashtag }}
                 {{ form.hashtag|as_crispy_field }} 
             </fieldset>
             <div class="form-group">

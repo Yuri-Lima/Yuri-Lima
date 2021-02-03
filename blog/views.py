@@ -22,24 +22,39 @@ class PainelList(ListView):
     template_name = 'painel/painel_list.html'
     paginate_by = 5 
 
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['post_list'] = Post.objects.all()
+        return context
+
     def get_queryset(self):
         return Painel.objects.all().order_by('-painel_date_posted')
     
 class PainelCreate(LoginRequiredMixin,CreateView):
     model = Painel
     template_name = 'painel/painel_form.html'
-    fields = ['hashtag','date_posted','date_updated']
+    fields = ['hashtag',]
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
         return super().form_valid(form)
+    
 
 class PainelDetail(LoginRequiredMixin,DetailView):
     model: Painel 
     template_name = 'painel/painel_detail.html'
 
     def get_object(self, queryset=None): #https://levelup.gitconnected.com/django-quick-tips-get-absolute-url-1c22321f806b
-        return Painel.objects.get(pk=self.kwargs.get("pk"))
+        return Painel.objects.get(hashtag=self.kwargs.get("hashtag"))
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['post_list'] = Post.objects.all()
+        return context
 
 class PainelUpdate(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model = Painel
@@ -95,6 +110,13 @@ class PostDetailView(DetailView):
     def get_object(self, queryset=None): #https://levelup.gitconnected.com/django-quick-tips-get-absolute-url-1c22321f806b
         return Post.objects.get(pk=self.kwargs.get("pk"))
 
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['painel_list'] = Painel.objects.all()
+        return context
+
 class PostCreateView(LoginRequiredMixin,CreateView):
     model: Post
     fields = ['title', 'content', 'url','contact_number']
@@ -106,6 +128,7 @@ class PostCreateView(LoginRequiredMixin,CreateView):
 
     def get_queryset(self):
         return Post.objects.all()
+    
 
 class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model: Post
