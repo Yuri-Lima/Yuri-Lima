@@ -8,8 +8,8 @@ from django.utils.text import slugify
 class Painel(models.Model):
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     hashtag = models.CharField(max_length=255, unique=True, blank=False, null=True)
-    date_posted = models.DateTimeField(auto_now_add= True, null=True)
-    date_updated = models.DateTimeField(auto_now= True, null=True)
+    painel_date_posted = models.DateTimeField(auto_now_add= True, null=True)
+    painel_date_updated = models.DateTimeField(auto_now= True, null=True)
 
     def __str__(self):
         return self.hashtag
