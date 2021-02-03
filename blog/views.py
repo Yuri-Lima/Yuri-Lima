@@ -17,22 +17,58 @@ from django.urls import reverse
 from django.urls import reverse_lazy
 
 
+class PainelList(ListView): 
+    model: Painel
+    template_name = 'painel/painel_list.html'
+    paginate_by = 5 
 
+    def get_queryset(self):
+        return Painel.objects.all().order_by('-painel_date_posted')
+    
 class PainelCreate(LoginRequiredMixin,CreateView):
     model = Painel
+    template_name = 'painel/painel_form.html'
     fields = ['hashtag','date_posted','date_updated']
-    
+
     def form_valid(self, form):
         form.instance.created_by = self.request.user
         return super().form_valid(form)
 
+class PainelDetail(LoginRequiredMixin,DetailView):
+    model: Painel 
+    template_name = 'painel/painel_detail.html'
+
+    def get_object(self, queryset=None): #https://levelup.gitconnected.com/django-quick-tips-get-absolute-url-1c22321f806b
+        return Painel.objects.get(pk=self.kwargs.get("pk"))
+
 class PainelUpdate(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model = Painel
-    fields = ['created_by','hashtag','date_posted','date_updated']
+    fields = ['hashtag',]
+    template_name = 'painel/painel_form.html'
+
+    def form_valid(self, form):#"""If the form is valid, save the associated model."""
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)
+
+    def get_queryset(self):
+        return Painel.objects.all()
+
+    def test_func(self):
+        painel = self.get_object()
+        if self.request.user == painel.created_by:
+            return True
+        return False
 
 class PainelDelete(LoginRequiredMixin, UserPassesTestMixin,DeleteView):
     model = Painel
+    template_name = 'painel/painel_confirm_delete.html'
     success_url = reverse_lazy('painel-list')
+
+    def test_func(self):
+        painel = self.get_object()
+        if self.request.user == painel.created_by:
+            return True
+        return False
 
 
 
@@ -46,7 +82,6 @@ class PostLisView(ListView):
     template_name = 'blog/home.html'# <app>/<model>_<viewtype>.html
     context_object_name = 'posts' #{% for post in posts %}
     paginate_by = 5 #the number of posts per page 
-    print(Post.objects.all())
 
     def get_queryset(self):
         return Post.objects.all().order_by('-date_posted')

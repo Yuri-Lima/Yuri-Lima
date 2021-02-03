@@ -20,6 +20,7 @@ class Painel(models.Model):
 class Post(models.Model):
     #===============================================================================
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    painel = models.ForeignKey(Painel, on_delete=models.CASCADE, blank=True, null=True)
     title = models.CharField(max_length=100, blank=False)
     slug = models.SlugField(max_length=100 ,null=True)
     #===============================================================================

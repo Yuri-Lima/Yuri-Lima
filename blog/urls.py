@@ -10,7 +10,9 @@ from .views import (
     UserPostLisView,
 
     #Painel
+    PainelList,
     PainelCreate,
+    PainelDetail,
     PainelUpdate,
     PainelDelete
     )
@@ -31,7 +33,9 @@ urlpatterns = [
     
 
     #Painel
+    path('painel/', PainelList.as_view(), name='painel'),
     path('painel/add/', PainelCreate.as_view(), name='painel-add'),
-    path('painel/<int:pk>/', PainelUpdate.as_view(), name='painel-update'),
+    path('painel/<int:pk>/',  PainelDetail.as_view(), name='painel-detail'),
+    path('painel/<int:pk>/update', PainelUpdate.as_view(), name='painel-update'),
     path('painel/<int:pk>/delete/', PainelDelete.as_view(), name='painel-delete'),
 ]

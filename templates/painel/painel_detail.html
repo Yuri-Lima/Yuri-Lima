@@ -1,0 +1,31 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+<div class="media-body">
+    <small class="text-muted"><b>Hastag: </b><a class="mr-2" href="#">{{object.hashtag}}</a></small>
+    <small class="text-muted"><b>Created by: </b><a class="mr-2" href="#">{{object.created_by|capfirst}}</a></small>
+    <small class="text-muted"><b>Posted: </b><a class="mr-2" href="#">{{object.painel_date_posted|date:'N d, Y H:i:s'}}</a></small>
+    <article class="media content-section">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <article class="media content-section ">
+                        
+                            <h5>Create Left Post</h5></button></a>
+                    </article>
+                </div>
+                <div class="col">
+                    <article class="media content-section">
+                        <button type="button" class="btn btn-outline-primary"><h5>Create Right Post</h5></button>
+                    </article>
+                </div>
+            </div>
+            <!-- <div class="row"></div> -->
+        </div>
+    </article>
+
+</div>
+{% endblock content %}
+
+<!-- <a href="{% url 'painel-add' object.pk %}"><button type="button" class="btn btn-outline-primary"></button> -->
