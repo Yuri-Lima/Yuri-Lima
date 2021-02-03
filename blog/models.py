@@ -5,24 +5,17 @@ from django.utils.text import slugify
 
 # Create your models here.
 
-# class Blog(models.Model):
-#     name = models.CharField(max_length=100)
-#     tagline = models.TextField()
-
-#     def __str__(self):
-#         return self.name
-
-# class Author(models.Model):
-#     name = models.CharField(max_length=200)
-#     email = models.EmailField()
-
-#     def __str__(self):
-#         return self.name
-
 class Painel(models.Model):
-    pass
-    # hashtag = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, unique=True, on_delete=models.CASCADE)
-    # categories = models.TextChoices()
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    hashtag = models.CharField(max_length=255, unique=True, blank=False, null=True)
+    date_posted = models.DateTimeField(auto_now_add= True, null=True)
+    date_updated = models.DateTimeField(auto_now= True, null=True)
+
+    def __str__(self):
+        return self.hashtag
+
+    # def get_absolute_url(self):
+    #     return reverse('painel-detail', kwargs={'pk': self.pk})
 
 class Post(models.Model):
     #===============================================================================
