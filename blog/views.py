@@ -2,7 +2,11 @@ from django.shortcuts import (
     render, 
     redirect, 
     get_object_or_404)
+from itertools import zip_longest
 from django.views.generic import (
+    FormView,
+    TemplateView,
+    RedirectView,
     CreateView, 
     ListView, 
     UpdateView, 
@@ -15,31 +19,51 @@ from .models import Post, Painel
 from users.models import Profile
 from django.urls import reverse
 from django.urls import reverse_lazy
+from .form import HashtagForm,PostForm
 
 
-class PainelList(ListView): 
+class PainelList(ListView):
     model: Painel
     template_name = 'painel/painel_list.html'
     paginate_by = 5 
-
+    
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of all the books
-        context['post_list'] = Post.objects.all()
+        context = {
+            'posts': Post.objects.all(),
+            'paineis' : Painel.objects.all()
+        }
         return context
 
-    def get_queryset(self):
+    def get_queryset(self, **kwargs):
         return Painel.objects.all().order_by('-painel_date_posted')
     
+class PainelTemplate(LoginRequiredMixin,FormView):
+    template_name = 'painel/painel_form.html'
+    form_class = HashtagForm
+    success_url = '/post/new/'
+    # success_url = reverse_lazy('post-create')
+
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)
+
+
 class PainelCreate(LoginRequiredMixin,CreateView):
     model = Painel
     template_name = 'painel/painel_form.html'
     fields = ['hashtag',]
 
     def form_valid(self, form):
+        # print('form.hashtag:',form.instance.hashtag)
         form.instance.created_by = self.request.user
         return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('painel-detail', kwargs={'hashtag': self.object.hashtag})
+        
     
 
 class PainelDetail(LoginRequiredMixin,DetailView):
@@ -52,9 +76,23 @@ class PainelDetail(LoginRequiredMixin,DetailView):
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
+        painelpost = Painel.objects.get(hashtag=self.kwargs.get("hashtag"))
+
         # Add in a QuerySet of all the books
-        context['post_list'] = Post.objects.all()
+        context['post_list'] = Post.objects.all().filter(painel=painelpost)
         return context
+
+class UserPainelList(ListView):
+    model: Painel
+    template_name = 'painel/user_painel.html'
+    context_object_name = 'paineis' 
+    paginate_by = 2
+
+    def get_queryset(self):
+        getUser = get_user_model()
+        user = get_object_or_404(getUser, username=self.kwargs.get('username')) #Ele pega o user que vem pela URL
+        return Painel.objects.filter(created_by=user)
+        
 
 class PainelUpdate(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model = Painel
@@ -118,7 +156,7 @@ class PostDetailView(DetailView):
         return context
 
 class PostCreateView(LoginRequiredMixin,CreateView):
-    model: Post
+    model: Post 
     fields = ['title', 'content', 'url','contact_number']
     template_name = 'blog/post_form.html'
     
@@ -127,7 +165,17 @@ class PostCreateView(LoginRequiredMixin,CreateView):
         return super().form_valid(form)
 
     def get_queryset(self):
+        # painel = Post.objects.get(painel=self.request.painel.id)
         return Post.objects.all()
+
+    # def get_context_data(self, **kwargs):
+    #     # Call the base implementation first to get a context
+    #     context = super().get_context_data(**kwargs)
+    #     painelpost = Post.objects.get(painel=self.kwargs.get("hashtag"))
+    #     print('Painelpost:',painelpost)
+    #     # Add in a QuerySet of all the books
+    #     context['post_list'] = Post.objects.all().filter(painel=painelpost)
+    #     return context
     
 
 class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):

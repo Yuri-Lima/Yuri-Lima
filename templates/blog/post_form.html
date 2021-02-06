@@ -7,6 +7,7 @@
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="boder-bottom mb-6">Blog Post</legend> 
+                {{ form.painel|as_crispy_field }}
                 {{ form.title|as_crispy_field }}
                 {{ form.content|as_crispy_field }}
                 {{ form.url|as_crispy_field }}

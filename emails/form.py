@@ -1,8 +1,8 @@
 
 from .models import SendContactEmail
-from django.contrib.auth.forms import UserCreationForm,UserChangeForm
+from django import forms
 
-class SendContactForm(UserChangeForm):
-    class Meta(UserChangeForm.Meta):
+class SendContactForm(forms.ModelForm):
+    class Meta:
         model = SendContactEmail
         fields = ('subject','message','from_email',)

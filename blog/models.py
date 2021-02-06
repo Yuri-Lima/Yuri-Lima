@@ -39,8 +39,8 @@ class Post(models.Model):
     def __str__(self):
         return self.title
     
-    def get_absolute_url(self):
-        return f"/post/{self.pk}/"
+        # def get_absolute_url(self):
+        #     return f"/post/{self.pk}/"
     
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'pk': self.pk})

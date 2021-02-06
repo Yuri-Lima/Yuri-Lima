@@ -17,8 +17,8 @@
 
   <link rel="stylesheet" href="{% static 'blog/main.css' %}">
   <!-- ======================================================================== -->
-  {% if author %}
-  <title>Yuri Lima - {{user.author}}</title>
+  {% if user.username %}
+  <title>Yuri Lima - {{user.username|capfirst}}</title>
   {% else %}
   <title>Yuri Lima</title>
   {% endif %}
