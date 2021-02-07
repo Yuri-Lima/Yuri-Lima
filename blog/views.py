@@ -2,7 +2,6 @@ from django.shortcuts import (
     render, 
     redirect, 
     get_object_or_404)
-from itertools import zip_longest
 from django.views.generic import (
     FormView,
     TemplateView,
@@ -19,7 +18,10 @@ from .models import Post, Painel
 from users.models import Profile
 from django.urls import reverse
 from django.urls import reverse_lazy
-from .form import HashtagForm,PostForm
+from .form import CombinedFormSet, PostFormHelper, PainelForm, HashtagForm
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import HttpResponseRedirect
+
 
 
 class PainelList(ListView):
@@ -53,18 +55,88 @@ class PainelTemplate(LoginRequiredMixin,FormView):
 
 class PainelCreate(LoginRequiredMixin,CreateView):
     model = Painel
+    form_class = PainelForm
     template_name = 'painel/painel_form.html'
-    fields = ['hashtag',]
+    # fields = ['hashtag',]
+    """
+    https://kevindias.com/writing/django-class-based-views-multiple-inline-formsets/
+    """    
+    def get(self, request, *args, **kwargs):
+        """
+        Handles GET requests and instantiates blank versions of the form
+        and its inline formsets.
+        """
+        self.object = None
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        post_form = CombinedFormSet()
+        post_formhelper = PostFormHelper()
 
-    def form_valid(self, form):
-        # print('form.hashtag:',form.instance.hashtag)
+        return self.render_to_response(
+            self.get_context_data(form=form, post_form=post_form)
+        )
+
+    def post(self, request, *args, **kwargs):
+        """
+        Handles POST requests, instantiating a form instance and its inline
+        formsets with the passed POST variables and then checking them for
+        validity.
+        """
+        self.object = None
+        form_class = self.get_form_class()
+        # print('Form_class:', form_class)
+        form = self.get_form(form_class)
+        # print('Form:', form)
+        post_form = CombinedFormSet(self.request.POST)
+        # print('Post_Form:', post_form)
+        if (form.is_valid() and post_form.is_valid()):
+            return self.form_valid(form, post_form)
+
+        return self.form_invalid(form, post_form)
+
+    def form_valid(self, form, post_form):
+        """
+        Called if all forms are valid. Creates a Author instance along
+        with associated books and then redirects to a success page.
+        """
+        # username = form.cleaned_data.get('author')
+        print('Username:',self.request.user)
+
         form.instance.created_by = self.request.user
-        return super().form_valid(form)
+        post_form.instance.author = self.request.user
+        self.object = form.save()
+        post_form.instance = self.object
+        post_form.save()
 
+        return HttpResponseRedirect(self.get_success_url())
+
+    def form_invalid(self, form, post_form):
+        """
+        Called if whether a form is invalid. Re-renders the context
+        data with the data-filled forms and errors.
+        """
+        return self.render_to_response(
+            self.get_context_data(form=form, post_form=post_form)
+        )
+
+    def get_context_data(self, **kwargs):
+        """ Add formset and formhelper to the context_data. """
+        ctx = super(PainelCreate, self).get_context_data(**kwargs)
+        post_formhelper = PostFormHelper()
+
+        if self.request.POST:
+            ctx['form'] = PainelForm(self.request.POST)
+            ctx['post_form'] = CombinedFormSet(self.request.POST, instance = self.request.username)
+            ctx['post_formhelper'] = post_formhelper
+        else:
+            ctx['form'] = PainelForm()
+            ctx['post_form'] = CombinedFormSet()
+            ctx['post_formhelper'] = post_formhelper
+
+        return ctx
+        
     def get_success_url(self):
         return reverse('painel-detail', kwargs={'hashtag': self.object.hashtag})
-        
-    
 
 class PainelDetail(LoginRequiredMixin,DetailView):
     model: Painel 
