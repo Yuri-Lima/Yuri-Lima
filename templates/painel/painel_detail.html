@@ -2,24 +2,34 @@
 
 {% block content %}
 
-
-
 <div class="media-body">
     <small class="text-muted"><b>Hastag: </b><a class="mr-2" href="#">{{object.hashtag}}</a></small>
     <small class="text-muted"><b>Created by: </b><a class="mr-2" href="#">{{object.created_by|capfirst}}</a></small>
     <small class="text-muted"><b>Posted: </b><a class="mr-2" href="#">{{object.painel_date_posted|date:'N d, Y H:i:s'}}</a></small>
-    <div class="content-section">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="boder-bottom mb-6">Blog Post</legend> 
+    {% for post in posts_by_hashtag %}
+        <article class="media content-section">
+            <img class='rounded-cicle article-img' src="{{ post.author.profile.image.url }}" alt="profile_img">
+            <div class="media-body">
+            <div class="article-metadata">
+                {% if post.author == user %}
+                <small class="text-muted"><b>Author: </b><a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author|capfirst }}</a></small>
+                {% else %}
+                    <small class="text-muted"><b>Author: </b><a class="mr-2" href="#">{{ post.author|capfirst }}</a></small>
+                {% endif %}
                 
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-infor" type="submit">Post</button>
+                <small class="text-muted"><b>Posted: </b> {{ post.date_posted|date:'N d, Y H:i:s' }}</small>
+                <small class="text-muted"><b>Last Updated: </b> {{ post.date_updated|date:'N d, Y H:i:s' }}</small>
+                {% if post.author == user %}
+                    <a class="btn btn-info btn-sm mt-0 mb-0" href="{% url 'post-update' post.id %}">Update</a>
+                    <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' post.id %}">Delete</a>
+                {% endif %}
+
             </div>
-        </form>
-    </div>
+            <h2 class="article-title">{{ post.title }}</h2>
+            <p class="article-content">{{ post.content }}</p>
+            </div>
+        </article>
+    {% endfor %}
 {% endblock content %}
 
-<!-- <a href="{% url 'painel-add' object.pk %}"><button type="button" class="btn btn-outline-primary"></button> -->
+<!-- <a href="{% url 'painel-add' post.pk %}"><button type="button" class="btn btn-outline-primary"></button> -->

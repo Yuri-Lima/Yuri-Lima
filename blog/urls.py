@@ -10,7 +10,6 @@ from .views import (
     UserPostLisView,
 
     #Painel
-    PainelTemplate,
     PainelList,
     PainelCreate,
     PainelDetail,
@@ -35,7 +34,6 @@ urlpatterns = [
 
     #Painel
     path('', PainelList.as_view(), name='painel-list'),
-    path('painel/add/as', PainelTemplate.as_view(), name='painel-redirect'),
     path('painel/add/<int:pk>/', PainelCreate.as_view(), name='painel-add'),
     # path('painel/<int:pk>/',  PainelDetail.as_view(), name='painel-detail'),
     path('painel/<str:hashtag>/',  PainelDetail.as_view(), name='painel-detail'),

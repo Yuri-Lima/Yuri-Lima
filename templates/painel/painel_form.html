@@ -6,13 +6,26 @@
 <div class="content-section">
     <form method="POST">
         {% csrf_token %}
-        {% crispy form %}
         <fieldset class="form-group">
-            {{ post_form.management_form }}
-            {{ post_form.non_form_errors }}
+            {% crispy form %}
+            {{ post_form.management_form|crispy}}
+            {{ post_form.non_form_errors|crispy }}
             {% crispy post_form post_formhelper %}
+
+
+            <!-- <th>
+                <label for="id_posts-0-author">Author:</label>
+            </th>
+            <td>
+                <select name="posts-0-author" id="id_posts-0-author">
+        
+                    <option value="{{ request.user.id }}" selected>{{ request.user }}</option>
+    
+                </select>
+            </td> -->
         </fieldset>
-        <input class='btn btn-outline-primary' type='submit' value='Save'>
+        
+        <input type="submit" name="submit" value="Save" class="btn btn-outline-primary" id="submit-save">
     </form>
 <div>
 
@@ -40,3 +53,11 @@
 
 {% endif %}
 {% endblock content %}
+
+<!-- {% for form in post_form %}
+{% crispy form %}
+{% endfor %} -->
+
+
+
+

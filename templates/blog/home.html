@@ -4,7 +4,6 @@
 
     {% for post in posts %}
         <article class="media content-section">
-            <img class='rounded-cicle article-img' src="{{ post.author.profile.image.url }}" alt="profile_img">
             <div class="media-body">
             <div class="article-metadata">
                 <small class="text-muted"><b>Author: </b><a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author|capfirst }}</a></small>

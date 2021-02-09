@@ -18,10 +18,22 @@ from .models import Post, Painel
 from users.models import Profile
 from django.urls import reverse
 from django.urls import reverse_lazy
-from .form import CombinedFormSet, PostFormHelper, PainelForm, HashtagForm
+from .form import PostFormHelper, PainelForm, HashtagForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, request
+from django.forms.models import inlineformset_factory
 
+
+formSet = CombinedFormSet = inlineformset_factory(
+            Painel,
+            Post,
+            fields= ('title','content', 'url', 'contact_number', 'author', ),
+            # form= PostFormHelper,
+            extra=1,
+            can_delete=False,
+            # max_num=1,
+            # validate_max= 1,
+)
 
 
 class PainelList(ListView):
@@ -32,7 +44,7 @@ class PainelList(ListView):
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
-        # Add in a QuerySet of all the books
+        # Add in a QuerySet of all
         context = {
             'posts': Post.objects.all(),
             'paineis' : Painel.objects.all()
@@ -41,40 +53,11 @@ class PainelList(ListView):
 
     def get_queryset(self, **kwargs):
         return Painel.objects.all().order_by('-painel_date_posted')
-    
-class PainelTemplate(LoginRequiredMixin,FormView):
-    template_name = 'painel/painel_form.html'
-    form_class = HashtagForm
-    success_url = '/post/new/'
-    # success_url = reverse_lazy('post-create')
-
-    def form_valid(self, form):
-        form.instance.created_by = self.request.user
-        return super().form_valid(form)
-
 
 class PainelCreate(LoginRequiredMixin,CreateView):
-    model = Painel
+    model = Painel # Painel
     form_class = PainelForm
-    template_name = 'painel/painel_form.html'
-    # fields = ['hashtag',]
-    """
-    https://kevindias.com/writing/django-class-based-views-multiple-inline-formsets/
-    """    
-    def get(self, request, *args, **kwargs):
-        """
-        Handles GET requests and instantiates blank versions of the form
-        and its inline formsets.
-        """
-        self.object = None
-        form_class = self.get_form_class()
-        form = self.get_form(form_class)
-        post_form = CombinedFormSet()
-        post_formhelper = PostFormHelper()
-
-        return self.render_to_response(
-            self.get_context_data(form=form, post_form=post_form)
-        )
+    template_name = 'painel/painel_form.html' 
 
     def post(self, request, *args, **kwargs):
         """
@@ -84,11 +67,9 @@ class PainelCreate(LoginRequiredMixin,CreateView):
         """
         self.object = None
         form_class = self.get_form_class()
-        # print('Form_class:', form_class)
         form = self.get_form(form_class)
-        # print('Form:', form)
-        post_form = CombinedFormSet(self.request.POST)
-        # print('Post_Form:', post_form)
+        post_form = formSet(self.request.POST, prefix='posts') 
+
         if (form.is_valid() and post_form.is_valid()):
             return self.form_valid(form, post_form)
 
@@ -99,14 +80,19 @@ class PainelCreate(LoginRequiredMixin,CreateView):
         Called if all forms are valid. Creates a Author instance along
         with associated books and then redirects to a success page.
         """
-        # username = form.cleaned_data.get('author')
-        print('Username:',self.request.user)
-
         form.instance.created_by = self.request.user
-        post_form.instance.author = self.request.user
         self.object = form.save()
         post_form.instance = self.object
         post_form.save()
+
+        #To populate author instance wich post was created
+        paineis = Painel.objects.all()
+        painel = paineis.get(hashtag=form.instance.hashtag)
+        posts_by_hashtag = painel.post_set.all()
+        for post in posts_by_hashtag:
+            if post.author is None:
+                post.author_id = self.request.user.id
+                post.save()
 
         return HttpResponseRedirect(self.get_success_url())
 
@@ -122,17 +108,15 @@ class PainelCreate(LoginRequiredMixin,CreateView):
     def get_context_data(self, **kwargs):
         """ Add formset and formhelper to the context_data. """
         ctx = super(PainelCreate, self).get_context_data(**kwargs)
-        post_formhelper = PostFormHelper()
 
         if self.request.POST:
             ctx['form'] = PainelForm(self.request.POST)
-            ctx['post_form'] = CombinedFormSet(self.request.POST, instance = self.request.username)
-            ctx['post_formhelper'] = post_formhelper
+            ctx['post_form'] = formSet(self.request.POST,  prefix='posts')
+            ctx['post_formhelper'] = PostFormHelper()
         else:
             ctx['form'] = PainelForm()
-            ctx['post_form'] = CombinedFormSet()
-            ctx['post_formhelper'] = post_formhelper
-
+            ctx['post_form'] = formSet(prefix='posts') 
+            ctx['post_formhelper'] = PostFormHelper()
         return ctx
         
     def get_success_url(self):
@@ -148,10 +132,11 @@ class PainelDetail(LoginRequiredMixin,DetailView):
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
-        painelpost = Painel.objects.get(hashtag=self.kwargs.get("hashtag"))
+        painel = Painel.objects.get(hashtag=self.kwargs.get("hashtag"))
+        posts_by_hashtag = painel.post_set.all()
 
         # Add in a QuerySet of all the books
-        context['post_list'] = Post.objects.all().filter(painel=painelpost)
+        context['posts_by_hashtag'] = posts_by_hashtag
         return context
 
 class UserPainelList(ListView):
@@ -194,13 +179,6 @@ class PainelDelete(LoginRequiredMixin, UserPassesTestMixin,DeleteView):
         if self.request.user == painel.created_by:
             return True
         return False
-
-
-
-
-
-
-
 
 class PostLisView(ListView):
     model: Post

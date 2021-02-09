@@ -2,16 +2,16 @@
 # https://www.youtube.com/watch?v=FdVuKt_iuSI&list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p&index=8
 from django.db.models.signals import post_save
 from django.dispatch import receiver# The RECEIVER
-from django.contrib.auth.models import User # The SENDER
 from django.conf import settings
 
-from .models import  Profile, User #WHat we are gonna create it means a new profile
+from .models import  Profile
 
 # https://gist.github.com/kylefox/177091bd8e4d88ac0cc19496064fd7d3
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_profile(sender, instance, created, **kwargs): #Create profiel FUNCTION, we want to run everytime when a user has been created
     if created: #if created is False it means there any profiles has been created
         Profile.objects.create(user=instance)
+        
         
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)

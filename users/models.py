@@ -19,6 +19,10 @@ class User(AbstractUser):
     def clean(self):
         self.first_name = self.first_name.capitalize()
         self.last_name = self.last_name.capitalize()
+        self.country = self.country.capitalize()
+        self.state = self.state.capitalize()
+        self.city = self.city.capitalize()
+        
 
 class Profile(models.Model):#https://docs.djangoproject.com/pt-br/3.1/ref/models/fields/
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile', unique=True)#http://fosshelp.blogspot.com/2016/11/python-django-attributeerror-user.html
