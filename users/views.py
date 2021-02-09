@@ -16,11 +16,11 @@ def register(request):
             form.save()
             username = form.cleaned_data.get('username')
             
-            messages.success(request, f'Thanks {username}! Now You are able to Login')
+            messages.success(request, f'Thanks {username}!')
             return redirect('login')
-        else:
-            messages.error(request, f'Something Went Wrong, Try Again')
-            return redirect('register')
+        # else:
+        #     messages.error(request, f'Something Went Wrong, Try Again')
+        #     return redirect('register')
     else:
         form = UserSignup()
     return render(request,'users/register.html',{'form': form})
@@ -36,9 +36,9 @@ def profile(request):#https://www.youtube.com/watch?v=CQ90L5jfldw&list=PL-osiE80
             p_form.save()
             messages.success(request, f'Your account has beend updated!')
             return redirect('profile',)
-        else:
-            messages.error(request, f'Something Went Wrong, Try update it Again')
-            return redirect('profile')
+        # else:
+        #     messages.error(request, f'Something Went Wrong, Try update it Again')
+        #     return redirect('profile')
     else:
         
         u_form = UserUpdateForm(instance=request.user)

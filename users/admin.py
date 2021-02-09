@@ -15,7 +15,7 @@ class UserAdmin(auth_admin.UserAdmin):
     add_form = UserSignup
     model = User,Profile
     fieldsets = auth_admin.UserAdmin.fieldsets + (
-        ('Aditionals Informations', {'fields': ('middle_name','country','state','city')}),
+        ('Aditionals Informations', {'fields': ('country','state','city')}),
     )
 
 #https://docs.djangoproject.com/en/3.1/ref/contrib/admin/

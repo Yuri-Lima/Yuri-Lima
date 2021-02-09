@@ -1,0 +1,17 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="boder-bottom mb-6">Delete Painel</legend> 
+                <h2> Are you sure that you want to delete the Painel with "{{object.hashtag}} ?"</h2>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-danger" type="submit">Yes, Delete Post</button>
+                <a class="btn btn-warning" href="{% url 'painel-detail' object.id %}">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

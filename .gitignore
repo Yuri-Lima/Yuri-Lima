@@ -141,3 +141,5 @@ cython_debug/
 #Deply to HEROKU
 static/
 
+datadump.json
+workspace.code-workspace
