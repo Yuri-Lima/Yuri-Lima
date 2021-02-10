@@ -25,6 +25,7 @@ def register(request):
         form = UserSignup()
     return render(request,'users/register.html',{'form': form})
 
+
 @login_required
 def profile(request):#https://www.youtube.com/watch?v=CQ90L5jfldw&list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p&index=9
     if request.method =='POST':

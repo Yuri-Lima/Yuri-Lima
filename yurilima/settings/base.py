@@ -128,8 +128,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 #Authetications Redirects
-LOGOUT_REDIRECT_URL = 'blog-home'#After login they goes to home page
-LOGIN_REDIRECT_URL = 'blog-home'#After login they goes to home page
+LOGOUT_REDIRECT_URL = 'painel-list'#After login they goes to home page
+LOGIN_REDIRECT_URL = 'painel-list'#After login they goes to home page
 LOGIN_URL = 'login'#if the user is not logged in, they redirect to login page
 
 #Static Paths
