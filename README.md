@@ -1,16 +1,15 @@
 <!-- Headings --> <!-- Strong --> <!-- Italics --> <!-- Blockquote --> <!-- Links --> <!-- UL --> <!-- OL --> <!-- Images --> <!-- Code Blocks --> <!-- Tables --> 
 <!-- Task Lists -->
+# WebSite Yuri Lima
 ### Hi there 👋
-
 - 🔭 I’m currently working on my personal website
 - 🌱 I’m currently learning Django FrameWork and Python
 - 👯 I’m looking to collaborate with the communities of Python and Django
 - 💬 Ask me about whatever you want, i will be glad to anwser you anytime
 - 📫 How to reach me: +353 083 419 1605 (Dublin/Irlanda)
 - 😄 Pronouns: Power of will
--->
 
-# WebSite Yuri Lima
+
 > ### We are goint to see some exemples that i'll develop.
 
 > ### My first prject:
