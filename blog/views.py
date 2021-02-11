@@ -266,7 +266,8 @@ class UserPostLisView(ListView):
         user = get_object_or_404(getUser, username=self.kwargs.get('username')) #Ele pega o user que vem pela URL
         return Post.objects.filter(author=user).order_by('-date_posted')
 
-
+def newbase(request):
+    return render(request, 'blog/index.html')
 
 def about(request):
     return render(request, 'blog/about.html')
