@@ -14,11 +14,12 @@
 
 > ### My first prject:
 1. **Personal Painel Blog**:
-  I will build an aplication to show post from hashtag.
-  For while this is only a simple example. Because my real intentions is create a new blog with totaly new propuse. 
-  For more details about it. You can take a look at on https://www.yurilima.com.br/, there you can follow week by week, some new features, being added.
-  
-  If you want to give some piece of advices, please, fell free and getting in touch.
+  I am building an aplication to show post from hashtag. For while this is only a simple example, 
+  because my real intentions is create a new blog with totaly new propuse. 
+  For more details about it you can take a look at on https://www.yurilima.com.br/.
+  There you can follow week by week. Some new features is being added.
+
+If you want to give some piece of advices, please, fell free to getting in touch.
   
 > ### Contact
 
