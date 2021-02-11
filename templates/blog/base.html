@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="{% static 'blog/main.css' %}">
   <!-- ======================================================================== -->
   {% if user.username %}
-  <title>Yuri Lima - {{user.username|capfirst}}</title>
+  <title>Yuri Lima & {{user.username|capfirst}}</title>
   {% else %}
   <title>Yuri Lima</title>
   {% endif %}
@@ -30,7 +30,7 @@
   <header class="site-header">
     <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
       <div class="container">
-        <a class="navbar-brand mr-4" href="{% url 'painel-list' %}"><img class="rounded-0" src="{{ user.profile.image.url }}" style=" width: 50px; height: auto;" ></a>
+        <a class="navbar-brand mr-4" href="{% url 'painel-list' %}"><img class="rounded float-left" src="https://github.com/Yuri-Lima/Yuri-Lima/blob/FrontEndFix/public_images/logo_200x200.png?raw=true" style=" width: 50px; height: auto;" ></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
           aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -62,6 +62,7 @@
       </div>
     </nav>
   </header>
+  
   <div class="nav-scroller py-1 mb-2">
     <div class="container">
       <nav class="nav d-flex justify-content-between">
@@ -82,7 +83,7 @@
   </div>
   <main role="main" class="container">
     <div class="row">
-      <div class="col-md-8">
+      <div class="col">
         {% if messages %}
           {% for message in messages %}
             <div class="alert alert-{{message.tags}}">
@@ -90,7 +91,6 @@
             </div>
           {% endfor %}
         {% endif %}
-
         {% block content %}
 
         {% endblock %}
@@ -102,8 +102,13 @@
     <div class="row">
       <div class="col">
         <p>Blog <a href="{% url 'email-contact' %}">Contact</a></p>
-        <p>Facebook</p>
-        <p>Instagram</p>
+         <a href="https://www.facebook.com/yurimatosdelima">
+           <img src="https://www.flaticon.com/svg/vstatic/svg/747/747374.svg?token=exp=1612989244~hmac=bf8bcad94c4a3e56d1f8f91b344afc66" style=" width: 30px; height: auto;" >
+         </a>
+        <a href="https://www.instagram.com/treta.news.irlanda/">
+          <img src="https://www.flaticon.com/svg/vstatic/svg/1384/1384031.svg?token=exp=1612988790~hmac=772ed0cd62b1c284f43d328f22a3ef37" style=" width: 30px; height: auto;" >
+          </a>
+        
       </div>
       <div class="col">
         <p>Web Site <a href="{% url 'blog-about' %}">Yuri Lima</a> by <a href="#">Yuri Lima</a>.</p>

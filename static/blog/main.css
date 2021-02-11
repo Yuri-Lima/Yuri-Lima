@@ -102,3 +102,19 @@ body {
 .blog-footer p:last-child {
   margin-bottom: 0;
 }
+
+@media (min-width: 768px) {
+  .media .avatar-2 {
+      width: 130px;
+  }
+}
+
+@media (max-width: 767px) {
+  .media .avatar-2 {
+      width: 160px;
+  }
+}
+
+.card img.rounded-circle {
+  border-radius: 50%;
+}

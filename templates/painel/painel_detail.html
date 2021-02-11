@@ -16,9 +16,10 @@
                 {% else %}
                     <small class="text-muted"><b>Author: </b><a class="mr-2" href="#">{{ post.author|capfirst }}</a></small>
                 {% endif %}
-                
-                <small class="text-muted"><b>Posted: </b> {{ post.date_posted|date:'N d, Y H:i:s' }}</small>
-                <small class="text-muted"><b>Last Updated: </b> {{ post.date_updated|date:'N d, Y H:i:s' }}</small>
+                <ul class="list-inline">
+                    <li class="list-inline-item"><small class="text-muted"><b>Posted: </b> {{ post.date_posted|date:'N d, Y H:i:s' }}</small></li>
+                    <li class="list-inline-item"><small class="text-muted"><b>Last Updated: </b> {{ post.date_updated|date:'N d, Y H:i:s' }}</small></li>
+                </ul>
                 {% if post.author == user %}
                     <a class="btn btn-info btn-sm mt-0 mb-0" href="{% url 'post-update' post.id %}">Update</a>
                     <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' post.id %}">Delete</a>

@@ -19,14 +19,13 @@
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="{% static 'blog/login.css' %}" >
 <!-- ======================================================================== -->
-{% if title %}
-<title>Fake No More - {{title}}</title>
+{% if user.username %}
+<title>Yuri Lima & {{user.username|capfirst}}</title>
 {% else %}
-<title>Fake No More</title>
+<title>Yuri Lima</title>
 {% endif %}
 <!-- ======================================================================== -->
   </head>
-
   <body class="text-center">
     {% block content %}
         

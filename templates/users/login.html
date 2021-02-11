@@ -16,6 +16,13 @@
         <a href="{% url 'password_reset' %}">Fortgot Password</a>    
     </small>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+    <div class="boder-top pt-3">
+        <small class="text-muted">Create An Account 
+            <a class="ml-2" href="{% url 'register' %}">Sign In</a>
+        </small>
+    </div>
     <p class="mt-5 mb-3 text-muted">&copy; 2020-2021</p>
+    
 </form>
+
 {% endblock content %}

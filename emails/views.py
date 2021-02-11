@@ -27,18 +27,11 @@ def send_email(request):
                 except BadHeaderError:
                     return HttpResponse('Invalid header found.')
 
-                # messages.success(request, f'Your email has been submited!')
-                return redirect('email-thanks')
+                messages.success(request, f'Your email has been submited!'),
+                return redirect('painel-list')
         else:
             messages.error(request, f'Make sure all fields are entered and valid.')
             return redirect('email-contact')
     else:
         email_form = SendContactForm()
     return render(request,'email/contact.html',{'email_form': email_form})
-
-
-def send_thanks(request):
-    context = {
-        'thanks':messages.success(request, f'Your email has been submited!'),
-    }
-    return render(request, 'email/thanks.html', context)
