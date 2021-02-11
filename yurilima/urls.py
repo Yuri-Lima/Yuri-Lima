@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from users import views as user_views
-
+from users.forms import EmailValidationOnForgotPassword
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -31,7 +31,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),#from django.contrib.auth import views as auth_views  - 'users/logout.html'
     #Password Reset
     path('password-reset/', 
-        auth_views.PasswordResetView.as_view(template_name='users/password_reset.html'),
+        auth_views.PasswordResetView.as_view(template_name='users/password_reset.html', form_class=EmailValidationOnForgotPassword),
          name='password_reset'),
     path('password-reset/done/', 
         auth_views.PasswordResetDoneView.as_view(template_name='users/password_reset_done.html'),
