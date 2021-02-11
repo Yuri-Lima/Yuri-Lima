@@ -14,9 +14,10 @@ def register(request):
         form = UserSignup(request.POST)
         if form.is_valid():
             form.save()
-            username = form.cleaned_data.get('username')
+            first_name = form.cleaned_data.get('first_name').capitalize()
+            last_name = form.cleaned_data.get('last_name').capitalize()
             
-            messages.success(request, f'Thanks {username}!')
+            messages.success(request, f'Welcome {first_name} {last_name}! ')
             return redirect('login')
         # else:
         #     messages.error(request, f'Something Went Wrong, Try Again')
@@ -24,6 +25,7 @@ def register(request):
     else:
         form = UserSignup()
     return render(request,'users/register.html',{'form': form})
+
 
 @login_required
 def profile(request):#https://www.youtube.com/watch?v=CQ90L5jfldw&list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p&index=9

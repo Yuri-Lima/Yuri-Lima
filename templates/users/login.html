@@ -9,32 +9,20 @@
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     {{ form.username|as_crispy_field }}
     {{ form.password|as_crispy_field }}
+    {% for errors in form.non_field_errors %}
+        <div class="alert alert-danger">{{ errors }}</div>
+    {% endfor %}    
     <small class="text-muted ml-2">
         <a href="{% url 'password_reset' %}">Fortgot Password</a>    
     </small>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+    <div class="boder-top pt-3">
+        <small class="text-muted">Create An Account 
+            <a class="ml-2" href="{% url 'register' %}">Sign In</a>
+        </small>
+    </div>
     <p class="mt-5 mb-3 text-muted">&copy; 2020-2021</p>
-    </form>
     
+</form>
+
 {% endblock content %}
-
-
-<!-- 
-
-<div class="content-section">
-    <form method="POST">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="boder-bottom mb-6">Login</legend>                
-            aqui ficava o  formulario
-        </fieldset>
-        <div class="form-group">
-            <button class="btn btn-outline-infor" type="submit">Login</button>
-        </div>
-        <div class="boder-top pt-3">
-            <small class="text-muted">Need An Account 
-                <a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
-            </small>
-        </div>
-    </form>
-</div> -->
