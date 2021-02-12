@@ -10,3 +10,9 @@ Por exemplo, mexeu em algo no package.json? Use esse cara, seja atualizando a ve
 instalando novas dependências
 
 https://docs.djangoproject.com/en/dev/topics/class-based-views/generic-editing/
+
+
+Tutorial: Using AWS Lambda with Amazon S3
+1. https://docs.aws.amazon.com/lambda/latest/dg/with-s3-example.html
+2. https://docs.aws.amazon.com/lambda/latest/dg/lambda-python.html
+3 .https://austinlasseter.medium.com/resize-an-image-using-aws-s3-and-lambda-fda7a6abc61c
