@@ -14,6 +14,14 @@ class Painel(models.Model):
     def __str__(self):
         return self.hashtag
 
+    def clean(self):
+        if  self.hashtag.startswith('#'):
+            self.hashtag = self.hashtag.lower()
+        else:
+            self.hashtag = '#' + self.hashtag.lower()
+                
+        
+
     def get_absolute_url(self):
         return reverse('painel-detail', kwargs={'hashtag': self.hashtag})
 

@@ -30,7 +30,7 @@ class PainelForm(ModelForm):
         helper = FormHelper()
         helper.form_tag = False # This is crucial.
         helper.layout = Layout(
-            Fieldset('Create new Painel - {{ user|capfirst }}',
+            Fieldset('Create New Post',
                     PrependedText('hashtag','#', placeholder="hashtag"),
                     ),
         )
@@ -42,7 +42,7 @@ class PostFormHelper(FormHelper):
         self.form_tag = False # This is crucial.
         self.render_required_fields = True
         self.layout = Layout(
-            Fieldset("Add Post {{ forloop.counter }}",
+            Fieldset("",
                     PrependedText('title','', placeholder="My Post"),
                     PrependedText('content','',placeholder="Descritions"),
                     PrependedText('url','', placeholder="www.example.com"),

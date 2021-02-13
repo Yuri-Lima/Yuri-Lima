@@ -2,33 +2,33 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <div class="content-section">
-      <div class="media">
-        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" >
-        <div class="media-body">
-          <h2 class="account-heading">{{ user.get_full_name }}</h2>
-          <p class="text-secondary">{{ user.email }}</p>
-        </div>
+<div class="content-section">
+    <div class="d-flex flex-row">
+      <div class="p-2">
+        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" style='width:100px; height:auto;' alt="profile_img" >
       </div>
-      <form method="POST" enctype="multipart/form-data"> <!-- multipart/form-data	No characters are encoded. This value is required when you are using forms that have a file upload control -->
-        {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="boder-bottom mb-6">Profile Infor</legend>
-            
-            <!-- UserUpdateForm -->
-            {{u_form.username|as_crispy_field}}
-            {{u_form.first_name|as_crispy_field}}
-            {{u_form.last_name|as_crispy_field}}
-            {{u_form.email|as_crispy_field}} 
+      <div class="p-2">
+        <h2 class="account-heading">{{ user.get_full_name }}</h2>
+        <p class="text-secondary">{{ user.email }}</p>
+      </div>
+</div>
+<form method="POST" enctype="multipart/form-data"> <!-- multipart/form-data	No characters are encoded. This value is required when you are using forms that have a file upload control -->
+  {% csrf_token %}
+  <fieldset class="form-group">
+    <legend class="boder-bottom mb-6">Profile Infor</legend>
+    <!-- UserUpdateForm -->
+    {{u_form.username|as_crispy_field}}
+    {{u_form.first_name|as_crispy_field}}
+    {{u_form.last_name|as_crispy_field}}
+    {{u_form.email|as_crispy_field}} 
 
-            <!-- ProfileUpdateForm -->
-            {{p_form.image|as_crispy_field}}
-            {{p_form.bio|as_crispy_field}} 
-
-        </fieldset>
-        <div class="form-group">
-            <button class="btn btn-outline-infor" type="submit">Update</button>
-        </div>
-    </form>
+    <!-- ProfileUpdateForm -->
+    {{p_form.image|as_crispy_field}}
+    {{p_form.bio|as_crispy_field}} 
+  </fieldset>
+  <div class="form-group">
+      <button type="submit" name="submit" value="Save" class="btn btn-outline-primary" id="submit-save">Update</button>
+  </div>
+</form>
     </div>
 {% endblock content %}

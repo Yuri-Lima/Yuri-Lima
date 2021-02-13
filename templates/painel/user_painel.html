@@ -3,12 +3,14 @@
 {% block content %}
     <h1 class="mb-3">Paineis by Creater</h1> <!-- para pegar o username from url -->
     {% for painel in paineis %}
-        <small class="text-muted"><b>Hastag: </b><a class="mr-2" href="#">{{painel.hashtag}}</a></small>
-        <small class="text-muted"><b>Created by: </b><a class="mr-2" href="#">{{painel.created_by|capfirst}}</a></small>
-        <small class="text-muted"><b>Posted: </b><a class="mr-2" href="#">{{painel.painel_date_posted|date:'N d, Y H:i:s'}}</a></small>
+    <div class="d-flex p-2 bg-secondary text-white">
+        <small class="text-white"><b>Hastag: </b><a class="text-white mr-2" href="{% url 'painel-detail' painel.hashtag %}">{{painel.hashtag}}</a></small>
+        <small class="text-white"><b>Created by: </b><a class="text-white mr-2" href="#">{{painel.created_by|capfirst}}</a></small>
+        <small class="text-white"><b>Posted: </b><a class="text-white mr-2" href="#">{{painel.painel_date_posted|date:'N d, Y H:i:s'}}</a></small>
+    </div>
     {% endfor %}
 
 {% endblock content %}
 
-<!-- django template filters -->
+
 

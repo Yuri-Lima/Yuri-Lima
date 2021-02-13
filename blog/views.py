@@ -13,14 +13,13 @@ from django.views.generic import (
     DetailView )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import User
 from .models import Post, Painel
-from users.models import Profile
+from djcompoundqueryset import CompoundQueryset
 from django.urls import reverse
 from django.urls import reverse_lazy
 from .form import PostFormHelper, PainelForm, HashtagForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import HttpResponseRedirect, request
+from django.http import HttpResponseRedirect
 from django.forms.models import inlineformset_factory
 
 
@@ -39,15 +38,28 @@ formSet = CombinedFormSet = inlineformset_factory(
 class PainelList(ListView):
     model: Painel
     template_name = 'painel/painel_list.html'
-    paginate_by = 5 
-    
+    context_object_name = 'paineis'
+    qs_1 = Painel.objects.order_by('painel_date_updated').all()
+    qs_2 = Post.objects.order_by('date_updated').all()
+    combined_queryset = CompoundQueryset(qs_1, qs_2, max_items=100)
+    p = Paginator(qs_1, 2)
+    print('P:', p.count)
+    print('P.num_pages:', p.num_pages)
+    print('P.page_range:', p.page_range)
+    page1 = p.page(1)
+    print('Page1:', page1)
+    print('Page1.Object_list:', page1.object_list)
+
+
+
+
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of all
         context = {
-            'posts': Post.objects.all(),
-            'paineis' : Painel.objects.all()
+            'posts': Post.objects.all().order_by('-date_posted'),
+            'paineis' : Painel.objects.all().order_by('-painel_date_posted')
         }
         return context
 
@@ -134,9 +146,11 @@ class PainelDetail(LoginRequiredMixin,DetailView):
         context = super().get_context_data(**kwargs)
         painel = Painel.objects.get(hashtag=self.kwargs.get("hashtag"))
         posts_by_hashtag = painel.post_set.all()
+        
 
         # Add in a QuerySet of all the books
         context['posts_by_hashtag'] = posts_by_hashtag
+        context['posts'] = Post.objects.all().order_by('-date_posted')
         return context
 
 class UserPainelList(ListView):
@@ -265,9 +279,6 @@ class UserPostLisView(ListView):
         getUser = get_user_model()
         user = get_object_or_404(getUser, username=self.kwargs.get('username')) #Ele pega o user que vem pela URL
         return Post.objects.filter(author=user).order_by('-date_posted')
-
-def newbase(request):
-    return render(request, 'blog/index.html')
 
 def about(request):
     return render(request, 'blog/about.html')
