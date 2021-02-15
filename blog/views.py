@@ -3,9 +3,6 @@ from django.shortcuts import (
     redirect, 
     get_object_or_404)
 from django.views.generic import (
-    FormView,
-    TemplateView,
-    RedirectView,
     CreateView, 
     ListView, 
     UpdateView, 
@@ -14,12 +11,10 @@ from django.views.generic import (
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth import get_user_model
 from .models import Post, Painel
-from djcompoundqueryset import CompoundQueryset
 from django.urls import reverse
 from django.urls import reverse_lazy
-from .form import PostFormHelper, PainelForm, HashtagForm
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger, Page, InvalidPage
-from django.http import HttpResponseRedirect, Http404
+from .form import PostFormHelper, PainelForm
+from django.http import HttpResponseRedirect
 from django.forms.models import inlineformset_factory
 
 formSet = CombinedFormSet = inlineformset_factory(
@@ -29,8 +24,6 @@ formSet = CombinedFormSet = inlineformset_factory(
             # form= PostFormHelper,
             extra=1,
             can_delete=False,
-            # max_num=1,
-            # validate_max= 1,
 )
 
 class PainelList(ListView):
