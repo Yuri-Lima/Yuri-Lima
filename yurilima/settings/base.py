@@ -25,7 +25,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['yurilima.herokuapp.com','www.yurilima.com.br']
+ALLOWED_HOSTS = ['yurilima.herokuapp.com','www.yurilima.com.br', '127.0.0.1']
 
 
 # Application definition
