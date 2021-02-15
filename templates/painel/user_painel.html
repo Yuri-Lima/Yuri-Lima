@@ -1,14 +1,42 @@
-{% extends 'blog/base.html' %}
+{% extends 'blog/index.html' %}
 
 {% block content %}
     <h1 class="mb-3">Paineis by Creater</h1> <!-- para pegar o username from url -->
-    {% for painel in paineis %}
-        <small class="text-muted"><b>Hastag: </b><a class="mr-2" href="#">{{painel.hashtag}}</a></small>
-        <small class="text-muted"><b>Created by: </b><a class="mr-2" href="#">{{painel.created_by|capfirst}}</a></small>
-        <small class="text-muted"><b>Posted: </b><a class="mr-2" href="#">{{painel.painel_date_posted|date:'N d, Y H:i:s'}}</a></small>
-    {% endfor %}
+{% for painel in paineis %}
+    <div class="d-flex p-2 mt-3 mb-3 bg-info text-white">
+        <div class="p-1 mr-auto align-self-center" >
+            <small class="text-white"><b>Hastag: </b><a class="text-white mr-2" href="{% url 'painel-detail' painel.hashtag %}">{{painel.hashtag}}</a></small>
+            <small class="text-white"><b>Created by: </b><a class="text-white mr-2" href="{% url 'user-painel' painel.created_by %}">{{painel.created_by|capfirst}}</a></small>
+            <small class="text-white"><b>Posted: </b><a class="text-white mr-2" href="#">{{painel.painel_date_posted|date:'N d, Y H:i:s'}}</a></small>
+        </div>
+    </div>
+{% endfor %}
+
+<!-- Paginations -->
+{% if is_paginated %}
+
+{% if page_obj.has_previous %}<!-- Esse o objeto que nossa Views passa dentro do nosso template -->
+    <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+{% endif %}
+
+{% for num in page_obj.paginator.page_range %}
+    {% if page_obj.number == num %}<!-- page_obj.number e o numero atual da pagina -->
+        <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+        <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% endif %}
+
+{% endfor %}
+
+{% if page_obj.has_next %}<!-- Esse o objeto que nossa Views passa dentro do nosso template -->
+    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a> 
+    <a class="btn btn-outline-info mb-4" href="?page=last">Last</a> <!-- page_obj.pagintor.num_pages Retorna o numero total de paginas -->
+{% endif %}
+
+{% endif %}
 
 {% endblock content %}
 
-<!-- django template filters -->
+
 

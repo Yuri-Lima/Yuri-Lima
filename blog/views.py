@@ -13,16 +13,14 @@ from django.views.generic import (
     DetailView )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import User
 from .models import Post, Painel
-from users.models import Profile
+from djcompoundqueryset import CompoundQueryset
 from django.urls import reverse
 from django.urls import reverse_lazy
 from .form import PostFormHelper, PainelForm, HashtagForm
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import HttpResponseRedirect, request
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger, Page, InvalidPage
+from django.http import HttpResponseRedirect, Http404
 from django.forms.models import inlineformset_factory
-
 
 formSet = CombinedFormSet = inlineformset_factory(
             Painel,
@@ -35,24 +33,13 @@ formSet = CombinedFormSet = inlineformset_factory(
             # validate_max= 1,
 )
 
-
 class PainelList(ListView):
     model: Painel
     template_name = 'painel/painel_list.html'
-    paginate_by = 5 
+    paginate_by = 5
+    queryset = Painel.objects.all().order_by('-painel_date_posted')
+    context_object_name = 'paineis'
     
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super().get_context_data(**kwargs)
-        # Add in a QuerySet of all
-        context = {
-            'posts': Post.objects.all(),
-            'paineis' : Painel.objects.all()
-        }
-        return context
-
-    def get_queryset(self, **kwargs):
-        return Painel.objects.all().order_by('-painel_date_posted')
 
 class PainelCreate(LoginRequiredMixin,CreateView):
     model = Painel # Painel
@@ -134,16 +121,18 @@ class PainelDetail(LoginRequiredMixin,DetailView):
         context = super().get_context_data(**kwargs)
         painel = Painel.objects.get(hashtag=self.kwargs.get("hashtag"))
         posts_by_hashtag = painel.post_set.all()
+        
 
         # Add in a QuerySet of all the books
         context['posts_by_hashtag'] = posts_by_hashtag
+        context['posts'] = Post.objects.all().order_by('-date_posted')
         return context
 
 class UserPainelList(ListView):
     model: Painel
     template_name = 'painel/user_painel.html'
     context_object_name = 'paineis' 
-    paginate_by = 2
+    paginate_by = 5
 
     def get_queryset(self):
         getUser = get_user_model()
@@ -154,7 +143,8 @@ class UserPainelList(ListView):
 class PainelUpdate(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model = Painel
     fields = ['hashtag',]
-    template_name = 'painel/painel_form.html'
+    template_name_suffix = 'update_form'
+    template_name = 'painel/painel_update_form.html'
 
     def form_valid(self, form):#"""If the form is valid, save the associated model."""
         form.instance.created_by = self.request.user
@@ -173,9 +163,21 @@ class PainelDelete(LoginRequiredMixin, UserPassesTestMixin,DeleteView):
     model = Painel
     template_name = 'painel/painel_confirm_delete.html'
     success_url = reverse_lazy('painel-list')
+    context_object_name = 'paineis'
+    context_object_name = 'posts'
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(PainelDelete, self).get_context_data(**kwargs)
+        self.object = self.get_object()
+        # Add in a QuerySet of all the books
+        context['posts'] = Post.objects.filter(painel=self.object.id)
+        return context
+    
 
     def test_func(self):
         painel = self.get_object()
+        print('Painel:', painel)
         if self.request.user == painel.created_by:
             return True
         return False
@@ -227,7 +229,6 @@ class PostCreateView(LoginRequiredMixin,CreateView):
     #     context['post_list'] = Post.objects.all().filter(painel=painelpost)
     #     return context
     
-
 class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model: Post
     fields = ['title', 'content', 'url','contact_number']
@@ -249,6 +250,38 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):#respe
     model = Post
     success_url ='/'
 
+
+    def get_context_data(self, *args, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(PostDeleteView, self).get_context_data(**kwargs)
+        self.object = self.get_object()
+        witchpost = Post.objects.get(id=self.object.id)
+        painelIDwasfounded = witchpost.painel.id
+        posts = Post.objects.filter(painel = painelIDwasfounded)
+
+        # Add in a QuerySet of all the books
+        context['posts'] = posts
+        return context
+
+    def delete(self, request, *args, **kwargs):
+        """
+        Call the delete() method on the fetched object and then redirect to the
+        success URL.
+        """
+        self.object = self.get_object()
+        witchpost = Post.objects.get(id=self.object.id)
+        painelIDwasfounded = witchpost.painel.id
+        posts = Post.objects.filter(painel = painelIDwasfounded)
+        painel = Painel.objects.get(id=painelIDwasfounded)
+
+        if posts.count() == 1: 
+            success_url = self.get_success_url()
+            painel.delete()
+        else:
+            success_url = self.get_success_url()
+            self.object.delete()
+        return HttpResponseRedirect(success_url, self.get_context_data(posts=posts.count()))
+
     def test_func(self):
         post = self.get_object()
         if self.request.user == post.author:
@@ -261,12 +294,20 @@ class UserPostLisView(ListView):
     context_object_name = 'posts' #{% for post in posts %}
     paginate_by = 5 #the number of posts per page 
 
+    # def get_context_data(self, **kwargs):
+    #     # Call the base implementation first to get a context
+    #     context = super(UserPostLisView, self).get_context_data(**kwargs)
+    #     # Add in a QuerySet of all
+    #     context = {
+    #         'posts': Post.objects.all().order_by('-date_posted'),
+    #         'paineis' : Painel.objects.all().order_by('-painel_date_posted'),
+    #     }
+    #     return context
+
     def get_queryset(self):
         getUser = get_user_model()
         user = get_object_or_404(getUser, username=self.kwargs.get('username')) #Ele pega o user que vem pela URL
         return Post.objects.filter(author=user).order_by('-date_posted')
-
-
 
 def about(request):
     return render(request, 'blog/about.html')

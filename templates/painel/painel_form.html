@@ -1,4 +1,4 @@
-{% extends 'blog/base.html' %}
+{% extends 'blog/index.html' %}
 {% load crispy_forms_tags %}
 
 {% block content %}
@@ -11,53 +11,12 @@
             {{ post_form.management_form|crispy}}
             {{ post_form.non_form_errors|crispy }}
             {% crispy post_form post_formhelper %}
-
-
-            <!-- <th>
-                <label for="id_posts-0-author">Author:</label>
-            </th>
-            <td>
-                <select name="posts-0-author" id="id_posts-0-author">
-        
-                    <option value="{{ request.user.id }}" selected>{{ request.user }}</option>
-    
-                </select>
-            </td> -->
         </fieldset>
-        
         <input type="submit" name="submit" value="Save" class="btn btn-outline-primary" id="submit-save">
+        <div class="p-2 mb-auto" style="height: 100px;"></div>
     </form>
 <div>
 
-<!-- Paginations -->
-{% if is_paginated %}
-
-{% if page_obj.has_previous %}<!-- Esse o objeto que nossa Views passa dentro do nosso template -->
-    <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
-    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-{% endif %}
-
-{% for num in page_obj.paginator.page_range %}
-    {% if page_obj.number == num %}<!-- page_obj.number e o numero atual da pagina -->
-        <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
-    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-        <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
-    {% endif %}
-
-{% endfor %}
-
-{% if page_obj.has_next %}<!-- Esse o objeto que nossa Views passa dentro do nosso template -->
-    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
-    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a> <!-- page_obj.pagintor.num_pages Retorna o numero total de paginas -->
-{% endif %}
-
-{% endif %}
 {% endblock content %}
-
-<!-- {% for form in post_form %}
-{% crispy form %}
-{% endfor %} -->
-
-
 
 

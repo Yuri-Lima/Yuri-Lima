@@ -21,6 +21,7 @@ from .import views
 
 #Path converters
 urlpatterns = [
+
     #Base Pages
     path('about/', views.about, name='blog-about'),
 

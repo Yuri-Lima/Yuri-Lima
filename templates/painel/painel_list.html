@@ -1,107 +1,113 @@
-{% extends 'blog/base.html' %}
+{% extends 'blog/index.html' %}
 
 {% block content %}
-
 {% for painel in paineis %}
-<div class="container">
-    <small class="text-muted"><b>Hastag: </b><a class="mr-2" href="{% url 'painel-detail' painel.hashtag %}">{{painel.hashtag}}</a></small>
-    <small class="text-muted"><b>Created by: </b><a class="mr-2" href="#">{{painel.created_by|capfirst}}</a></small>
-    <small class="text-muted"><b>Posted: </b><a class="mr-2" href="#">{{painel.painel_date_posted|date:'N d, Y H:i:s'}}</a></small>
-
-</div>
-    <div class="container ">
-        <div class="row ">
-            <div class="col-12 col-lg-12 ">
-                <div class="container content-section"> <!-- externo -->
-                    <div class="row">
-                        {% for posts_by_painel in painel.post_set.all %}
-                        <div class="col-12 col-lg-6 ">
-                            <div class="media content-section "> <!-- interno -->
-                                <article class="'media">
-                                    <img class='rounded mx-auto d-block article-img' src="{{ posts_by_painel.author.profile.image.url }}" alt="profile_img">
-                                    <div class="media-body">
-                                        <div class="article-metadata">
-                                            <ul class="list-inline">
-                                                <li class="list-inline-item"><small class="text-muted"><b>Author: <a class="mr-2" href="{% url 'user-posts' posts_by_painel.author.username %}">{{ posts_by_painel.author|capfirst }}</a></b></small></li>
-                                                <!-- <li class="list-inline-item"><small class="text-muted"><b>Posted: </b> {{ posts_by_painel.date_posted|date:'N d, Y H:i:s' }}</small></li> -->
-                                                <li class="list-inline-item"><small class="text-muted"><b>Last Updated: </b> {{ posts_by_painel.date_updated|date:'N d, Y H:i:s' }}</small></li>
-                                            </ul>
-                                        </div>
-                                        <h5><a class="article-title" href="{{posts_by_painel.get_absolute_url}}">{{ posts_by_painel.title }}</a></h5>
-                                        <p class="article-content">{{ posts_by_painel.content|linebreaks|truncatewords:20 }}</p>
-                                    </div>
-                                </article>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                    
-                </div>
-            </div>  
-        </div>
+<div class="d-flex p-0 bg-secondary text-white rounded"> 
+    <div class="p-1 mr-auto align-self-center">
+        <small class="text-white"><b>Hastag: </b><a class="text-white mr-2" href="{% url 'painel-detail' painel.hashtag %}">{{painel.hashtag}}</a></small>
+        <small class="text-white"><b>Created by: </b><a class="text-white mr-2" href="{% url 'user-painel' painel.created_by %}">{{painel.created_by|capfirst}}</a></small>
+        <small class="text-white"><b>Posted: </b><a class="text-white mr-2" href="#">{{painel.painel_date_posted|date:'N d, Y H:i:s'}}</a></small>
     </div>
-        
-        
-{% endfor %}
-{% endblock content %}
-
-
-<div class="media content-section "> <!-- interno -->
-    <div class="row ">
-        {% for posts_by_painel in painel.post_set.all %}
-        <div class="col ">
-            <article class="media">
-                <img class='rounded-cicle avatar article-img' src="{{ posts_by_painel.author.profile.image.url }}" alt="profile_img">
-                <div class="media-body">
-                    <div class="article-metadata">
-                        <small class="text-muted"><b>Author: <a class="mr-2" href="{% url 'user-posts' posts_by_painel.author.username %}">{{ posts_by_painel.author|capfirst }}</a></b></small>
-                        <small class="text-muted"><b>Posted: </b> {{ posts_by_painel.date_posted|date:'N d, Y H:i:s' }}</small>
-                        <small class="text-muted"><b>Last Updated: </b> {{ posts_by_painel.date_updated|date:'N d, Y H:i:s' }}</small>
-                    </div>
-                    <h5><a class="article-title" href="{{posts_by_painel.get_absolute_url}}">{{ posts_by_painel.title }}</a></h5>
-                    <p class="article-content">{{ posts_by_painel.content|linebreaks|truncatewords:20 }}</p>
-                </div>
-            </article>
-        </div>
-        {% endfor %}
+    {% if painel.created_by == user %}
+    <div class="ml-auto p-1 align-self-center">
+        <small><a class="btn btn-info btn-sm mt-0 mb-0 p-1" href="{% url 'painel-update' painel.id %}">Update</a></small> 
     </div>
+    <div class="ml-2 p-1 align-self-center">
+        <small><a class="btn btn-danger btn-sm mt-1 mb-1 p-1" href="{% url 'painel-delete' painel.id %}">Delete</a></small>
+    </div>
+    {% endif %}
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<article class="media content-section">
-    <div class="media-body">
-        {% for posts_by_painel in painel.post_set.all %}
-            <div class="container">
-                <article class="media content-section">
-                    <img class='rounded-cicle article-img' src="{{ posts_by_painel.author.profile.image.url }}" alt="profile_img">
+<div class="row">
+    {% for posts_by_painel in painel.post_set.all %}
+        <div class="col-12 col-lg-6 ">
+            <div class="d-flex "> <!-- interno -->
+                <article class="'media">
+                    ​<picture>
+                        <img class='rounded mx-auto d-block article-img' src="{{ posts_by_painel.author.profile.image.url }}" style='width:75px; height:auto;' alt="profile_img">
+                    </picture>
+                    <!-- style='width: 75px; height: auto;' -->
                     <div class="media-body">
                         <div class="article-metadata">
-                            <small class="text-muted"><b>Author: <a class="mr-2" href="{% url 'user-posts' posts_by_painel.author.username %}">{{ posts_by_painel.author|capfirst }}</a></b></small>
-                            <small class="text-muted"><b>Posted: </b> {{ posts_by_painel.date_posted|date:'N d, Y H:i:s' }}</small>
-                            <small class="text-muted"><b>Last Updated: </b> {{ posts_by_painel.date_updated|date:'N d, Y H:i:s' }}</small>
+                            <ul class="list-inline">
+                                <li class="list-inline-item"><small class="text-muted"><b>Author: <a class="mr-2" href="{% url 'user-posts' posts_by_painel.author.username %}">{{ posts_by_painel.author|capfirst }}</a></b></small></li>
+                                <!-- <li class="list-inline-item"><small class="text-muted"><b>Posted: </b> {{ posts_by_painel.date_posted|date:'N d, Y H:i:s' }}</small></li> -->
+                                <li class="list-inline-item"><small class="text-muted"><b>Last Updated: </b> {{ posts_by_painel.date_updated|date:'N d, Y H:i:s' }}</small></li>
+                            </ul>
                         </div>
-                        <h2><a class="article-title" href="{{posts_by_painel.get_absolute_url}}">{{ posts_by_painel.title }}</a></h2>
-                        <p class="article-content">{{ posts_by_painel.content|linebreaks|truncatewords:30 }}</p>
+                        <h5><a class="article-title" href="{{posts_by_painel.get_absolute_url}}">{{ posts_by_painel.title }}</a></h5>
+                        <p class="article-content">{{ posts_by_painel.content|linebreaks|truncatewords:20 }}</p>
                     </div>
                 </article>
             </div>
-        {% endfor %}
+        </div>
+    {% endfor %}
+</div>
+
+{% endfor %}
+
+<!-- Paginations -->
+{% if is_paginated %}
+
+{% if page_obj.has_previous %}<!-- Esse o objeto que nossa Views passa dentro do nosso template -->
+    <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+{% endif %}
+
+{% for num in page_obj.paginator.page_range %}
+    {% if page_obj.number == num %}<!-- page_obj.number e o numero atual da pagina -->
+        <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+        <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% endif %}
+
+{% endfor %}
+
+{% if page_obj.has_next %}<!-- Esse o objeto que nossa Views passa dentro do nosso template -->
+    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a> 
+    <a class="btn btn-outline-info mb-4" href="?page=last">Last</a> <!-- page_obj.pagintor.num_pages Retorna o numero total de paginas -->
+{% endif %}
+
+{% endif %}
+
+{% endblock content %}
+
+
+
+
+
+
+<!-- <div class="container ">
+    <div class="row ">
+        <div class="col-12 col-lg-12 "> -->
+            <!--<div class="container content-section">  externo -->
+                <!-- <div class="row">
+                    {% for posts_by_painel in painel.post_set.all %}
+                    <div class="col-12 col-lg-6 "> -->
+                        <!-- <div class="media content-section "> interno -->
+                            <!-- <article class="'media">
+                                ​<picture>
+                                    <img class='rounded mx-auto d-block article-img' src="{{ posts_by_painel.author.profile.image.url }}"  alt="profile_img">
+                                </picture> -->
+                                <!-- style='width: 75px; height: auto;' -->
+                                <!-- <div class="media-body">
+                                    <div class="article-metadata">
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item"><small class="text-muted"><b>Author: <a class="mr-2" href="{% url 'user-posts' posts_by_painel.author.username %}">{{ posts_by_painel.author|capfirst }}</a></b></small></li> -->
+                                            <!-- <li class="list-inline-item"><small class="text-muted"><b>Posted: </b> {{ posts_by_painel.date_posted|date:'N d, Y H:i:s' }}</small></li> -->
+                                            <!-- <li class="list-inline-item"><small class="text-muted"><b>Last Updated: </b> {{ posts_by_painel.date_updated|date:'N d, Y H:i:s' }}</small></li>
+                                        </ul>
+                                    </div>
+                                    <h5><a class="article-title" href="{{posts_by_painel.get_absolute_url}}">{{ posts_by_painel.title }}</a></h5>
+                                    <p class="article-content">{{ posts_by_painel.content|linebreaks|truncatewords:20 }}</p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+            </div>
+        </div>  
     </div>
-</article>
+</div> -->

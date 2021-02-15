@@ -1,0 +1,22 @@
+{% extends 'blog/index.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="content-section">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            {{ form.management_form|crispy }}
+            {{ form.non_form_errors|crispy }}
+            {{ form|crispy }}
+
+        </fieldset>
+        <div class="form-group">
+            <button type="submit" name="submit" value="Save" class="btn btn-outline-primary" id="submit-save">Save</button>
+        </div>
+        <div class="p-2 mb-auto" style="height: 100px;"></div>
+    </form>
+<div>
+
+{% endblock content %}

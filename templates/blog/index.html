@@ -1,0 +1,183 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">  
+  
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" href="{% static 'css/simple-sidebar.css' %}">
+  <!-- ======================================================================== -->
+  {% if user.username %}
+  <title>Yuri Lima & {{user.username|capfirst}}</title>
+  {% else %}
+  <title>Yuri Lima</title>
+  {% endif %}
+  <!-- ======================================================================== -->
+
+
+</head>
+
+<body>
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+      <div class="bg-light border-right" id="sidebar-wrapper" >
+        <div class="d-flex flex-column align-self-center">
+          <div class="p-2 mb-auto" style="height: 50px;"></div>
+          <div class="p-2 mb-auto align-self-center" style="height: 200px;">
+            <img class='rounded mx-auto d-block article-img' src="https://yurilima.s3-eu-west-1.amazonaws.com/yuri.png" style='width:150px; height:auto;' alt="profile_img">
+            <div class="sidebar-heading">@YuriLima </div>
+          </div>
+        </div>
+        <div class="sidebar-heading">{{user.get_full_name}}</div>
+        <div class="list-group list-group-flush">
+          {% if user.is_authenticated %}
+          <a href="{% url 'profile' %}" class="list-group-item list-group-item-action bg-light">Profile</a>
+          <a href="{% url 'painel-list' %}" class="list-group-item list-group-item-action bg-light">Blog</a>
+          <a href="{% url 'user-posts' user.username %}" class="list-group-item list-group-item-action bg-light">My Posts</a>
+          <a href="{% url 'painel-add' user.id %}" class="list-group-item list-group-item-action bg-light">New Post</a>
+          {% if user.username == 'yuri' %}
+          <a href="https://www.linkedin.com/in/yuri-lima-40118bb3/" class="list-group-item list-group-item-action bg-light" target="_blank">LinkedIn</a>
+          <a href="https://github.com/Yuri-Lima/" class="list-group-item list-group-item-action bg-light" target="_blank">GitHub</a>
+          {% endif %}
+          <a href="{% url 'logout' %}" class="list-group-item list-group-item-action bg-light">Logout</a>
+          <small><p class="list-group-item list-group-item-action bg-light">Last Login: {{ user.last_login|date:'N d, Y H:i'}}</p></small>
+          {% else %}
+          <a href="{% url 'painel-list' %}" class="list-group-item list-group-item-action bg-light">Blog</a>
+          <a href="{% url 'login' %}" class="list-group-item list-group-item-action bg-light">Login</a>
+          <a href="{% url 'register' %}" class="list-group-item list-group-item-action bg-light">Register</a>
+          {% endif %}
+        </div>
+      </div>
+    
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <button class="btn btn-primary" id="menu-toggle"> Menu </button>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'profile' %}">Hi,{{user.get_full_name}}!<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'painel-list' %}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'blog-about' %}">About</a>
+            </li>
+            <!-- <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li> -->
+            {% else %}
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'painel-list' %}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'blog-about' %}">About</a>
+            </li>
+            <!-- <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li> -->
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+      <div class="container-fluid">
+        <div class="nav-scroller py-1 mb-2">
+          <div class="container">
+            <nav class="nav d-flex justify-content-between">
+              <a class="p-2 text-muted" href="#">World</a>
+              <a class="p-2 text-muted" href="#">U.S.</a>
+              <a class="p-2 text-muted" href="#">Technology</a>
+              <a class="p-2 text-muted" href="#">Design</a>
+              <a class="p-2 text-muted" href="#">Culture</a>
+              <a class="p-2 text-muted" href="#">Business</a>
+              <a class="p-2 text-muted" href="#">Politics</a>
+              <a class="p-2 text-muted" href="#">Opinion</a>
+              <a class="p-2 text-muted" href="#">Science</a>
+              <a class="p-2 text-muted" href="#">Health</a>
+              <a class="p-2 text-muted" href="#">Style</a>
+              <a class="p-2 text-muted" href="#">Travel</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+          <main role="main" class="container">
+            <div class="row">
+              <div class="col">
+                {% if messages %}
+                  {% for message in messages %}
+                    <div class="alert alert-{{message.tags}}">
+                      {{ message }}
+                    </div>
+                  {% endfor %}
+                {% endif %}
+                {% block content %}
+                      <!-- All in here -->
+                {% endblock %}
+              </div>
+            </div>
+          </main>
+    </div>
+    <!-- /#page-content-wrapper -->
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

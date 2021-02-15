@@ -1,12 +1,35 @@
-{% extends 'blog/base.html' %}
+{% extends 'blog/index.html' %}
 
 {% block content %}
     <div class="content-section">
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="boder-bottom mb-6">Delete Post</legend> 
-                <h2> Are you sure that you want to delete the post "{{object.title}} ?"</h2>
+                <div class="d-flex p-0 text-black rounded"> 
+                    <div class="d-flex flex-column">
+                        <div class="p-1 mr-auto align-self-start"><legend class="border-bottom mb-6">Delete Post</legend></div>
+                        {% if posts.count == 1 %}
+                        <div class="p-1 mr-auto align-self-start text-info"><h3><b><q>This is your last post</q></b></h3></div>
+                        <div class="p-1 mr-auto align-self-start"><h5>If you delete it, the painel {{object.hashtag}} will be deleted automaticaly.</h5> </div>
+                        {% endif %}
+                        <div class="p-1 mr-auto align-self-start"><h5> <b class="text-danger">Are you sure</b>  that you want to delete it ?</h5></div>
+                        <div class="p-1 mr-auto align-self-start">
+                            <div class="border border-danger rounded m-2">
+                                <div class="p-2 pr-4 mr-auto align-self-start">
+                                    <small><b>You will delete:</b></small>
+                                    <ul>
+                                        <small>
+                                            <li><b>Post Title:</b></li>
+                                            <ul>
+                                                <a href="{% url 'post-detail' post.id %}"><li>{{post.title}} </li></a>
+                                            </ul>
+                                        </small>
+                                    </ul>
+                                </div>
+                            </div>    
+                        </div>
+                      </div>
+                </div>
             </fieldset>
             <div class="form-group">
                 <button class="btn btn-outline-danger" type="submit">Yes, Delete Post</button>
