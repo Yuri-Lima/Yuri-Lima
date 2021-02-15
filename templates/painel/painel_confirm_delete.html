@@ -5,12 +5,40 @@
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="boder-bottom mb-6">Delete Painel</legend> 
-                <h2> Are you sure that you want to delete the Painel with "{{object.hashtag}} ?"</h2>
+                
+                    <div class="d-flex p-0 text-black rounded"> 
+                        <div class="d-flex flex-column">
+                            <div class="p-1 mr-auto align-self-start"><legend class="border-bottom mb-6">Delete Painel</legend></div>
+                            <div class="span border rounded">
+                                <!-- <div class="p-1 mr-auto align-self-start text-danger"><h3>Alert</h3></div> -->
+                                <div class="p-1 mr-auto align-self-start text-info"><h5>When you delete a painel, you will detele all posts that exist inside of them.</h5></div>
+                            </div>
+                            
+                            <div class="p-1 mr-auto align-self-start"><h5> <b class="text-danger">Are you sure</b> that you want to delete the Painel "{{object.hashtag}} ?"</h5></div>
+                            <div class="p-1 mr-auto align-self-start">
+                                <div class="border border-danger rounded m-2">
+                                    <div class="p-2 pr-4 mr-auto align-self-start">
+                                        <small><b>You will delete:</b></small>
+                                        <ul>
+                                            <small>
+                                                <li><b>Post Titles:</b></li>
+                                                <ul>
+                                                {% for post in posts %}
+                                                    <a href="{% url 'post-detail' post.id %}"><li>{{post.title}} </li></a>
+                                                {% endfor %}
+                                                </ul>
+                                            </small>
+                                        </ul>
+                                    </div>
+                                </div>    
+                            </div>
+                          </div>
+                    </div>
+                
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline-danger" type="submit">Yes, Delete Post</button>
-                <a class="btn btn-warning" href="{% url 'painel-detail' object.id %}">Cancel</a>
+                <button class="btn btn-outline-danger" type="submit">Yes, Delete Painel</button>
+                <a class="btn btn-warning" href="{% url 'painel-detail' object.hashtag %}">Cancel</a>
             </div>
         </form>
     </div>

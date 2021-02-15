@@ -19,6 +19,9 @@ class Painel(models.Model):
             self.hashtag = self.hashtag.lower()
         else:
             self.hashtag = '#' + self.hashtag.lower()
+    
+    class Meta:
+        ordering = ['-painel_date_posted']
                 
         
 
@@ -46,6 +49,8 @@ class Post(models.Model):
     
     def __str__(self):
         return self.title
+    class Meta:
+        ordering = ['-date_posted']
     
         # def get_absolute_url(self):
         #     return f"/post/{self.pk}/"

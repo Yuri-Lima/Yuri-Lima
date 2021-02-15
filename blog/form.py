@@ -42,7 +42,7 @@ class PostFormHelper(FormHelper):
         self.form_tag = False # This is crucial.
         self.render_required_fields = True
         self.layout = Layout(
-            Fieldset("",
+            Fieldset("TestPaginations",
                     PrependedText('title','', placeholder="My Post"),
                     PrependedText('content','',placeholder="Descritions"),
                     PrependedText('url','', placeholder="www.example.com"),

@@ -11,7 +11,7 @@
         <article class="media content-section"> 
             <div class="media-body">
             <div class="article-metadata">
-                <div class="d-flex p-2 bg-secondary text-white">
+                <div class="d-flex p-2 bg-secondary text-white rounded">
                     <smallclass="text-white"> {{ forloop.counter }} - </small>
                     <small class="text-white"><b>Author: </b><a class="text-white mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author|capfirst }}</a></small>
                     <small class="text-white"><b>Posted: </b> {{ post.date_posted|date:'N d, Y H:i:s' }}</small>
