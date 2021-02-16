@@ -313,3 +313,15 @@ def about(request):
     #         raise Http404("Question does not exist")
 
     #     return render(request, 'post_detail.html', {'post': post})
+
+def error_404_view(request, exception,*args, **argv):
+    return render(request ,'errorpages/404.html') 
+
+def error_500_view(request, *args, **argv):
+    return render(request ,'errorpages/500.html')
+
+def error_403_view(request, exception, *args, **argv):
+    return render(request ,'errorpages/403.html')
+
+def error_400_view(request, exception, *args, **argv):
+    return render(request ,'errorpages/400.html')
