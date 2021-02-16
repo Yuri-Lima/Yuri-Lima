@@ -9,7 +9,7 @@ UserModel = get_user_model()
 class SendContactEmail(models.Model):
     subject = models.CharField(max_length=150)
     message = models.TextField()
-    from_email = models.EmailField(verbose_name='Email', max_length=60, default=UserModel.USERNAME_FIELD)
+    from_email = models.EmailField(verbose_name='Email', max_length=60)
     to_email = models.EmailField()
 
     def __str__(self):
