@@ -5,15 +5,8 @@ from django.contrib.auth.forms import UserCreationForm,UserChangeForm, PasswordR
 class UserSignup(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
-        # fields = (
-        #         'username', 'first_name', 'middle_name', 'last_name', 'email',
-        #          'country', 'state', 'city', 'password1', 'password2'
-        #          )
         fields = ('username','email','first_name','last_name','password1','password2',)
-        # # fields = '__all__'
-        # EMAIL_FIELD = 'email'
-        # USERNAME_FIELD = 'username'
-        REQUIRED_FIELDS = ['email','username','first_name','last_name']
+        REQUIRED_FIELDS = ['username','first_name','last_name']
 
 class EmailValidationOnForgotPassword(PasswordResetForm):
     def clean_email(self):
@@ -27,7 +20,6 @@ class UserUpdateForm(UserChangeForm):
     class Meta(UserChangeForm.Meta):
         model = User
         fields = ('first_name','last_name','username', 'email',)
-        # exclude = ('password',)
 
 class ProfileUpdateForm(UserChangeForm):
     class Meta(UserChangeForm.Meta):
