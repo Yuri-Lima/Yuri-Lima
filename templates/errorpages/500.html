@@ -1,0 +1,36 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	{% if user.username %}
+  		<title>Yuri Lima & {{user.username|capfirst}}</title>
+  	{% else %}
+  		<title>Yuri Lima</title>
+  	{% endif %}
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:700,900" rel="stylesheet">
+
+	<!-- Custom stlylesheet -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/error.css'  %}">
+
+</head>
+
+<body>
+	<div id="notfound">
+		<div class="notfound">
+				<div class="notfound-404">
+					<h1>500</h1>
+					<h2>Page not found</h2>
+				</div>
+				<a href="{% url 'painel-list' %}">Homepage</a>
+		</div>
+	</div>
+
+</body>
+
+</html>

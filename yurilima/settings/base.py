@@ -9,9 +9,13 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+
+import mimetypes
+
 from decouple import config
 from pathlib import Path
 import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -24,6 +28,15 @@ SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
+# config('DEBUG', default=False, cast=bool)
+
+#MIME type Django
+# mimetypes.add_type("text/css", ".css", True)
+# mimetypes.add_type("text/scss", ".scss", True)
+# mimetypes.add_type("text/plain", ".js", True)
+# mimetypes.add_type("text/javascript", ".js", True)
+# mimetypes.add_type("application/javascript", ".js", True)
+# mimetypes.add_type("application/x-javascript", ".js", True)
 
 ALLOWED_HOSTS = ['yurilima.herokuapp.com','www.yurilima.com.br', '127.0.0.1']
 
