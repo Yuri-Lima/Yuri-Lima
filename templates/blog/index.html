@@ -43,7 +43,9 @@
             <div class="sidebar-heading">@YuriLima </div>
           </div>
         </div>
+        {% if user.is_authenticated %}
         <a href="{% url 'profile' %}" class="sidebar-heading text-dark">{{user.get_full_name}}</a>
+        {% endif %}
         <div class="list-group list-group-flush">
           {% if user.is_authenticated %}
           <a href="{% url 'profile' %}" class="list-group-item list-group-item-action bg-light">Profile</a>
@@ -54,8 +56,13 @@
           <a href="https://www.linkedin.com/in/yuri-lima-40118bb3/" class="list-group-item list-group-item-action bg-light" target="_blank">LinkedIn</a>
           <a href="https://github.com/Yuri-Lima/" class="list-group-item list-group-item-action bg-light" target="_blank">GitHub</a>
           {% endif %}
-          <a href="{% url 'logout' %}" class="list-group-item list-group-item-action bg-light">Logout</a>
-          <small><p class="list-group-item list-group-item-action bg-light">Last Login: {{ user.last_login|date:'N d, Y H:i'}}</p></small>
+          <div class="p-3 mb-auto list-group-item list-group-item-action" >
+            <a href="{% url 'logout' %}" class="list-group-item list-group-item-action list-group-item-danger ">Logout</a>
+          </div>
+          <div class="list-group-item list-group-item-action bg-light" >
+            <small>Last Login: {{ user.last_login|date:'N d, Y H:i'}}</p></small>
+          </div>
+          
           {% else %}
           <a href="{% url 'painel-list' %}" class="list-group-item list-group-item-action bg-light">Blog</a>
           <a href="{% url 'login' %}" class="list-group-item list-group-item-action bg-light">Login</a>
