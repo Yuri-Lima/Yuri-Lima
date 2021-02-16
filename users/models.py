@@ -7,6 +7,9 @@ from django.contrib.auth import get_user_model
 
 # Create your models here. https://www.geeksforgeeks.org/creating-custom-user-model-using-abstractuser-in-django_restframework/
 class User(AbstractUser):
+    #Make user login by email
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
     #Perfil
     email = models.EmailField(max_length=255, unique=True)
     first_name = models.CharField(max_length=150)

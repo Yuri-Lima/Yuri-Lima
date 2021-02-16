@@ -6,7 +6,7 @@
     <div class="d-flex p-0 bg-secondary text-white rounded">
         <div class="p-1 mr-auto align-self-center">
             <small class="text-white"><b>Hastag: </b><a class=" text-white mr-2" href="{% url 'painel-detail' painel.hashtag %}">{{object.hashtag}}</a></small>
-        <small class="text-white"><b>Created by: </b><a class="text-white mr-2" href="{% url 'user-painel' painel.created_by %}">{{object.created_by|capfirst}}</a></small>
+        <small class="text-white"><b>Created by: </b><a class="text-white mr-2" href="{% url 'user-painel' painel.created_by.username %}">{{object.created_by.username|capfirst}}</a></small>
         <small class="text-white"><b>Posted: </b><a class="text-white mr-2" href="#">{{object.painel_date_posted|date:'N d, Y H:i:s'}}</a></small>
         </div>
         
@@ -26,14 +26,9 @@
             <div class="media-body">
             <div class="article-metadata">
                 <div class="d-flex p-2 bg-light text-dark">
-                {% if post.author == user %}
-                <small class="text-muted"><b>Author: </b><a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author|capfirst }}</a></small>
-                {% else %}
-                    <small class="text-muted"><b>Author: </b><a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author|capfirst }}</a></small>
-                {% endif %}
-                
-                    <small class="text-muted"><b>Posted: </b> {{ post.date_posted|date:'N d, Y H:i:s' }}</small>
-                    <small class="text-muted"><b>Last Updated: </b> {{ post.date_updated|date:'N d, Y H:i:s' }}</small>
+                <small class="text-muted"><b>Author: </b><a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author.username|capfirst }}</a></small>
+                <small class="text-muted"><b>Posted: </b> {{ post.date_posted|date:'N d, Y H:i:s' }}</small>
+                <small class="text-muted"><b>Last Updated: </b> {{ post.date_updated|date:'N d, Y H:i:s' }}</small>
                
             </div>
             <div class="ml-auto p-2">

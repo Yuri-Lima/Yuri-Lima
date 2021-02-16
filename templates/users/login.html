@@ -5,7 +5,7 @@
 {% block content %}
 <form class="form-signin" method="POST">
     {% csrf_token %}
-    <img class="mb-4" src="https://cdn.boldomatic.com/content/post/tynAQw/FAKE-NO-MORE?size=800" alt="" width="150" height="150">
+    <img class="mb-4" src="https://yurilima.s3-eu-west-1.amazonaws.com/logo_200x200.png" alt="" width="200" height="200">
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     {{ form.username|as_crispy_field }}
     {{ form.password|as_crispy_field }}

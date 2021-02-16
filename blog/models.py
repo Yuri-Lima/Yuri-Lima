@@ -17,7 +17,7 @@ class Painel(models.Model):
     def clean(self):
         if  self.hashtag.startswith('#'):
             self.hashtag = self.hashtag.lower()
-        else:
+        else:   
             self.hashtag = '#' + self.hashtag.lower()
     
     class Meta:
