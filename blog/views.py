@@ -241,9 +241,9 @@ class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
         return False
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):#respect those postions
     model = Post
-    success_url ='/'
+    success_url = reverse_lazy('painel-list')
 
-
+    #Shows the titles of the post witch will be delete
     def get_context_data(self, *args, **kwargs):
         # Call the base implementation first to get a context
         context = super(PostDeleteView, self).get_context_data(**kwargs)
@@ -268,12 +268,12 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):#respe
         painel = Painel.objects.get(id=painelIDwasfounded)
 
         if posts.count() == 1: 
-            success_url = self.get_success_url()
+            success_url = reverse_lazy('painel-list')
             painel.delete()
         else:
-            success_url = self.get_success_url()
+            success_url = reverse_lazy('painel-list')
             self.object.delete()
-        return HttpResponseRedirect(success_url, self.get_context_data(posts=posts.count()))
+        return HttpResponseRedirect(success_url)
 
     def test_func(self):
         post = self.get_object()
