@@ -36,7 +36,7 @@ class Post(models.Model):
     slug = models.SlugField(max_length=100 ,null=True)
     #===============================================================================
     content = models.TextField(null=True, help_text='Write your Post', blank=False)
-    url = models.URLField(help_text='Paste here the link, witch you saw that news?', blank=False)
+    url = models.URLField(help_text='Paste here the link, witch you saw that news ou inspirations?', blank=False)
     contact_number = models.CharField(max_length=20,blank=True, help_text='If you have another way to comunicate.')
     #===============================================================================
     date_posted = models.DateTimeField(auto_now_add= True)

@@ -1,11 +1,11 @@
-{% extends "blog/index.html" %}
+  {% extends "blog/index.html" %}
 {% load crispy_forms_tags %}
 
 {% block content %}
 <div class="content-section">
     <div class="d-flex flex-row">
       <div class="p-2">
-        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" style='width:100px; height:auto;' alt="profile_img" >
+        <img class="rounded-circle account-img"  src="{{ user.profile.image.url }}" style='width:100px; height:auto;' alt="profile_img" >
       </div>
       <div class="p-2">
         <h2 class="account-heading">{{ user.get_full_name }}</h2>
