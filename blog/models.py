@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.urls import reverse
-from django.utils.text import slugify
+from tinymce import models as tinymce_models
 
 # Create your models here.
 
@@ -19,11 +19,8 @@ class Painel(models.Model):
             self.hashtag = self.hashtag.lower()
         else:   
             self.hashtag = '#' + self.hashtag.lower()
-    
     class Meta:
         ordering = ['-painel_date_posted']
-                
-        
 
     def get_absolute_url(self):
         return reverse('painel-detail', kwargs={'hashtag': self.hashtag})
@@ -35,6 +32,7 @@ class Post(models.Model):
     title = models.CharField(max_length=100, blank=False)
     slug = models.SlugField(max_length=100 ,null=True)
     #===============================================================================
+    content_post = tinymce_models.HTMLField(null=True, blank=True, verbose_name='Content')
     content = models.TextField(null=True, help_text='Write your Post', blank=False)
     url = models.URLField(help_text='Paste here the link, witch you saw that news ou inspirations?', blank=False)
     contact_number = models.CharField(max_length=20,blank=True, help_text='If you have another way to comunicate.')

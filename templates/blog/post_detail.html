@@ -20,7 +20,8 @@
                 
             </div>
             <h2 class="article-title">{{ object.title }}</h2>
-            <p class="article-content">{{ object.content }}</p>
+            <!-- <p class="article-content">{{ object.content }}</p> -->
+            <p class="article-content">{{ object.content_post|safe }}</p>
         </div>
     </article>
     <a class="btn btn-info btn-sm mt-0 mb-0" href="{% url 'painel-list' %}">Back</a>
