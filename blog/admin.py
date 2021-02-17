@@ -1,8 +1,16 @@
 from .models import Post, Painel
 from django.contrib import admin
+from blog.forms import PostForm
 
-# Register your models here.
-admin.site.register(Post)
-admin.site.register(Painel)
-# Register your models here.
-
+@admin.register(Painel)
+class PainelAdmin(admin.ModelAdmin):
+    model = Painel
+    fields = ('created_by','hashtag',)
+    list_display = ('__str__','created_by','hashtag',)
+    
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    model = Post
+    fields = ('author','painel','title','slug','content_post','url','contact_number',)
+    list_display = ('__str__','author','painel',)
+    

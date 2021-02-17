@@ -8,7 +8,7 @@
         {% csrf_token %}
         <fieldset class="form-group">
             {% crispy form %}
-            {{ post_form.management_form|crispy}}
+            {{ post_form.management_form|crispy }}
             {{ post_form.non_form_errors|crispy }}
             {% crispy post_form post_formhelper %}
         </fieldset>

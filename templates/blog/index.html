@@ -14,16 +14,17 @@
   <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon_io/favicon-16x16.png' %}">
   <link rel="manifest" href="{% static 'favicon_io/site.webmanifest' %} ">
 
-  
-  
-  <!-- Bootstrap core CSS -->
+  <!-- Bootstrap core CSS don't touch-->
   <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %} ">
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <!-- TinyMCE Config don't touch-->
+  {{ form.media }}
 
-  <!-- Custom styles for this template -->
+  <!-- Bootstrap core JavaScript don't touch-->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+  <!-- Custom styles for this template don't touch-->
   <link rel="stylesheet" type="text/css" href="{% static 'css/simple-sidebar.css'  %}">
   <!-- ======================================================================== -->
   {% if user.username  %}

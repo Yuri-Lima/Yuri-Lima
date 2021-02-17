@@ -25,10 +25,12 @@ from django.conf.urls.static import static
 urlpatterns = [
     #Admin
     path('admin/', admin.site.urls),
+    
     #Authenticaios Users
     path('register/', user_views.register, name='register'),#from users import views as user_views
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),#from django.contrib.auth import views as auth_views
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),#from django.contrib.auth import views as auth_views  - 'users/logout.html'
+    
     #Password Reset
     path('password-reset/', 
         auth_views.PasswordResetView.as_view(template_name='users/password_reset.html', form_class=EmailValidationOnForgotPassword),
@@ -42,18 +44,19 @@ urlpatterns = [
     path('password-reset-complete/', 
         auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'),
          name='password_reset_complete'),
+
     #Profiles
     path('profile/', user_views.profile, name='profile'),
     
-    #Main Page Blog
+    #Main Page Blog >> Posts and Painel <<
     path('blog/', include('blog.urls')),
     path('', include('blog.urls')),
 
-    #Blog Emails
+    #Blog Emails >> anymail <<
     path('', include('emails.urls')),
 
-    #Blog richtextfield
-    path('djrichtextfield/', include('djrichtextfield.urls'))
+    #Blog richtextfield >> tinymce <<
+    path('tinymce/', include('tinymce.urls')),
 ]
 
 if settings.DEBUG is True:

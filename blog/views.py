@@ -13,14 +13,14 @@ from django.contrib.auth import get_user_model
 from .models import Post, Painel
 from django.urls import reverse
 from django.urls import reverse_lazy
-from .form import PostFormHelper, PainelForm
+from .forms import PostFormHelper, PainelForm
 from django.http import HttpResponseRedirect
 from django.forms.models import inlineformset_factory
 
 formSet = CombinedFormSet = inlineformset_factory(
             Painel,
             Post,
-            fields= ('title','content', 'url', 'contact_number', 'author', ),
+            fields= ('title', 'contact_number', 'author','content_post', ),
             # form= PostFormHelper,
             extra=1,
             can_delete=False,
@@ -177,7 +177,7 @@ class PainelDelete(LoginRequiredMixin, UserPassesTestMixin,DeleteView):
 
 class PostLisView(ListView):
     model: Post
-    template_name = 'blog/home.html'# <app>/<model>_<viewtype>.html
+    template_name = 'blog/post_list.html'# <app>/<model>_<viewtype>.html
     context_object_name = 'posts' #{% for post in posts %}
     paginate_by = 5 #the number of posts per page 
 
@@ -224,7 +224,7 @@ class PostCreateView(LoginRequiredMixin,CreateView):
     
 class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model: Post
-    fields = ['title', 'content', 'url','contact_number']
+    fields = ['title', 'content', 'url','contact_number', 'content_post',]
     # template_name = 'blog/post_form.html'
     
     def form_valid(self, form):#"""If the form is valid, save the associated model."""
@@ -287,16 +287,6 @@ class UserPostLisView(ListView):
     context_object_name = 'posts' #{% for post in posts %}
     paginate_by = 5 #the number of posts per page 
 
-    # def get_context_data(self, **kwargs):
-    #     # Call the base implementation first to get a context
-    #     context = super(UserPostLisView, self).get_context_data(**kwargs)
-    #     # Add in a QuerySet of all
-    #     context = {
-    #         'posts': Post.objects.all().order_by('-date_posted'),
-    #         'paineis' : Painel.objects.all().order_by('-painel_date_posted'),
-    #     }
-    #     return context
-
     def get_queryset(self):
         getUser = get_user_model()
         user = get_object_or_404(getUser, username=self.kwargs.get('username')) #Ele pega o user que vem pela URL
@@ -304,15 +294,6 @@ class UserPostLisView(ListView):
 
 def about(request):
     return render(request, 'blog/about.html')
-
-
-    # def detail(request, post_id):
-    #     try:
-    #         post = Post.objects.get(pk=post_id)
-    #     except Post.DoesNotExist:
-    #         raise Http404("Question does not exist")
-
-    #     return render(request, 'post_detail.html', {'post': post})
 
 def error_404_view(request, exception,*args, **argv):
     return render(request ,'errorpages/404.html') 
