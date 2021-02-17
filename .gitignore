@@ -139,7 +139,7 @@ dmypy.json
 cython_debug/
 
 #Deply to HEROKU
-static/
+# static/
 
 datadump.json
 workspace.code-workspace
