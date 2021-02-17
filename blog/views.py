@@ -200,7 +200,7 @@ class PostDetailView(DetailView):
 
 class PostCreateView(LoginRequiredMixin,CreateView):
     model: Post 
-    fields = ['title', 'content', 'url','contact_number']
+    fields = ['title','contact_number', 'content_post',]
     template_name = 'blog/post_form.html'
     
     def form_valid(self, form):#"""If the form is valid, save the associated model."""
@@ -222,8 +222,8 @@ class PostCreateView(LoginRequiredMixin,CreateView):
     
 class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model: Post
-    fields = ['title', 'content', 'url','contact_number', 'content_post',]
-    # template_name = 'blog/post_form.html'
+    fields = ['title','contact_number', 'content_post',]
+    template_name = 'blog/post_form.html'
     
     def form_valid(self, form):#"""If the form is valid, save the associated model."""
         form.instance.author = self.request.user
