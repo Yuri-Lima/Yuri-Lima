@@ -14,7 +14,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:700,900" rel="stylesheet">
 
 	<!-- Custom stlylesheet -->
-	<link type="text/css" rel="stylesheet" href="{% static error400/error400.css %" />
+	<link type="text/css" rel="stylesheet" href="{% static css/error400.css %" />
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,14 +29,13 @@
 
 	<div id="notfound">
 		<div class="notfound">
-			<div class="notfound-404">
+			<div class="notfound-400">
 				<h1>400</h1>
-				<h2>Page not found</h2>
+				<h2>Bad Request</h2>
 			</div>
 			<a href="{% url 'painel-list' %}">Homepage</a>
 		</div>
 	</div>
-
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</body>
 
 </html>

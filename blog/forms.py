@@ -1,11 +1,8 @@
 from django.forms import ModelForm
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, Submit
+from crispy_forms.layout import Layout, Fieldset
 from crispy_forms.bootstrap import *
-from django.http import request
 from .models import Painel, Post
-from tinymce.widgets import TinyMCE
-from django import forms
 
 """
     https://django-crispy-forms.readthedocs.io/en/latest/form_helper.html
@@ -45,7 +42,6 @@ class PostFormHelper(FormHelper):
             Fieldset("",
                     PrependedText('title','', placeholder="My Post"),
                     PrependedText('content_post','',placeholder="Descriptions"),
-                    PrependedText('url','', placeholder="http://www.example.com"),
                     PrependedText('contact_number','', placeholder="countryCode + localCode + PhoneNumber"),
                     ),
         )
@@ -57,7 +53,7 @@ class HashtagForm(ModelForm):
 class PostForm(ModelForm): 
     class Meta:
         model = Post
-        fields = ('author','painel','title','url','contact_number','content_post','content')
+        fields = ('author','painel','title','contact_number','content_post',)
 
 
 

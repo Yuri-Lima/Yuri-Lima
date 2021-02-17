@@ -33,8 +33,6 @@ class Post(models.Model):
     slug = models.SlugField(max_length=100 ,null=True)
     #===============================================================================
     content_post = tinymce_models.HTMLField(null=True, blank=True, verbose_name='Content')
-    content = models.TextField(null=True, help_text='Write your Post', blank=False)
-    url = models.URLField(help_text='Paste here the link, witch you saw that news ou inspirations?', blank=True)
     contact_number = models.CharField(max_length=20,blank=True, help_text='If you have another way to comunicate.')
     #===============================================================================
     date_posted = models.DateTimeField(auto_now_add= True)
@@ -49,10 +47,7 @@ class Post(models.Model):
         return self.title
     class Meta:
         ordering = ['-date_posted']
-    
-        # def get_absolute_url(self):
-        #     return f"/post/{self.pk}/"
-    
+
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'pk': self.pk})
 

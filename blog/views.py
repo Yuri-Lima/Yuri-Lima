@@ -1,6 +1,5 @@
 from django.shortcuts import (
-    render, 
-    redirect, 
+    render,
     get_object_or_404)
 from django.views.generic import (
     CreateView, 
@@ -21,7 +20,6 @@ formSet = CombinedFormSet = inlineformset_factory(
             Painel,
             Post,
             fields= ('title', 'contact_number', 'author','content_post', ),
-            # form= PostFormHelper,
             extra=1,
             can_delete=False,
 )
