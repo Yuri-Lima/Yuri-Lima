@@ -6,9 +6,6 @@ from .models import User, Profile
 
 from .forms import UserSignup,UserUpdateForm
 
-# Register your models here.
-# admin.site.register(Profile)
-
 @admin.register(User)
 class UserAdmin(auth_admin.UserAdmin):
     form : UserUpdateForm
