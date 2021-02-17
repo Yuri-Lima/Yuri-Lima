@@ -13,7 +13,7 @@ from django.contrib.auth import get_user_model
 from .models import Post, Painel
 from django.urls import reverse
 from django.urls import reverse_lazy
-from .form import PostFormHelper, PainelForm
+from .forms import PostFormHelper, PainelForm
 from django.http import HttpResponseRedirect
 from django.forms.models import inlineformset_factory
 
@@ -177,7 +177,7 @@ class PainelDelete(LoginRequiredMixin, UserPassesTestMixin,DeleteView):
 
 class PostLisView(ListView):
     model: Post
-    template_name = 'blog/home.html'# <app>/<model>_<viewtype>.html
+    template_name = 'blog/post_list.html'# <app>/<model>_<viewtype>.html
     context_object_name = 'posts' #{% for post in posts %}
     paginate_by = 5 #the number of posts per page 
 
