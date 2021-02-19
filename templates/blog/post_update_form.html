@@ -2,17 +2,17 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+
 <div class="content-section">
-    <form method="POST">
+    <form method="post" id='update_post'>
         {% csrf_token %}
-        <fieldset class="form-group">
+        <fieldset class="form-group" id='update_post'>
             {{ form.management_form|crispy }}
             {{ form.non_form_errors|crispy }}
-            {{ form|crispy }}
+            {% crispy form post_formhelper %}
+
         </fieldset>
-        <div class="form-group">
-            <button type="submit" name="submit" value="Save" class="btn btn-outline-primary" id="submit-save">Save</button>
-        </div>
+        <button type="submit" name="submit" value="Save" class="btn btn-outline-primary" id="submit-save">Save Post</button>
         <div class="p-2 mb-auto" style="height: 100px;"></div>
     </form>
 <div>

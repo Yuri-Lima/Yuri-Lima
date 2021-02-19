@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset
+from crispy_forms.layout import Layout, Fieldset, Submit
 from crispy_forms.bootstrap import *
 from .models import Painel, Post
 
@@ -39,7 +39,7 @@ class PostFormHelper(FormHelper):
         self.form_tag = False # This is crucial.
         self.render_required_fields = True
         self.layout = Layout(
-            Fieldset("",
+            Fieldset("Update Post",
                     PrependedText('title','', placeholder="My Post"),
                     PrependedText('content_post','',placeholder="Descriptions"),
                     PrependedText('contact_number','', placeholder="countryCode + localCode + PhoneNumber"),
@@ -53,7 +53,8 @@ class HashtagForm(ModelForm):
 class PostForm(ModelForm): 
     class Meta:
         model = Post
-        fields = ('author','painel','title','contact_number','content_post',)
+        fields = ('title','content_post','contact_number',)
+
 
 
 

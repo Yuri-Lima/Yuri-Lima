@@ -2,10 +2,8 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-
 <div class="content-section">
     <form method="POST">
-        {% csrf_token %}
         <fieldset class="form-group">
             {% crispy form %}
             {{ post_form.management_form|crispy }}
@@ -16,7 +14,6 @@
         <div class="p-2 mb-auto" style="height: 100px;"></div>
     </form>
 <div>
-
 {% endblock content %}
 
 

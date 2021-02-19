@@ -12,8 +12,8 @@
                 <li class="list-inline-item"><small class="text-muted"><b>Last Updated: </b> {{ post.date_updated|date:'N d, Y H:i:s' }}</small></li>
             </ul>
         </div>
-        <h2><a class="article-title" href="{{post.get_absolute_url}}">{{ post.title }}</a></h2>
-        <p class="article-content">{{ post.content_post|safe|linebreaks|truncatewords:30 }}</p>
+        <h2><a class="article-title" href="{{post.get_absolute_url}}">{{ post.title|title }}</a></h2>
+        <p class="article-content">{{ post.content_post|safe|linebreaks|truncatechars_html:10|cut:"  " }}</p>
         </div>
     </article>
 {% endfor %}

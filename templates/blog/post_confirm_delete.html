@@ -21,7 +21,7 @@
                                         <small>
                                             <li><b>Post Title:</b></li>
                                             <ul>
-                                                <a href="{% url 'post-detail' post.id %}"><li>{{post.title}} </li></a>
+                                                <a href="{% url 'post-detail' post.id %}"><li>{{post.title|linenumbers|title}} </li></a>
                                             </ul>
                                         </small>
                                     </ul>
