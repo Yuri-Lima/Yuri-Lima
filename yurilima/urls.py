@@ -55,6 +55,9 @@ urlpatterns = [
     #Blog Emails >> anymail <<
     path('', include('emails.urls')),
 
+    #Yuri Lima CV >> Personal <<
+    path('', include('yurilimacv.urls')),
+
     #Blog richtextfield >> tinymce <<
     path('tinymce/', include('tinymce.urls')),
 ]

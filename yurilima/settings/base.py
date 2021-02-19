@@ -56,10 +56,12 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'blog.apps.BlogConfig',
     'emails.apps.EmailsConfig',
+    'yurilimacv.apps.YurilimacvConfig',
     # 3rd Party
     'crispy_forms', #https://django-crispy-forms.readthedocs.io/en/latest/ --- https://simpleisbetterthancomplex.com/tutorial/2018/11/28/advanced-form-rendering-with-django-crispy-forms.html
     "anymail",
     'tinymce',
+    'mathfilters',
 ]
 
 MIDDLEWARE = [

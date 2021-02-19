@@ -2,18 +2,20 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <div class="content-section">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="boder-bottom mb-6">Contact</legend> 
-                {{ email_form.from_email|as_crispy_field }}
-                {{ email_form.subject|as_crispy_field }}
-                {{ email_form.message|as_crispy_field }}
-            </fieldset>
-            <div class="form-group">
-                <button type="submit" name="submit" value="Contact" class="btn btn-outline-primary" id="submit-save">Send</button>
-            </div>
-        </form>
-    </div>
+<div class="content-section">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="boder-bottom mb-6">Contact</legend> 
+            {{ email_form.from_email|as_crispy_field }}
+            {{ email_form.subject|as_crispy_field }}
+            {{ email_form.message|as_crispy_field }}
+        </fieldset>
+        <div class="form-group">
+            <button type="submit" name="submit" value="Contact" class="btn btn-outline-primary" id="submit-save">Send</button>
+        </div>
+    </form>
+</div>
+</div>
 {% endblock content %}
+
