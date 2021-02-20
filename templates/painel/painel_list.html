@@ -35,9 +35,9 @@
                                 <li class="list-inline-item"><small class="text-muted"><b>Last Updated: </b> {{ posts_by_painel.date_updated|date:'N d, Y H:i:s' }}</small></li>
                             </ul>
                         </div>
-                        <h5><a class="article-title" href="{{posts_by_painel.get_absolute_url}}">{{ posts_by_painel.title }}</a></h5>
+                        <h5><a class="article-title" href="{{posts_by_painel.get_absolute_url}}">{{ posts_by_painel.title|title }}</a></h5>
                         <!-- <p class="article-content">{{ posts_by_painel.content|linebreaks|truncatewords:20 }}</p> -->
-                        <p class="article-content">{{ posts_by_painel.content_post|safe|linebreaks|truncatewords:20 }}</p>
+                        <p class="article-content">{{ posts_by_painel.content_post|safe|linebreaks|truncatewords_html:25|cut:"  "}}</p>
                     </div>
                 </article>
             </div>

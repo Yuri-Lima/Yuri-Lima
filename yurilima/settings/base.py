@@ -56,10 +56,12 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'blog.apps.BlogConfig',
     'emails.apps.EmailsConfig',
+    'yurilimacv.apps.YurilimacvConfig',
     # 3rd Party
     'crispy_forms', #https://django-crispy-forms.readthedocs.io/en/latest/ --- https://simpleisbetterthancomplex.com/tutorial/2018/11/28/advanced-form-rendering-with-django-crispy-forms.html
     "anymail",
     'tinymce',
+    'mathfilters',
 ]
 
 MIDDLEWARE = [
@@ -192,7 +194,8 @@ TINYMCE_JS_URL = 'https://cdn.tiny.cloud/1/6ur4208fgogunt9u96dk0gnuw5hyvtfvv18tg
 TINYMCE_SPELLCHECKER = True
 TINYMCE_COMPRESSOR = False
 TINYMCE_DEFAULT_CONFIG = {
-    "height": "320px",
+    # 'selector':'form-group',
+    "height": "520px",
     "width": "1280px",
     "menubar": "file edit view insert format tools table help",
     "plugins": "advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code "
@@ -203,7 +206,7 @@ TINYMCE_DEFAULT_CONFIG = {
     "backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | "
     "a11ycheck ltr rtl | showcomments addcomment code",
     "custom_undo_redo_levels": 10,
-    "language": "en-Us",  # To force a specific language instead of the Django current language.
+    # "language": "en-Us",  # To force a specific language instead of the Django current language.
 }
 # TINYMCE_EXTRA_MEDIA = {
 #     'css': {

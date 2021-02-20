@@ -14,15 +14,15 @@
                 <div class="d-flex p-2 bg-secondary text-white rounded">
                     <smallclass="text-white"> {{ forloop.counter }} - </small>
                     <small class="text-white"><b>Author: </b><a class="text-white mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author.username|capfirst }}</a></small>
-                    <small class="text-white"><b>Posted: </b> {{ post.date_posted|date:'N d, Y H:i:s' }}</small>
-                    <small class="text-white"><b>Last Updated: </b> {{ post.date_updated|date:'N d, Y H:i:s' }}</small>
+                    <small class="text-white "><b>Posted: </b> {{ post.date_posted|date:'N d, Y H:i:s' }}</small>
+                    <small class="text-white m-4"><b>Last Updated: </b> {{ post.date_updated|date:'N d, Y H:i:s' }}</small>
                 </div>
                 {% if view.kwargs.username == username %}
                     <a class="btn btn-info btn-sm mt-0 mb-0" href="{% url 'post-update' post.id %}">Update</a>
                     <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' post.id %}">Delete</a>
                 {% endif %}
             </div>
-            <h2><a class="article-title" href="{{post.get_absolute_url}}">{{ post.title }}</a></h2>
+            <h2><a class="article-title" href="{{post.get_absolute_url}}">{{ post.title|title }}</a></h2>
             <!-- <p class="article-content">{{ post.content|linebreaks|truncatewords:20 }}</p> -->
             <p class="article-content">{{ post.content_post|safe|linebreaks|truncatewords:20 }}</p>
             </div>

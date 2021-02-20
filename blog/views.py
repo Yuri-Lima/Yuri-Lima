@@ -12,9 +12,9 @@ from django.contrib.auth import get_user_model
 from .models import Post, Painel
 from django.urls import reverse
 from django.urls import reverse_lazy
-from .forms import PostFormHelper, PainelForm
+from .forms import PostFormHelper, PainelForm, PostForm
 from django.http import HttpResponseRedirect
-from django.forms.models import inlineformset_factory
+from django.forms.models import inlineformset_factory, formset_factory
 
 formSet = CombinedFormSet = inlineformset_factory(
             Painel,
@@ -221,16 +221,20 @@ class PostCreateView(LoginRequiredMixin,CreateView):
     #     return context
     
 class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
-    model: Post
-    fields = ['title','contact_number', 'content_post',]
-    template_name = 'blog/post_form.html'
-    
-    def form_valid(self, form):#"""If the form is valid, save the associated model."""
-        form.instance.author = self.request.user
-        return super().form_valid(form)
+    model: Painel
+    form_class = PostForm
+    template_name_suffix = 'update_form'
+    template_name = 'blog/post_update_form.html'
+    # fields = ['title', 'content_post','contact_number',]
 
-    def get_queryset(self):
-        return Post.objects.all()
+    def get_object(self, queryset=None): #https://levelup.gitconnected.com/django-quick-tips-get-absolute-url-1c22321f806b
+        return Post.objects.get(pk=self.kwargs.get("pk"))
+    
+    def get_context_data(self, **kwargs):
+        """ Add formset and formhelper to the context_data. """
+        ctx = super(PostUpdateView, self).get_context_data(**kwargs)
+        ctx['post_formhelper'] = PostFormHelper()
+        return ctx
 
     def test_func(self):
         post = self.get_object()
