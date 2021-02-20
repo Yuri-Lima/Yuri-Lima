@@ -49,7 +49,7 @@
     {% endspaceless %}
     </head>
     <body>
-        <main role="main" class="container">
+        
             <div class="row">
               <div class="col">
                 {% if messages %}
@@ -59,12 +59,14 @@
                     </div>
                   {% endfor %}
                 {% endif %}
-                {% block content %}
-                      <!-- All in here -->
-                {% endblock %}
               </div>
             </div>
-          </main>
+            {% block content %}
+                  <!-- All in here -->
+            {% endblock %}
+              
+            
+          
 
         <!-- Vendor JS Files -->
         <script src="{% static 'yurilima/assets/vendor/jquery/jquery.min.js' %}"></script>
