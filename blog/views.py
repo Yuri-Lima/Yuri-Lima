@@ -41,7 +41,6 @@ class PainelList(ListView):
         context['covid'] = covid
         return context
 
-
 class PainelCreate(LoginRequiredMixin,CreateView):
     model = Painel # Painel
     form_class = PainelForm
