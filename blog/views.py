@@ -26,16 +26,7 @@ formSet = CombinedFormSet = inlineformset_factory(
             can_delete=False,
 )
 
-def covid():
-    url = "https://covid-19-data.p.rapidapi.com/report/country/name"
-    querystring = {"name":"brazil"}
-    headers = {
-    'x-rapidapi-key': config('Rapid_API_Key_Covid'),
-    'x-rapidapi-host': "covid-19-data.p.rapidapi.com"
-    }
-    response = requests.request("GET", url, headers=headers, params=querystring)
-    # print(response.all())
-    print(response.text)
+
 
 class PainelList(ListView):
     model: Painel
@@ -44,7 +35,7 @@ class PainelList(ListView):
     queryset = Painel.objects.all().order_by('-painel_date_posted')
     context_object_name = 'paineis'
 
-    covid()
+    
     
 
 class PainelCreate(LoginRequiredMixin,CreateView):
