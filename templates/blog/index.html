@@ -20,6 +20,12 @@
   <!-- TinyMCE Config don't touch-->
   {{ form.media }}
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+
+  <!-- Rapidapi Config don't touch-->
+  <!-- 'x-rapidapi-key': "2fd1bed76cmshf8785b0ef8233a9p1a5a3fjsn2c5226e1160d",  
+  'x-rapidapi-host': "covid-19-data.p.rapidapi.com" -->
+
   <!-- Bootstrap core JavaScript don't touch-->
   <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
   <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
@@ -121,18 +127,9 @@
         <div class="nav-scroller py-1 mb-2">
           <div class="container">
             <nav class="nav d-flex justify-content-between">
-              <a class="p-2 text-muted" href="#">World</a>
-              <a class="p-2 text-muted" href="#">U.S.</a>
-              <a class="p-2 text-muted" href="#">Technology</a>
-              <a class="p-2 text-muted" href="#">Design</a>
-              <a class="p-2 text-muted" href="#">Culture</a>
-              <a class="p-2 text-muted" href="#">Business</a>
-              <a class="p-2 text-muted" href="#">Politics</a>
-              <a class="p-2 text-muted" href="#">Opinion</a>
-              <a class="p-2 text-muted" href="#">Science</a>
-              <a class="p-2 text-muted" href="#">Health</a>
-              <a class="p-2 text-muted" href="#">Style</a>
-              <a class="p-2 text-muted" href="#">Travel</a>
+              <div class="p-2">
+                <small><a class="ml3" href="#">World</a></small>
+              </div>
             </nav>
           </div>
         </div>
@@ -176,6 +173,27 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
+
+  <script>
+  // Wrap every letter in a span
+  var textWrapper = document.querySelector('.ml3');
+  textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+  anime.timeline({loop: true})
+    .add({
+      targets: '.ml3 .letter',
+      opacity: [0,1],
+      easing: "easeInOutQuad",
+      duration: 2250,
+      delay: (el, i) => 150 * (i+1)
+    }).add({
+      targets: '.ml3',
+      opacity: 0,
+      duration: 1000,
+      easing: "easeOutExpo",
+      delay: 1000
+    });
+  </script>
 
   {% endspaceless %}
 </body>

@@ -15,6 +15,8 @@ from django.urls import reverse_lazy
 from .forms import PostFormHelper, PainelForm, PostForm
 from django.http import HttpResponseRedirect
 from django.forms.models import inlineformset_factory, formset_factory
+import requests
+from decouple import config
 
 formSet = CombinedFormSet = inlineformset_factory(
             Painel,
@@ -24,12 +26,16 @@ formSet = CombinedFormSet = inlineformset_factory(
             can_delete=False,
 )
 
+
+
 class PainelList(ListView):
     model: Painel
     template_name = 'painel/painel_list.html'
     paginate_by = 5
     queryset = Painel.objects.all().order_by('-painel_date_posted')
     context_object_name = 'paineis'
+
+    
     
 
 class PainelCreate(LoginRequiredMixin,CreateView):
@@ -293,6 +299,7 @@ class UserPostLisView(ListView):
         getUser = get_user_model()
         user = get_object_or_404(getUser, username=self.kwargs.get('username')) #Ele pega o user que vem pela URL
         return Post.objects.filter(author=user).order_by('-date_posted')
+
 
 def about(request):
     return render(request, 'blog/about.html')
