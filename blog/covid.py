@@ -3,7 +3,8 @@ from decouple import config
 
 
 def covid19():
-    country = getcountry()
+    # country = getcountry()
+    country = 'Brazil'
     url = "https://covid-19-data.p.rapidapi.com/country"
     querystring = {"name":str(country)}
     headers = {
