@@ -32,6 +32,7 @@
 
   <!-- Custom styles for this template don't touch-->
   <link rel="stylesheet" type="text/css" href="{% static 'css/simple-sidebar.css'  %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/covid.css'  %}">
   <!-- ======================================================================== -->
   {% if user.username  %}
   <title>Yuri Lima & {{user.username|capfirst}}</title>
@@ -123,17 +124,7 @@
           </ul>
         </div>
       </nav>
-      <div class="container-fluid">
-        <div class="nav-scroller py-1 mb-2">
-          <div class="container">
-            <nav class="nav d-flex justify-content-between">
-              <div class="p-2">
-                <small><a class="ml3" href="#">World</a></small>
-              </div>
-            </nav>
-          </div>
-        </div>
-      </div>
+      {% include 'blog/covid.html' %}
           <main role="main" class="container">
             <div class="row">
               <div class="col">
@@ -173,28 +164,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
-
-  <script>
-  // Wrap every letter in a span
-  var textWrapper = document.querySelector('.ml3');
-  textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
-
-  anime.timeline({loop: true})
-    .add({
-      targets: '.ml3 .letter',
-      opacity: [0,1],
-      easing: "easeInOutQuad",
-      duration: 2250,
-      delay: (el, i) => 150 * (i+1)
-    }).add({
-      targets: '.ml3',
-      opacity: 0,
-      duration: 1000,
-      easing: "easeOutExpo",
-      delay: 1000
-    });
-  </script>
-
+  <script src="{% static 'js/covid.js' %}"></script>
   {% endspaceless %}
 </body>
 

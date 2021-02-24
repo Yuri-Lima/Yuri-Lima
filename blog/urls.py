@@ -24,7 +24,7 @@ urlpatterns = [
 
     #Base Page
     path('about/', views.about, name='blog-about'),
-
+    
     #Post
     path('post/', PostLisView.as_view(), name='post-list'),
     path('post/new/', PostCreateView.as_view(), name='post-create'),

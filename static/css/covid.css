@@ -1,0 +1,16 @@
+html,body {
+  font-family: 'Raleway', sans-serif;
+  /* padding: 1em 2em; */
+  /* font-size: 18px; */
+  color: rgb(8, 8, 8)
+}
+
+h1,h2 {
+  font-weight: 100;
+  /* margin: 0.4em 0; */
+}
+h1 { font-size: 1.5em; }
+h2 {
+  color: #888;
+  font-size: 2em;
+}

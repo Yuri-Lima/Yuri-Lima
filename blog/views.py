@@ -9,14 +9,14 @@ from django.views.generic import (
     DetailView )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth import get_user_model
+from requests.models import requote_uri
 from .models import Post, Painel
 from django.urls import reverse
 from django.urls import reverse_lazy
 from .forms import PostFormHelper, PainelForm, PostForm
 from django.http import HttpResponseRedirect
-from django.forms.models import inlineformset_factory, formset_factory
-import requests
-from decouple import config
+from django.forms.models import inlineformset_factory
+from .covid import covid19
 
 formSet = CombinedFormSet = inlineformset_factory(
             Painel,
@@ -26,8 +26,6 @@ formSet = CombinedFormSet = inlineformset_factory(
             can_delete=False,
 )
 
-
-
 class PainelList(ListView):
     model: Painel
     template_name = 'painel/painel_list.html'
@@ -35,8 +33,14 @@ class PainelList(ListView):
     queryset = Painel.objects.all().order_by('-painel_date_posted')
     context_object_name = 'paineis'
 
-    
-    
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(PainelList, self).get_context_data(**kwargs)
+        covid = covid19()
+        # Add in a QuerySet of all the books
+        context['covid'] = covid
+        return context
+
 
 class PainelCreate(LoginRequiredMixin,CreateView):
     model = Painel # Painel
@@ -299,7 +303,6 @@ class UserPostLisView(ListView):
         getUser = get_user_model()
         user = get_object_or_404(getUser, username=self.kwargs.get('username')) #Ele pega o user que vem pela URL
         return Post.objects.filter(author=user).order_by('-date_posted')
-
 
 def about(request):
     return render(request, 'blog/about.html')
