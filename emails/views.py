@@ -23,7 +23,7 @@ def send_email(request):
             if subject and message and from_email:
                 try:
                     send_mail(subject, message, from_email, [to_email], fail_silently=False,)
-                    
+
                 except BadHeaderError:
                     return HttpResponse('Invalid header found.')
 
@@ -34,4 +34,4 @@ def send_email(request):
             return redirect('email-contact')
     else:
         email_form = SendContactForm()
-    return render(request,'email/contact.html',{'email_form': email_form})
+    return render(request,'email/contact.html', {'email_form': email_form})

@@ -6,7 +6,7 @@ from django.core.mail import BadHeaderError, send_mail
 from django.http import HttpResponse
 
 # Create your views here.
-def YuriLimaProfile(request):
+def YuriLima(request):
     if request.method =='POST':
         email_form = SendContactForm(request.POST)#,instance=request.user
         if email_form.is_valid():
@@ -24,13 +24,30 @@ def YuriLimaProfile(request):
                 except BadHeaderError:
                     return HttpResponse('Invalid header found.')
                 messages.success(request, f'Your email has been submited!'),
-                return redirect('yuri-lima')
+                return redirect('#contact')
         else:
             messages.error(request, f'Make sure all fields are entered and valid.')
-            return redirect('email-contact')
+            return redirect('#contact')
     else:
         email_form = SendContactForm()
     return render(request, 'yurilimacv/yurilima.html', {'email_form': email_form} )
 
-def YuriLimaPortifolio(request):
-    return render(request, 'yurilimacv/portfolio-details.html')
+def YuriLimaAbout(request):
+    email_form = SendContactForm()
+    return render(request, 'yurilimacv/yurilima.html', {'email_form': email_form} )
+
+def YuriLimaResume(request):
+    email_form = SendContactForm()
+    return render(request, 'yurilimacv/yurilima.html', {'email_form': email_form} )
+
+def YuriLimaPortofolio(request):
+    email_form = SendContactForm()
+    return render(request, 'yurilimacv/yurilima.html', {'email_form': email_form} )
+
+def YuriLimaServices(request):
+    email_form = SendContactForm()
+    return render(request, 'yurilimacv/yurilima.html', {'email_form': email_form} )
+
+def YuriLimaContact(request):
+    email_form = SendContactForm()
+    return render(request, 'yurilimacv/yurilima.html', {'email_form': email_form} )
