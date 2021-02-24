@@ -39,6 +39,7 @@ def covid19():
     }
     responsecovid = requests.request("GET", url, headers=headers, params=querystring).json()
     return responsecovid
+  
 
 def getcountry():
     url = "https://find-any-ip-address-or-domain-location-world-wide.p.rapidapi.com/iplocation"
@@ -49,7 +50,10 @@ def getcountry():
         }
 
     response = requests.request("GET", url, headers=headers, params=querystring).json()
-    return response['country']
+    if response['status'] == 200:
+        return response['country']
+    else:
+        return 'Brazil'
 
 class PainelList(ListView):
     model: Painel
@@ -58,13 +62,13 @@ class PainelList(ListView):
     queryset = Painel.objects.all().order_by('-painel_date_posted')
     context_object_name = 'paineis'
 
-    # def get_context_data(self, **kwargs):
-    #     # Call the base implementation first to get a context
-    #     context = super(PainelList, self).get_context_data(**kwargs)
-    #     covid = covid19()
-    #     # Add in a QuerySet of all the books
-    #     context['covid'] = covid
-    #     return context
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(PainelList, self).get_context_data(**kwargs)
+        covid = covid19()
+        # Add in a QuerySet of all the books
+        context['covid'] = covid
+        return context
 
 class PainelCreate(LoginRequiredMixin,CreateView):
     model = Painel # Painel
