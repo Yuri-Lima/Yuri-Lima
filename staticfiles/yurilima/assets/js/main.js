@@ -31,7 +31,7 @@
 
   // Smooth scroll for the navigation menu and links with .scrollto classes
   $(document).on('click', '.nav-menu a, .scrollto', function(e) {
-    if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+    if (location.pathname.replace(/^\/yurilima/, '') == this.pathname.replace(/^\/yurilima/, '') && location.hostname == this.hostname) {
       var target = $(this.hash);
       if (target.length) {
         e.preventDefault();
@@ -58,7 +58,7 @@
 
   // Activate smooth scroll on page load with hash links in the url
   $(document).ready(function() {
-    if (window.location.hash) {
+    if (window.location.pathname) {
       var initial_nav = window.location.hash;
       if ($(initial_nav).length) {
         var scrollto = $(initial_nav).offset().top;
