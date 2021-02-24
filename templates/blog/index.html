@@ -44,10 +44,10 @@
       <div class="bg-light border-right" id="sidebar-wrapper" >
         <div class="d-flex flex-column align-self-center">
           <div class="p-2 mb-auto align-self-center" style="height: 200px;">
-            <img class='rounded mx-auto d-block article-img m-5' src="https://yurilima.s3-eu-west-1.amazonaws.com/yuri.png" style='width:150px; height:auto;' alt="profile_img">            
+            <a href="{% url 'yuri-lima' %}"><img class='rounded mx-auto d-block article-img m-5' src="https://yurilima.s3-eu-west-1.amazonaws.com/yuri.png" style='width:150px; height:auto;' alt="profile_img"></a>            
           </div>
           <div class="p-2 mb-auto align-self-center" >
-            <div class="sidebar-heading">@YuriLima </div>
+            <a class="sidebar-heading" href="{% url 'yuri-lima' %}">@YuriLima</a>
           </div>
         </div>
         {% if user.is_authenticated %}

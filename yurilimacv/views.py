@@ -6,7 +6,7 @@ from django.core.mail import BadHeaderError, send_mail
 from django.http import HttpResponse
 
 # Create your views here.
-def send_email_yuri_lima(request):
+def YuriLimaProfile(request):
     if request.method =='POST':
         email_form = SendContactForm(request.POST)#,instance=request.user
         if email_form.is_valid():
