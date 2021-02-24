@@ -1,0 +1,21 @@
+{% load humanize %}
+<div class="container-fluid">
+    <div class="nav-scroller py-1 mb-2">
+      <div class="container">
+        <nav class="nav d-flex justify-content-between">
+          <div class="d-flex flex-row">
+            {% for x in covid %}
+            <h8>{{ x.country }} Cases - 
+            <span
+               class="txt-rotate"
+               data-period="1000"
+               data-rotate='[ "Confirmed: {{ x.confirmed|intword }}", "Recovered: {{ x.recovered|intword }}", "Deaths: {{ x.deaths|intcomma }} thousand"]'></span>
+               {% now "Y-M-d" as last_update %}
+               - Last Update {{ last_update }}</h8>
+          {% endfor %}
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+
