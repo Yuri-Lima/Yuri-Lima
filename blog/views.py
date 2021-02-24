@@ -58,13 +58,13 @@ class PainelList(ListView):
     queryset = Painel.objects.all().order_by('-painel_date_posted')
     context_object_name = 'paineis'
 
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super(PainelList, self).get_context_data(**kwargs)
-        covid = covid19()
-        # Add in a QuerySet of all the books
-        context['covid'] = covid
-        return context
+    # def get_context_data(self, **kwargs):
+    #     # Call the base implementation first to get a context
+    #     context = super(PainelList, self).get_context_data(**kwargs)
+    #     covid = covid19()
+    #     # Add in a QuerySet of all the books
+    #     context['covid'] = covid
+    #     return context
 
 class PainelCreate(LoginRequiredMixin,CreateView):
     model = Painel # Painel
