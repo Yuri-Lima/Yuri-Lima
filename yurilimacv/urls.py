@@ -9,5 +9,5 @@ urlpatterns = [
     path('yurilima/resume', views.YuriLimaResume, name='#resume'),
     path('yurilima/portfolio', views.YuriLimaPortofolio, name='#portofolio'),
     path('yurilima/services', views.YuriLimaServices, name='#services'),
-    path('yurilima/contact', views.YuriLimaContact, name='#contact'), 
+    path('yurilima/contact', views.YuriLimaContact, name='#contact'),
 ] 
