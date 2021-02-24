@@ -4,6 +4,10 @@ from . import views
 
 #Path converters
 urlpatterns = [
-    path('yurilima/', views.send_email_yuri_lima, name='yuri-lima'),
-    path('portifolio/', views.YuriLimaPortifolio, name='yuri-lima-portifolio'),
-]
+    path('yurilima/', views.YuriLima, name='#yurilima'),    
+    path('yurilima/about', views.YuriLimaAbout, name='#about'),
+    path('yurilima/resume', views.YuriLimaResume, name='#resume'),
+    path('yurilima/portfolio', views.YuriLimaPortofolio, name='#portofolio'),
+    path('yurilima/services', views.YuriLimaServices, name='#services'),
+    path('yurilima/contact', views.YuriLimaContact, name='#contact'),
+] 
