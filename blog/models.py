@@ -4,6 +4,13 @@ from django.urls import reverse
 from tinymce import models as tinymce_models
 
 # Create your models here.
+class Covid(models.Model):
+    country = models.CharField(null=True, max_length=255)
+    confirmed = models.CharField(null=True, max_length=255)
+    recovered = models.CharField(null=True, max_length=255)
+    critical = models.CharField(null=True, max_length=255)
+    deaths = models.CharField(null=True, max_length=255)
+    lastUpdate = models.CharField(null=True, max_length=255)
 
 class Painel(models.Model):
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
