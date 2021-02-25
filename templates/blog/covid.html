@@ -9,7 +9,7 @@
             <span
                class="txt-rotate"
                data-period="1000"
-               data-rotate='[ "Confirmed: {{ x.confirmed|intword }}", "Recovered: {{ x.recovered|intword }}", "Deaths: {{ x.deaths|intcomma }} thousand"]'></span>
+               data-rotate='[ "Confirmed: {{ x.confirmed|intcomma }}", "Recovered: {{ x.recovered|intcomma }}", "Deaths: {{ x.deaths|intcomma }}"]'></span>
                {% now "Y-M-d" as last_update %}
                - Last Update {{ last_update }}</h8>
           {% endfor %}
