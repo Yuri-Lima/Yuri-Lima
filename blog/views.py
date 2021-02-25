@@ -1,6 +1,4 @@
-from django.shortcuts import (
-    render,
-    get_object_or_404)
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import (
     CreateView, 
     ListView, 
@@ -9,16 +7,12 @@ from django.views.generic import (
     DetailView )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth import get_user_model
-from requests.models import requote_uri
 from .models import Post, Painel
-from django.urls import reverse
-from django.urls import reverse_lazy
+from django.urls import reverse,reverse_lazy
 from .forms import PostFormHelper, PainelForm, PostForm
 from django.http import HttpResponseRedirect
 from django.forms.models import inlineformset_factory
-# from .covid import covid19
-import requests
-from decouple import config
+from .covid import covid19
 
 formSet = CombinedFormSet = inlineformset_factory(
             Painel,
@@ -27,33 +21,6 @@ formSet = CombinedFormSet = inlineformset_factory(
             extra=1,
             can_delete=False,
 )
-
-def covid19():
-    # country = getcountry()
-    country = 'Brazil'
-    url = "https://covid-19-data.p.rapidapi.com/country"
-    querystring = {"name":'Brazil'}
-    headers = {
-    'x-rapidapi-key': config('Rapid_API_Key_Covid'), 
-    'x-rapidapi-host': "covid-19-data.p.rapidapi.com"
-    }
-    responsecovid = requests.request("GET", url, headers=headers, params=querystring).json()
-    return responsecovid
-  
-
-def getcountry():
-    url = "https://find-any-ip-address-or-domain-location-world-wide.p.rapidapi.com/iplocation"
-    querystring = {"apikey":config('Ipworld_API_Key')}
-    headers = {
-        'x-rapidapi-key': config('Rapid_API_Key_Country'),
-        'x-rapidapi-host': "find-any-ip-address-or-domain-location-world-wide.p.rapidapi.com"
-        }
-
-    response = requests.request("GET", url, headers=headers, params=querystring).json()
-    if response['status'] == 200:
-        return response['country']
-    else:
-        return 'Brazil'
 
 class PainelList(ListView):
     model: Painel
@@ -66,9 +33,13 @@ class PainelList(ListView):
         # Call the base implementation first to get a context
         context = super(PainelList, self).get_context_data(**kwargs)
         covid = covid19()
-        # Add in a QuerySet of all the books
-        context['covid'] = covid
-        return context
+        if covid:
+            # Add in a QuerySet of all the books
+            context['covid'] = covid
+            return context
+        else:
+            context['covid'] = 'Error_Data_Requests'
+            return context
 
 class PainelCreate(LoginRequiredMixin,CreateView):
     model = Painel # Painel

@@ -3,16 +3,18 @@ from decouple import config
 
 
 def covid19():
-    # country = getcountry()
-    country = 'Brazil'
-    url = "https://covid-19-data.p.rapidapi.com/country"
-    querystring = {"name":str(country)}
-    headers = {
-    'x-rapidapi-key': config('Rapid_API_Key_Covid'), 
-    'x-rapidapi-host': "covid-19-data.p.rapidapi.com"
-    }
-    responsecovid = requests.request("GET", url, headers=headers, params=querystring).json()
-    return responsecovid
+    country = getcountry()
+    if country:
+        url = "https://covid-19-data.p.rapidapi.com/country"
+        querystring = {"name":str(country)}
+        headers = {
+        'x-rapidapi-key': config('Rapid_API_Key_Covid'), 
+        'x-rapidapi-host': "covid-19-data.p.rapidapi.com"
+        }
+        responsecovid = requests.request("GET", url, headers=headers, params=querystring).json()
+        return responsecovid
+    else:
+        return False
 
 def getcountry():
     url = "https://find-any-ip-address-or-domain-location-world-wide.p.rapidapi.com/iplocation"
@@ -23,4 +25,7 @@ def getcountry():
         }
 
     response = requests.request("GET", url, headers=headers, params=querystring).json()
-    return response['country']
+    if response['status'] == 200:
+        return response['country']
+    else:
+        return False
