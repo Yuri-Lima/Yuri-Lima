@@ -29,8 +29,8 @@ formSet = CombinedFormSet = inlineformset_factory(
 )
 
 def covid19():
-    country = getcountry()
-    # country = 'Brazil'
+    # country = getcountry()
+    country = 'Brazil'
     url = "https://covid-19-data.p.rapidapi.com/country"
     querystring = {"name":str(country)}
     headers = {
