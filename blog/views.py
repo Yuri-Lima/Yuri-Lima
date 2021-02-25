@@ -32,7 +32,7 @@ def covid19():
     # country = getcountry()
     country = 'Brazil'
     url = "https://covid-19-data.p.rapidapi.com/country"
-    querystring = {"name":str(country)}
+    querystring = {"name":'Brazil'}
     headers = {
     'x-rapidapi-key': config('Rapid_API_Key_Covid'), 
     'x-rapidapi-host': "covid-19-data.p.rapidapi.com"
