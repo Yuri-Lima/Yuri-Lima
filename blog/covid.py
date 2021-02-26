@@ -2,8 +2,10 @@ import requests
 from decouple import config
 
 # https://rapidapi.com/Gramzivi/api/covid-19-data?endpoint=apiendpoint_90422c25-72f4-4e9a-a792-67e3dc7553a1
-def covid19():
-    country = getcountry()
+def covid19(self):
+    country = getcountry(self)
+    if country == 'United States':
+        country = country + ' Minor Outlying Islands' # one exception
     if country:
         url = "https://covid-19-data.p.rapidapi.com/country"
         querystring = {"name":str(country)}
@@ -17,17 +19,25 @@ def covid19():
         return False
 
 # https://rapidapi.com/ipworld/api/find-any-ip-address-or-domain-location-world-wide
-def getcountry():
-    # https://app.ipworld.info/api/iplocation?apikey=
-    url = "https://app.ipworld.info/api/iplocation"
-    querystring = {"apikey":config('Ipworld_API_Key')}
-    headers = {
-        'x-rapidapi-key': config('Rapid_API_Key_Country'),
-        'x-rapidapi-host': "find-any-ip-address-or-domain-location-world-wide.p.rapidapi.com"
-        }
+def getcountry(self):
+    ip = visitor_ip_address(self)
+    if ip in '127.0.0.1':
+        ip = '169.57.185.85'
+    url = "https://app.ipworld.info/api/iplocation?apikey=" + config('Ipworld_API_Key') + "&ip=" + str(ip)
+    r = requests.get(url).json()
 
-    response = requests.request("GET", url, headers=headers, params=querystring).json()
-    if response['status'] == 200:
-        return response['country']
+    if r['status'] == 200:
+        return r['country']
     else:
         return False
+
+#https://moonbooks.org/Articles/How-to-get-visitor-ip-address-with-django-/
+def visitor_ip_address(self):
+
+    x_forwarded_for = self.request.META.get('HTTP_X_FORWARDED_FOR')
+
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = self.request.META.get('REMOTE_ADDR')
+    return ip
