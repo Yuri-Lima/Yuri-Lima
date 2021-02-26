@@ -1,0 +1,44 @@
+{% load static %}
+
+<section id="portfolio" class="portfolio section-bg">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-title">
+        <h2>Accomplishments</h2>
+        <p>Lets see what i have done so far by sections.</p>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
+          <ul id="portfolio-flters">
+            <li data-filter="*" class="filter-active">All</li>
+            <li data-filter=".filter-django">Django</li>
+            <li data-filter=".filter-python">Python</li>
+            <li data-filter=".filter-cc">C/C++</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+        <!-- ======= Django Section ======= -->
+        {% include 'yurilimacv/portofolio/django/p1.html' %}
+        {% include 'yurilimacv/portofolio/django/p2.html' %}
+        <!-- End Django Section -->
+
+        <!-- ======= Python Section ======= -->
+        {% include 'yurilimacv/portofolio/python/p1.html' %}
+        <!-- {% include 'yurilimacv/portofolio/python/p2.html' %} -->
+        <!-- {% include 'yurilimacv/portofolio/python/p3.html' %} -->
+        <!-- End Python Section -->
+
+        <!-- ======= C/C++ Section ======= -->
+        {% include 'yurilimacv/portofolio/c++/p1.html' %}
+        {% include 'yurilimacv/portofolio/c++/p2.html' %}
+        {% include 'yurilimacv/portofolio/c++/p3.html' %}
+        {% include 'yurilimacv/portofolio/c++/p4.html' %}
+        {% include 'yurilimacv/portofolio/c++/p5.html' %}
+        {% include 'yurilimacv/portofolio/c++/p6.html' %}
+        <!-- End C/C++ Section -->
+      </div>
+    </div>
+  </section>

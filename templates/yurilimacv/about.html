@@ -1,0 +1,53 @@
+{% load mathfilters %}
+
+
+<!-- ======= About Section ======= -->
+<section id="about" class="about">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-title">
+        <h2>About</h2>
+        <p>
+          Skills include embedded, hardware design. Industry experience in embedded C/C++, Python, Linux, MatLab and software version control (GitHub).
+          I've learned HTML, CSS3, Java Script and SQL.
+          Experience developing customer applications and the designing complex operating systems comprising of both hardware and software components.
+        </p>
+      </div>
+      <div class="row">
+        <div class="col-lg-4">
+          <img src="https://yurilima.s3-eu-west-1.amazonaws.com/yuri2.jpg" class="img-fluid" alt="profile-img">
+        </div>
+        <div class="col-lg-8 pt-4 pt-lg-0 content">
+          <h3>Junior Django Developer.</h3>
+         <p class="font-italic"> <q>  
+            Achieving the desired results gradually and reliably rather than quickly and spectacularly.
+          </q></p>
+          <div class="row">
+            <div class="col-lg-6">
+              <ul>
+                <li><i class="icofont-rounded-right"></i> <strong>Birthday:</strong> 29 July 1988</li>
+                <li><i class="icofont-rounded-right"></i> <strong>Website:</strong> https://www.yurilima.com.br/</li>
+                <li><i class="icofont-rounded-right"></i> <strong>Phone:</strong> +353 083 419 1605</li>
+                <li><i class="icofont-rounded-right"></i> <strong>City:</strong> City : Dublin, IE</li>
+              </ul>
+            </div>
+            <div class="col-lg-6">
+              <ul>
+                {% now "Y" as current_year %}
+                {% with ano=1988 %}
+                <li><i class="icofont-rounded-right"></i> <strong>Age:</strong> {{ current_year|sub:ano}}</li>
+                {% endwith %}
+                <li><i class="icofont-rounded-right"></i> <strong>Degree:</strong> Master</li>
+                <li><i class="icofont-rounded-right"></i> <strong>Email:</strong> y.m.lima19@gmail.com</li>
+                <li><i class="icofont-rounded-right"></i> <strong>Freelance:</strong> Available</li>
+              </ul>
+            </div>
+          </div>
+          <p>
+            I'm looking for an opportunity to be a Junior Developer to grow up the knowledge that I've learned with Python and Django.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section><!-- End About Section -->
