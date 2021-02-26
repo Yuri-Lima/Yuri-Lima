@@ -5,8 +5,8 @@
 {% for painel in paineis %}
 <div class="d-flex p-0 bg-secondary text-white rounded"> 
     <div class="p-1 mr-auto align-self-center">
-        <small class="text-white"><b>Hastag: </b><a class="text-white mr-2" href="{% url 'painel-detail' painel.hashtag %}">{{painel.hashtag}}</a></small>
-        <small class="text-white"><b>Created by: </b><a class="text-white mr-2" href="{% url 'user-painel' painel.created_by.username %}">{{painel.created_by.username|capfirst}}</a></small>
+        <small class="text-white"><b>Hastag: </b><a class="text-white mr-2" href="{% url 'painel-detail' painel.hashtag %}">{{painel.hashtag}} <i class="bx bx-link bx-tada"></i></a></small>
+        <small class="text-white"><b>Created by: </b><a class="text-white mr-2" href="{% url 'user-painel' painel.created_by.username %}">{{painel.created_by.username|capfirst}} <i class="bx bx-link bx-tada"></i></a></small>
         <small class="text-white"><b>Posted: </b><a class="text-white mr-2" href="#">{{painel.painel_date_posted|date:'N d, Y H:i:s'}}</a></small>
     </div>
     {% if painel.created_by.username == user %}
@@ -31,7 +31,7 @@
                     <div class="media-body">
                         <div class="article-metadata">
                             <ul class="list-inline">
-                                <li class="list-inline-item"><small class="text-muted"><b>Author: <a class="mr-2" href="{% url 'user-posts' posts_by_painel.author.username %}">{{ posts_by_painel.author.username|capfirst }}</a></b></small></li>
+                                <li class="list-inline-item"><small class="text-muted"><b>Author: <a class="mr-2" href="{% url 'user-posts' posts_by_painel.author.username %}">{{ posts_by_painel.author.username|capfirst }} <i class="bx bx-link bx-tada"></i></a></b></small></li>
                                 <!-- <li class="list-inline-item"><small class="text-muted"><b>Posted: </b> {{ posts_by_painel.date_posted|date:'N d, Y H:i:s' }}</small></li> -->
                                 <li class="list-inline-item"><small class="text-muted"><b>Last Updated: </b> {{ posts_by_painel.date_updated|date:'N d, Y H:i:s' }}</small></li>
                             </ul>
