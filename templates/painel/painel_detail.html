@@ -5,9 +5,9 @@
 <div class="media-body">
     <div class="d-flex p-0 bg-secondary text-white rounded">
         <div class="p-1 mr-auto align-self-center">
-            <small class="text-white"><b>Hastag: </b><a class=" text-white mr-2" href="{% url 'painel-detail' painel.hashtag %}">{{object.hashtag}}</a></small>
-        <small class="text-white"><b>Created by: </b><a class="text-white mr-2" href="{% url 'user-painel' painel.created_by.username %}">{{object.created_by.username|capfirst}}</a></small>
-        <small class="text-white"><b>Posted: </b><a class="text-white mr-2" href="#">{{object.painel_date_posted|date:'N d, Y H:i:s'}}</a></small>
+            <small class="text-white mr-2"><b>Hastag: </b><a class=" text-white mr-2" href="{% url 'painel-detail' painel.hashtag %}">{{object.hashtag}}</a></small>
+        <small class="text-white mr-2"><b>Created by: </b><a class="text-white mr-2" href="{% url 'user-painel' painel.created_by.username %}">{{object.created_by.username|capfirst}}</a></small>
+        <small class="text-white mr-2"><b>Posted: </b><a class="text-white mr-2" href="#">{{object.painel_date_posted|date:'N d, Y H:i:s'}}</a></small>
         </div>
         
         {% if painel.created_by == user %}
@@ -26,15 +26,15 @@
             <div class="media-body">
             <div class="article-metadata">
                 <div class="d-flex p-2 bg-light text-dark">
-                <small class="text-muted"><b>Author: </b><a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author.username|capfirst }}</a></small>
-                <small class="text-muted"><b>Posted: </b> {{ post.date_posted|date:'N d, Y H:i:s' }}</small>
-                <small class="text-muted"><b>Last Updated: </b> {{ post.date_updated|date:'N d, Y H:i:s' }}</small>
+                <small class="text-muted mr-2"><b>Author: </b><a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author.username|capfirst }}</a></small>
+                <small class="text-muted mr-2"><b>Posted: </b> {{ post.date_posted|date:'N d, Y H:i:s' }}</small>
+                <small class="text-muted mr-2"><b>Last Updated: </b> {{ post.date_updated|date:'N d, Y H:i:s' }}</small>
                
             </div>
             <div class="ml-auto p-2">
                 {% if post.author == user %}
-                    <a class="btn btn-info btn-sm mt-0 mb-0" href="{% url 'post-update' post.id %}">Update</a>
-                    <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' post.id %}">Delete</a>
+                    <a class="btn btn-info btn-sm mt-0 mb-0 mr-2" href="{% url 'post-update' post.id %}">Update</a>
+                    <a class="btn btn-danger btn-sm mt-1 mb-1 mr-2" href="{% url 'post-delete' post.id %}">Delete</a>
                 {% endif %}
             </div>
             </div>
