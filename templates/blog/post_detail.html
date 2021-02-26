@@ -8,7 +8,7 @@
     <div class="p-2 align-self-end bg-secondary text-white rounded">
         <div class="d-flex flex-column">
             <div class="p-1">
-                <small class="text-white"><b>Author: </b><a class="text-white mr-2" href="{% url 'user-posts' object.author.username %}">{{ object.author.username|capfirst }}</a></small>                        
+                <small class="text-white"><b>Author: </b><a class="text-white mr-2" href="{% url 'user-posts' object.author.username %}">{{ object.author.username|capfirst }} <i class="bx bx-link bx-tada"></i></a></small>                        
             </div>
             <div class="p-1">
                 <small class="text-white"><b>Posted: </b> {{ object.date_posted|date:'N d, Y H:i:s' }}</small>

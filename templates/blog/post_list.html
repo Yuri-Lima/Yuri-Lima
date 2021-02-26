@@ -7,7 +7,7 @@
         <div class="media-body">
         <div class="article-metadata">
             <ul class="list-inline">
-                <li class="list-inline-item"><small class="text-muted"><b>Author: </b><a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author|capfirst }}</a></small></li>
+                <li class="list-inline-item"><small class="text-muted"><b>Author: </b><a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author|capfirst }} <i class="bx bx-link bx-tada"></i></a></small></li>
                 <li class="list-inline-item"><small class="text-muted"><b>Posted: </b> {{ post.date_posted|date:'N d, Y H:i:s' }}</small></li>
                 <li class="list-inline-item"><small class="text-muted"><b>Last Updated: </b> {{ post.date_updated|date:'N d, Y H:i:s' }}</small></li>
             </ul>
