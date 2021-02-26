@@ -1,5 +1,5 @@
 {% extends 'yurilimacv/base.html' %}
-
+{% load static %}
 {% block content %}
 {% spaceless %}
   <!-- ======= Mobile nav toggle button ======= -->
@@ -18,6 +18,7 @@
         <li><a href="#portfolio"><i class="bx bx-book-content"></i> <span>Accomplishments</span></a></li>
         <!-- <li><a href="#services"><i class="bx bx-server"></i> <span>Services</span></a></li> -->
         <li><a href="#contact"><i class="bx bx-envelope"></i> <span>Contact</span></a></li>
+        <li><a href="{% static 'yurilima/assets/img/portfolio/django/profile/CV.pdf' %}" target="_blank"><i class="bx bx-download"></i> <span>Print CV</span></a></li>
       </ul>
     </nav>
     <!-- End .nav-menu -->
