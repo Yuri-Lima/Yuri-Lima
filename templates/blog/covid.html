@@ -4,6 +4,7 @@
       <div class="container">
         <nav class="nav d-flex justify-content-between">
           <div class="d-flex flex-row">
+          {% if covid %}
             {% for x in covid %}
             <h8>{{ x.country }} Cases - 
             <span
@@ -12,7 +13,8 @@
                data-rotate='[ "Confirmed: {{ x.confirmed|intcomma }}", "Recovered: {{ x.recovered|intcomma }}", "Deaths: {{ x.deaths|intcomma }}"]'></span>
                {% now "Y-M-d" as last_update %}
                - Last Update {{ last_update }}</h8>
-          {% endfor %}
+            {% endfor %}
+          {% endif %}
           </div>
         </nav>
       </div>

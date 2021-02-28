@@ -12,7 +12,7 @@ from django.urls import reverse,reverse_lazy
 from .forms import PostFormHelper, PainelForm, PostForm
 from django.http import HttpResponseRedirect
 from django.forms.models import inlineformset_factory
-from .covid import covid19, visitor_ip_address
+from .covid import covid
 
 formSet = CombinedFormSet = inlineformset_factory(
             Painel,
@@ -21,8 +21,7 @@ formSet = CombinedFormSet = inlineformset_factory(
             extra=1,
             can_delete=False,
 )
-
-class PainelList(ListView):
+class PainelList(ListView, covid):
     model: Painel
     template_name = 'painel/painel_list.html'
     paginate_by = 5
@@ -32,14 +31,13 @@ class PainelList(ListView):
     def get_context_data(self,**kwargs):
         # Call the base implementation first to get a context
         context = super(PainelList, self).get_context_data(**kwargs)
-        # ip = visitor_ip_address()
-        covid = covid19(self) #https://moonbooks.org/Articles/How-to-get-visitor-ip-address-with-django-/
-        if covid:
-            # Add in a QuerySet of all the books
-            context['covid'] = covid
+        covid_ = covid.get_data_covid(self)
+
+        if covid_:
+            context['covid'] = covid_
             return context
         else:
-            context['covid'] = 'E'
+            context['covid'] = False
             return context
 
 class PainelCreate(LoginRequiredMixin,CreateView):
