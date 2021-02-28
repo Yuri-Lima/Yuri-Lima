@@ -20,6 +20,7 @@ from users import views as user_views
 from users.forms import EmailValidationOnForgotPassword
 from django.conf import settings
 from django.conf.urls.static import static
+from yurilimacv import views
 
 #Path converters
 urlpatterns = [
@@ -50,13 +51,17 @@ urlpatterns = [
     
     #Main Page Blog >> Posts and Painel <<
     path('blog/', include('blog.urls')),
-    path('', include('blog.urls')),
+    # path('', include('blog.urls')),
 
     #Blog Emails >> anymail <<
     path('', include('emails.urls')),
 
     #Yuri Lima CV >> Personal <<
-    path('', include('yurilimacv.urls')),
+    path('yurilima/', include('yurilimacv.urls')),
+
+    #Index
+    path('', views.index_view),
+    
 
     #Blog richtextfield >> tinymce <<
     path('tinymce/', include('tinymce.urls')),

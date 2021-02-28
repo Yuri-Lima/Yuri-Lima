@@ -1,0 +1,83 @@
+{% load static %}
+
+{% spaceless %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon_io/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon_io/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon_io/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'favicon_io/site.webmanifest' %} ">
+
+
+    <title>Welcome</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/cover.css' %}" rel="stylesheet">
+  </head>
+
+  <body class="text-center">
+
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+
+      <main role="main" class="inner cover">
+        <img class='rounded mx-auto d-block article-img m-5' src="{% static 'yurilima/assets/img/index.jpg' %}" alt="index_img">            
+        <h1 class="cover-heading">@YuriLima</h1>
+        <p class="lead">Very welcome to my WebPage.</p>
+        <div class="d-flex flex-row">
+            <a href="{% url '#yurilima' %}">
+                <div class="p-2">
+                    <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                        <div class="card-header">Profile</div>
+                        <div class="card-body">
+                        <h5 class="card-title">Personal Details</h5>
+                        <p class="card-text">Take a look at on my Resume, Skills and Portofolio.</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="{% url 'painel-list' %}">
+                <div class="p-2">
+                    <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+                        <div class="card-header">Blog</div>
+                        <div class="card-body">
+                        <h5 class="card-title">Personal and public Posts</h5>
+                        <p class="card-text">Enjoy your time and read some interesting posts.</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+          </div>
+      </main>
+
+      <footer class="mastfoot mt-auto">
+        <div class="inner">
+            <div class="copyright">
+                {% now "Y" as current_year %}
+                &copy; Copyright <strong><span>2020-{{ current_year }}</span></strong>. All Rights Reserved
+              </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+  crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+  crossorigin="anonymous"></script>
+  </body>
+</html>
+{% endspaceless %}
