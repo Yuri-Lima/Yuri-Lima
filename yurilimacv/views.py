@@ -94,3 +94,6 @@ def YuriLimaContact(request):
     else:
         email_form = SendContactForm()
     return render(request, 'yurilimacv/yurilima.html', {'email_form': email_form} )
+
+def index_view(request):
+    return render(request, 'index/index.html')
