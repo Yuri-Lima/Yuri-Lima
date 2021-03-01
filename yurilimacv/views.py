@@ -101,7 +101,8 @@ def index_view(request):
     return render(request, 'index/index.html')
 
 def numberinword(request):
-    numbertyped = word = False
+    numbertyped_ = False
+    word = False
     
     if request.method =='POST':
         numbertyped = NumberinWordForm(request.POST)
