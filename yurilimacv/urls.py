@@ -10,4 +10,5 @@ urlpatterns = [
     path('portfolio/', views.YuriLimaPortofolio, name='#portofolio'),
     path('services/', views.YuriLimaServices, name='#services'),
     path('contact/', views.YuriLimaContact, name='#contact'),
+    path('numberinword/', views.numberinword, name='#numberinword'),
 ] 

@@ -4,6 +4,8 @@ from emails.form import SendContactForm
 from emails.models import SendContactEmail
 from django.core.mail import BadHeaderError, send_mail
 from django.http import HttpResponse
+from .convertnumbers import Convert_numbers_english
+from .form import NumberinWordForm
 
 def send(request):
     email_form = SendContactForm(request.POST)#,instance=request.user
@@ -97,3 +99,21 @@ def YuriLimaContact(request):
 
 def index_view(request):
     return render(request, 'index/index.html')
+
+def numberinword(request):
+    numbertyped = word = False
+    
+    if request.method =='POST':
+        numbertyped = NumberinWordForm(request.POST)
+        if numbertyped.is_valid():
+            numbertyped_ = numbertyped.cleaned_data.get('numbertyped')
+            word = Convert_numbers_english(numbertyped_)
+            word.start_convertion()
+            word = word.number_in_word()
+    context = {
+        'number': numbertyped_,
+        'word' : word,
+        'form' : NumberinWordForm()
+    }
+    # print(word.even_or_odd())
+    return render(request, 'yurilimacv/portofolio/python/p1numberinword.html', context)
