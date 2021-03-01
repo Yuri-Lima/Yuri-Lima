@@ -206,7 +206,7 @@ class Convert_numbers_english:
         #  Hundreds_thousands #999.999
         if self.validates['flag_hundred_thousand'] and self.place['hundred_thousands'] != 0:
             #hundreds_part = int((hundred_thousands / 100) % 10)#999
-            if self.place['hundred_thousands'] != 0:
+            if self.place['hundreds'] != 0:
                 self.joins.append(' ' + (str(unit_EN[self.place['hundred_thousands']] + ' ' + 'Hundred')))
 
             #decimal_hundred_thousands_part = int((hundred_thousands % 100))
