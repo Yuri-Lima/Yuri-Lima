@@ -111,7 +111,7 @@ class Convert_numbers_english:
         index = None
         for index, k in enumerate(self.place.keys(), start=1):
             if index == self._decimal + 1:
-                print('index: {} number_typed: {}'.format(index, self._decimal))
+                # print('index: {} number_typed: {}'.format(index, self._decimal))
                 break
             else:
                 self.place[k] = int(self.number_typed[-index])#ele vai alimentando PLACE de traz para frente place[k] <-- 6 <-- int(num[-index])
@@ -211,7 +211,7 @@ class Convert_numbers_english:
 
             #decimal_hundred_thousands_part = int((hundred_thousands % 100))
             if self.tens_thousands_part <= 20:
-                self.joins.append((str(unit_EN[self.tens_thousands_part] + ' ' + 'Thousand')))
+                self.joins.append(' ' + (str(unit_EN[self.tens_thousands_part] + ' ' + 'Thousand')))
     
             if self.tens_thousands_part >= 21:
                 self.joins.append(' ' + (self.find_position_in_place(self.tens_thousands_part) + ' ' + unit_EN[unit_EN.index('Thousand')]))
