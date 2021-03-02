@@ -110,7 +110,7 @@ def numberinword(request):
             numbertyped_ = numbertyped.cleaned_data.get('numbertyped')
             word = Convert_numbers_english(numbertyped_)
             word.start_convertion()
-            word = word.number_in_word()
+            word = word.str_number_in_word()
     context = {
         'number': numbertyped_,
         'word' : word,
