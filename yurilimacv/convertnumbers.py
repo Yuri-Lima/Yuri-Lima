@@ -9,7 +9,6 @@ class Convert_numbers_english:
         self._decimal = len(self.number_typed)
         self._check_zero = self.check_zeros()
         self.joins = list()
-        self.joins_str = ""
         self.place = {
             'ones': 0, 'tens': 0, 'hundreds': 0, 'thousands': 0, 'ten_thousands': 0, 'hundred_thousands': 0,
             'millions': 0, 'ten_millions': 0, 'hundred_millions': 0, 'billions': 0, 'ten_billions': 0,
