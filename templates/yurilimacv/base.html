@@ -1,5 +1,6 @@
 {% load static %}
 {% load crispy_forms_tags %}
+{% load google_analytics_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,6 +52,12 @@
       {% block content %}
             <!-- All in here -->
       {% endblock %}
+
+      <!-- Start Google Analytics -->
+	    <div style="display:none">
+		    <img src="{% google_analytics %}" width="0" height="0" />
+	    </div>
+	  <!-- End Google Analytics -->
 
       <!-- Vendor JS Files -->
       <script src="{% static 'yurilima/assets/vendor/jquery/jquery.min.js' %}"></script>
