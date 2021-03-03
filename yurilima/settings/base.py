@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     "anymail",
     'tinymce',
     'mathfilters',
+    'google_analytics'
 ]
 
 MIDDLEWARE = [
@@ -209,16 +210,9 @@ TINYMCE_DEFAULT_CONFIG = {
     "custom_undo_redo_levels": 10,
     # "language": "en-Us",  # To force a specific language instead of the Django current language.
 }
-# TINYMCE_EXTRA_MEDIA = {
-#     'css': {
-#         'all': [
-#             ...
-#         ],
-#     },
-#     'js': [
-#         ...
-#     ],
-# }
+GOOGLE_ANALYTICS = {
+    'google_analytics_id': 'G-J4BGZKBT6W',
+}
 
 
 

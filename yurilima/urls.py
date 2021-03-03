@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from django.urls import path, include
+from django.urls import path, include, re_path
 from users import views as user_views
 from users.forms import EmailValidationOnForgotPassword
 from django.conf import settings
@@ -65,6 +65,9 @@ urlpatterns = [
 
     #Blog richtextfield >> tinymce <<
     path('tinymce/', include('tinymce.urls')),
+
+    #Google Analytics >> google_analytics << https://pypi.org/project/django-google-analytics-app/
+    re_path('djga/', include('google_analytics.urls')),
 ]
 
 if settings.DEBUG is True:
