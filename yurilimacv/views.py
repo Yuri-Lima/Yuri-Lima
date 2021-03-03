@@ -103,7 +103,6 @@ def index_view(request):
 def numberinword(request):
     numbertyped_ = False
     word = False
-    
     if request.method =='POST':
         numbertyped = NumberinWordForm(request.POST)
         if numbertyped.is_valid():

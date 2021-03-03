@@ -1,5 +1,5 @@
 import re
-from Locate import unit_EN
+from .Locate import unit_EN
 
 
 class Convert_numbers_english:
@@ -9,7 +9,6 @@ class Convert_numbers_english:
         self._decimal = len(self.number_typed)
         self._check_zero = self.check_zeros()
         self.joins = list()
-        self.joins_str = ""
         self.place = {
             'ones': 0, 'tens': 0, 'hundreds': 0, 'thousands': 0, 'ten_thousands': 0, 'hundred_thousands': 0,
             'millions': 0, 'ten_millions': 0, 'hundred_millions': 0, 'billions': 0, 'ten_billions': 0,
@@ -41,95 +40,8 @@ class Convert_numbers_english:
     ########################        Start Main Functions       #########################
     #===================================================================================
     def start_convertion(self):
-        self.change_validations()
-    
-    def change_validations(self):
-        #three statment below are always true
-        self.validates['flag_one'] = True
-        self.validates['flag_decimal'] = True
-        self.validates['flag_hundred'] = True
-        #====================================================================================================
-        # Thousands
-        if self._decimal == 4:
-            self.validates['flag_thousand'] = True
-        # ====================================================================================================
-        # Ten_thousands
-        elif self._decimal == 5:
-            self.validates['flag_ten_thousand'] = True
-        # ====================================================================================================
-        # hundreds_thousands
-        elif self._decimal == 6:
-            self.validates['flag_hundred_thousand'] = True
-        # ====================================================================================================
-        # Millions 
-        elif self._decimal == 7:
-            self.validates['flag_million'] = True
-            self.validates['flag_hundred_thousand'] = True
-        # ====================================================================================================
-        # Ten_millions 
-        elif self._decimal == 8:
-            self.validates['flag_ten_million'] = True
-            self.validates['flag_hundred_thousand'] = True
-        # ====================================================================================================
-        # Hundred_millions 
-        elif self._decimal == 9:
-            self.validates['flag_hundred_million'] = True
-            self.validates['flag_hundred_thousand'] = True
-        # ====================================================================================================
-        # Billions 
-        elif self._decimal == 10:
-            self.validates['flag_billion'] = True
-            self.validates['flag_hundred_million'] = True
-            self.validates['flag_hundred_thousand'] = True
-        # ====================================================================================================
-        # Ten_billions 
-        elif self._decimal == 11:
-            self.validates['flag_ten_billion'] = True
-            self.validates['flag_hundred_million'] = True
-            self.validates['flag_hundred_thousand'] = True
-        # ====================================================================================================
-        # Hundred_billions 
-        elif self._decimal == 12:
-            self.validates['flag_hundred_billion'] = True
-            self.validates['flag_hundred_million'] = True
-            self.validates['flag_hundred_thousand'] = True
-        # ====================================================================================================
-        # Trillions 
-        elif self._decimal == 13:
-            self.validates['flag_trillion'] = True 
-            self.validates['flag_hundred_billion'] = True
-            self.validates['flag_ten_billion'] = True
-            self.validates['flag_hundred_million'] = True
-            self.validates['flag_hundred_thousand'] = True
-        # ====================================================================================================
-        # Ten_Trillions
-        elif self._decimal == 14:
-            self.validates['flag_ten_trillion'] = True
-            self.validates['flag_hundred_billion'] = True
-            self.validates['flag_hundred_million'] = True
-            self.validates['flag_hundred_thousand'] = True
-         # ====================================================================================================
-        # Hundred_trillions 
-        elif self._decimal == 15:
-            self.validates['flag_hundred_trillion'] = True
-            self.validates['flag_hundred_billion'] = True
-            self.validates['flag_hundred_million'] = True
-            self.validates['flag_hundred_thousand'] = True
-        # ====================================================================================================
-        # Quadrillions 
-        elif self._decimal == 16:
-            self.validates['flag_quadrillion'] = True
-            self.validates['flag_hundred_trillion'] = True
-            # self.validates['flag_ten_trillion'] = True
-            self.validates['flag_hundred_billion'] = True
-            self.validates['flag_ten_billion'] = True
-            # self.validates['flag_billion'] = True
-            self.validates['flag_hundred_million'] = True
-            self.validates['flag_ten_million'] = True
-            self.validates['flag_million'] = True
-            self.validates['flag_hundred_thousand'] = True
-        
         self.populate_decimal_place()
+        # self.change_validations()
 
     def populate_decimal_place(self):#vai popular place e retornar
         index = None
