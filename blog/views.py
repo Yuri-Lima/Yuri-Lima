@@ -108,7 +108,7 @@ class PainelCreate(LoginRequiredMixin,CreateView):
     def get_success_url(self):
         return reverse('painel-detail', kwargs={'hashtag': self.object.hashtag})
 
-class PainelDetail(LoginRequiredMixin,DetailView):
+class PainelDetail(DetailView):#(LoginRequiredMixin,DetailView):
     model: Painel 
     template_name = 'painel/painel_detail.html'
 

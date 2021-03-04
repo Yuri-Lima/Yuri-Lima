@@ -13,42 +13,43 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.views.generic import TemplateView
-from django.contrib import admin
-from django.contrib.auth import views as auth_views
+#Path converters
 from django.urls import path, include, re_path
-from users import views as user_views
-from users.forms import EmailValidationOnForgotPassword
+#Google Robots >> robots.txt <<
+from django.views.generic import TemplateView
+#Admin
+from django.contrib import admin
+#Static Paths >> static <<
 from django.conf import settings
 from django.conf.urls.static import static
+#Index
 from yurilimacv import views
+from yurilimacv import sitemaps
+#Sitemap from django
+from django.contrib.sitemaps.views import sitemap
+#Sitemaps from apps
+from yurilimacv.sitemaps import YuriLimaCvViewSitemap
+from users.sitemaps import UsersViewSitemap
+from blog.sitemaps import BoardViewSitemap, PostViewSitemap
+from emails.sitemaps import EmailViewSitemap
+
+#Dict Sitemaps
+sitemaps = {
+    'yurilimacv': YuriLimaCvViewSitemap,
+    'users': UsersViewSitemap,
+    'boards': BoardViewSitemap,
+    'posts': PostViewSitemap,
+    'email' : EmailViewSitemap,
+}
+
 
 #Path converters
 urlpatterns = [
     #Admin
     path('admin/', admin.site.urls),
-    
-    #Authenticaios Users
-    path('register/', user_views.register, name='register'),#from users import views as user_views
-    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),#from django.contrib.auth import views as auth_views
-    path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),#from django.contrib.auth import views as auth_views  - 'users/logout.html'
-    
-    #Password Reset
-    path('password-reset/',
-        auth_views.PasswordResetView.as_view(template_name='users/password_reset.html', form_class=EmailValidationOnForgotPassword),
-         name='password_reset'),
-    path('password-reset/done/',
-        auth_views.PasswordResetDoneView.as_view(template_name='users/password_reset_done.html'),
-         name='password_reset_done'),
-    path('password-reset-confirm/<uidb64>/<token>/',
-        auth_views.PasswordResetConfirmView.as_view(template_name='users/password_reset_confirm.html'),
-         name='password_reset_confirm'),
-    path('password-reset-complete/', 
-        auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'),
-         name='password_reset_complete'),
 
-    #Profiles
-    path('profile/', user_views.profile, name='profile'),
+    #Main Page Blog >> Posts and Painel <<
+    path('', include('users.urls')),
     
     #Main Page Blog >> Posts and Painel <<
     path('blog/', include('blog.urls')),
@@ -72,11 +73,16 @@ urlpatterns = [
     #Google Robots >> robots.txt << https://developers.google.com/search/docs/advanced/robots/create-robots-txt?hl=en
     #https://stackoverflow.com/questions/58098342/how-to-make-a-robots-txt-on-django
     path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type='text/plain')),
+
+    #Sitemaps >> sitemap.py <<
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}),
 ]
 
+#Static Paths >> static <<
 if settings.DEBUG is True:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+#Error Paths Blog >> error_blog <<
 handler404 = 'blog.views.error_404_view'
 handler500 = 'blog.views.error_500_view'
 handler403 = 'blog.views.error_403_view'
