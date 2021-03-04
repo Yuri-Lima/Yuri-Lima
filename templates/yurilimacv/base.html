@@ -7,11 +7,11 @@
 
     <head>
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    <!-- <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-WWWKBMB');</script>
+    })(window,document,'script','dataLayer','GTM-WWWKBMB');</script> -->
     <!-- End Google Tag Manager -->
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -68,8 +68,8 @@
   </head>
   <body>
   <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WWWKBMB"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WWWKBMB"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> -->
   <!-- End Google Tag Manager (noscript) -->
       {% block content %}
             <!-- All in here -->
@@ -94,9 +94,10 @@
       <script src="{% static 'yurilima/assets/vendor/typed.js/typed.min.js' %}"></script>
       <script src="{% static 'yurilima/assets/vendor/aos/aos.js' %}"></script>
       <script>
-        var x = window.location.pathname.replace(/^\/yurilima/, '')
-        x = x.replace(/^\//, '')
-        // console.log('yuri:', x);
+        var x = window.location.pathname.replace(/^\/yurilima/, '')// --> /about/
+        x = x.replace(/^\//, '')// --> about/
+        x = x.replace('/', '')// --> about
+        console.log(x);
         if(x){
           window.location.assign('#' + x);
           // console.log('yuri:', x);
@@ -105,7 +106,6 @@
           // console.log(x);
           // console.log(window.location.host);
           // console.log(window.location.host + '/yurilima/' + x);
-          
         }
       </script>
 

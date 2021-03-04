@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.views.generic import TemplateView
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path, include, re_path
@@ -33,13 +34,13 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),#from django.contrib.auth import views as auth_views  - 'users/logout.html'
     
     #Password Reset
-    path('password-reset/', 
+    path('password-reset/',
         auth_views.PasswordResetView.as_view(template_name='users/password_reset.html', form_class=EmailValidationOnForgotPassword),
          name='password_reset'),
-    path('password-reset/done/', 
+    path('password-reset/done/',
         auth_views.PasswordResetDoneView.as_view(template_name='users/password_reset_done.html'),
          name='password_reset_done'),
-    path('password-reset-confirm/<uidb64>/<token>/', 
+    path('password-reset-confirm/<uidb64>/<token>/',
         auth_views.PasswordResetConfirmView.as_view(template_name='users/password_reset_confirm.html'),
          name='password_reset_confirm'),
     path('password-reset-complete/', 
@@ -62,12 +63,15 @@ urlpatterns = [
     #Index
     path('', views.index_view),
     
-
     #Blog richtextfield >> tinymce <<
     path('tinymce/', include('tinymce.urls')),
 
     #Google Analytics >> google_analytics << https://pypi.org/project/django-google-analytics-app/
     re_path('djga/', include('google_analytics.urls')),
+
+    #Google Robots >> robots.txt << https://developers.google.com/search/docs/advanced/robots/create-robots-txt?hl=en
+    #https://stackoverflow.com/questions/58098342/how-to-make-a-robots-txt-on-django
+    path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type='text/plain')),
 ]
 
 if settings.DEBUG is True:
