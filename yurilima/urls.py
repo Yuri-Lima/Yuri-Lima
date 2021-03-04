@@ -34,6 +34,7 @@ from blog.sitemaps import BoardViewSitemap, PostViewSitemap
 from emails.sitemaps import EmailViewSitemap
 
 #Dict Sitemaps
+# https://www.youtube.com/watch?v=xAXMqiPSY34
 sitemaps = {
     'yurilimacv': YuriLimaCvViewSitemap,
     'users': UsersViewSitemap,
@@ -42,18 +43,16 @@ sitemaps = {
     'email' : EmailViewSitemap,
 }
 
-
 #Path converters
 urlpatterns = [
     #Admin
     path('admin/', admin.site.urls),
 
-    #Main Page Blog >> Posts and Painel <<
+    #Users and Profile
     path('', include('users.urls')),
     
     #Main Page Blog >> Posts and Painel <<
     path('blog/', include('blog.urls')),
-    # path('', include('blog.urls')),
 
     #Blog Emails >> anymail <<
     path('', include('emails.urls')),
