@@ -193,8 +193,8 @@ AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-#Tiny API Key
-TINYMCE_JS_URL = 'https://cdn.tiny.cloud/1/6ur4208fgogunt9u96dk0gnuw5hyvtfvv18tgdq27iobo00u/tinymce/5/tinymce.min.js'
+#Tiny API Key 
+TINYMCE_JS_URL = os.path.join(MEDIA_URL, "tinymce/tinymce.min.js")
 TINYMCE_SPELLCHECKER = True
 TINYMCE_COMPRESSOR = False
 TINYMCE_DEFAULT_CONFIG = {
@@ -202,14 +202,29 @@ TINYMCE_DEFAULT_CONFIG = {
     "height": "520px",
     "width": "1280px",
     "menubar": "file edit view insert format tools table help",
+
+    'quickbars_selection_toolbar': 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+
     "plugins": "advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code "
-    "fullscreen insertdatetime media table paste code help wordcount spellchecker",
+
+    "fullscreen insertdatetime media table paste code help wordcount spellchecker codesample",
+
     "toolbar": "undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft "
+
     "aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor "
+
     "fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | "
+
     "backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | "
+
     "a11ycheck ltr rtl | showcomments addcomment code",
+
     "custom_undo_redo_levels": 10,
+
+    'codesample_global_prismjs': 'true',
+
+    'toolbar_mode': 'sliding',
+    
     # "language": "en-Us",  # To force a specific language instead of the Django current language.
 }
 GOOGLE_ANALYTICS = {
