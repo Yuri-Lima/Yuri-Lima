@@ -17,6 +17,8 @@ Including another URLconf
 from django.urls import path, include, re_path
 #Google Robots >> robots.txt <<
 from django.views.generic import TemplateView
+#Filebrowser
+from filebrowser.sites import site
 #Admin
 from django.contrib import admin
 #Static Paths >> static <<
@@ -45,6 +47,11 @@ sitemaps = {
 
 #Path converters
 urlpatterns = [
+    
+    #Filebrowser
+    path('admin/filebrowser/', site.urls),
+    path('grappelli/', include('grappelli.urls')),
+
     #Admin
     path('admin/', admin.site.urls),
 

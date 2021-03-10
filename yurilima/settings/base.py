@@ -11,10 +11,10 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 import mimetypes
-
 from decouple import config
 from pathlib import Path
 import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -28,7 +28,6 @@ SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
-# config('DEBUG', default=False, cast=bool)
 
 #MIME type Django
 # mimetypes.add_type("text/css", ".css", True)
@@ -63,9 +62,13 @@ INSTALLED_APPS = [
     # 3rd Party
     'crispy_forms', #https://django-crispy-forms.readthedocs.io/en/latest/ --- https://simpleisbetterthancomplex.com/tutorial/2018/11/28/advanced-form-rendering-with-django-crispy-forms.html
     "anymail",
-    'tinymce',
     'mathfilters',
-    'google_analytics'
+    'google_analytics',
+    # << Those below are working together, don't touch >>
+    'tinymce',
+    'grappelli',
+    'filebrowser',
+    #End
 ]
 
 MIDDLEWARE = [
@@ -201,6 +204,13 @@ TINYMCE_DEFAULT_CONFIG = {
     # 'selector':'form-group',
     "height": "520px",
     "width": "1280px",
+    #  /* enable title field in the Image dialog*/
+    'image_title': 'true',
+    # /* enable automatic uploads of images represented by blob or data URIs*/
+    'automatic_uploads': 'true',
+
+    'file_picker_types': 'image',
+
     "menubar": "file edit view insert format tools table help",
 
     'quickbars_selection_toolbar': 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
@@ -209,15 +219,15 @@ TINYMCE_DEFAULT_CONFIG = {
 
     "fullscreen insertdatetime media table paste code help wordcount spellchecker codesample",
 
-    "toolbar": "undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft "
+    "toolbar1": "undo redo | forecolor bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft "
 
-    "aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor "
+    "aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist",
 
-    "fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | "
+    'toolbar2': "fullscreen  preview save print | insertfile image media pageembed template link anchor | "
 
     "backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | "
 
-    "a11ycheck ltr rtl | showcomments addcomment code",
+    "a11ycheck ltr rtl | showcomments addcomment code codesample |",
 
     "custom_undo_redo_levels": 10,
 
@@ -231,6 +241,7 @@ GOOGLE_ANALYTICS = {
     'google_analytics_id': 'G-J4BGZKBT6W',
 }
 
+TINYMCE_FILEBROWSER= True
 
 
 
