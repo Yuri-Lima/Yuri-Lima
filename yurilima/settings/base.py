@@ -241,7 +241,6 @@ GOOGLE_ANALYTICS = {
     'google_analytics_id': 'G-J4BGZKBT6W',
 }
 
-TINYMCE_FILEBROWSER= True
 
 
 

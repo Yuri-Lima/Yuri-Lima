@@ -4,7 +4,7 @@ Production Settings for Heroku
 
 import environ
 from filebrowser.sites import site
-from filebrowser import settings
+from django.conf import settings
 
 # If using in your own project, update the project namespace below
 from yurilima.settings.base import *
@@ -29,7 +29,7 @@ DATABASES = {
 }
 
 #<< Start FileBrowser >>
-site.storage.location
+# site.storage.location
 #Main FileBrowser Directory
 DIRECTORY = getattr(settings, "FILEBROWSER_DIRECTORY", 'uploads/')
 #VERSIONS_BASEDIR 
@@ -54,5 +54,5 @@ SELECT_FORMATS = getattr(settings, "FILEBROWSER_SELECT_FORMATS", {
     'document': ['Document'],
     'media': ['Video','Audio'],
 })
-
+TINYMCE_FILEBROWSER= True
 #<< End FileBrowser >>
