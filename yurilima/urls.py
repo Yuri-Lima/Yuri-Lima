@@ -17,8 +17,6 @@ Including another URLconf
 from django.urls import path, include, re_path
 #Google Robots >> robots.txt <<
 from django.views.generic import TemplateView
-#Filebrowser
-from filebrowser.sites import site
 #Admin
 from django.contrib import admin
 #Static Paths >> static <<
@@ -47,11 +45,6 @@ sitemaps = {
 
 #Path converters
 urlpatterns = [
-    
-    #Filebrowser
-    path('admin/filebrowser/', site.urls),
-    path('grappelli/', include('grappelli.urls')),
-
     #Admin
     path('admin/', admin.site.urls),
 
@@ -70,8 +63,8 @@ urlpatterns = [
     #Index
     path('', views.index_view),
     
-    #Blog richtextfield >> tinymce <<
-    path('tinymce/', include('tinymce.urls')),
+    #Blog richtextfield >> ckeditor <<
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 
     #Google Analytics >> google_analytics << https://pypi.org/project/django-google-analytics-app/
     re_path('djga/', include('google_analytics.urls')),
