@@ -229,7 +229,7 @@ CKEDITOR_CONFIGS = {
                        'Language']},
             {'name': 'links', 'items': ['Link', 'Unlink', 'Anchor']},
             {'name': 'insert',
-             'items': ['codesnippet','youtube','Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe']},
+             'items': ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe']},
             '/',
             {'name': 'styles', 'items': ['Styles', 'Format', 'Font', 'FontSize']},
             {'name': 'colors', 'items': ['TextColor', 'BGColor']},
@@ -239,9 +239,9 @@ CKEDITOR_CONFIGS = {
             {'name': 'yourcustomtools', 'items': [
                 # put the name of your editor.ui.addButton here
                 'Preview',
-                'youtube',
-                'codesnippet',
-                'widget',
+                'Youtube',
+                'CodeSnippet',
+                'WidGet',
             ]},
         ],
         'toolbar': 'YourCustomToolbarConfig',  # put selected toolbar config here
@@ -251,7 +251,6 @@ CKEDITOR_CONFIGS = {
         'extraPlugins': ','.join([
             'youtube',
             'codesnippet',
-            'widget',
             'uploadimage', # the upload image feature
             # your extra plugins here
             'youtube',

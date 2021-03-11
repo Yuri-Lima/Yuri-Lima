@@ -31,8 +31,11 @@
   <!-- Bootstrap core CSS don't touch-->
   <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %} ">
 
-  <!-- TinyMCE Config don't touch-->
+  <!-- CKEditor Code Snippet Highlight Config don't touch-->
   {{ form.media }}
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 
   <!-- Covid Text Animated don't touch-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
