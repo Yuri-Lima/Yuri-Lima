@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
 import mimetypes
 from decouple import config
 from pathlib import Path
@@ -39,10 +38,9 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['yurilima.herokuapp.com','www.yurilima.com.br', '127.0.0.1']
 
-
 # Application definition
-
-INSTALLED_APPS = [
+INSTALLED_APPS = (
+    [
     # The following apps are required:
     # Django Apps    
     'django.contrib.admin',
@@ -64,12 +62,12 @@ INSTALLED_APPS = [
     "anymail",
     'mathfilters',
     'google_analytics',
-    # << Those below are working together, don't touch >>
-    'tinymce',
-    'grappelli',
-    'filebrowser',
-    #End
+    'ckeditor',
+    'ckeditor_uploader',
+    'reset_migrations',
 ]
+
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -196,51 +194,163 @@ AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-#Tiny API Key 
-TINYMCE_JS_URL = os.path.join(MEDIA_URL, "tinymce/tinymce.min.js")
-TINYMCE_SPELLCHECKER = True
-TINYMCE_COMPRESSOR = False
-TINYMCE_DEFAULT_CONFIG = {
-    # 'selector':'form-group',
-    "height": "520px",
-    "width": "1280px",
-    #  /* enable title field in the Image dialog*/
-    'image_title': 'true',
-    # /* enable automatic uploads of images represented by blob or data URIs*/
-    'automatic_uploads': 'true',
 
-    'file_picker_types': 'image',
-
-    "menubar": "file edit view insert format tools table help",
-
-    'quickbars_selection_toolbar': 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
-
-    "plugins": "advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code "
-
-    "fullscreen insertdatetime media table paste code help wordcount spellchecker codesample",
-
-    "toolbar1": "undo redo | forecolor bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft "
-
-    "aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist",
-
-    'toolbar2': "fullscreen  preview save print | insertfile image media pageembed template link anchor | "
-
-    "backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | "
-
-    "a11ycheck ltr rtl | showcomments addcomment code codesample |",
-
-    "custom_undo_redo_levels": 10,
-
-    'codesample_global_prismjs': 'true',
-
-    'toolbar_mode': 'sliding',
-    
-    # "language": "en-Us",  # To force a specific language instead of the Django current language.
-}
 GOOGLE_ANALYTICS = {
     'google_analytics_id': 'G-J4BGZKBT6W',
 }
 
+CKEDITOR_UPLOAD_PATH = "ckuploads/" #os.path.join(MEDIA_URL, "ckuploads/")
+CKEDITOR_ALLOW_NONIMAGE_FILES = False # image files only
+CKEDITOR_CONFIGS = {
+    'default': {
+        'skin': 'kama',
+        "removePlugins": "stylesheetparser",
+        # 'skin': 'office2013',
+        'height': 291,
+        'width': '100%',
+        'filebrowserWindowHeight': 725,
+        'filebrowserWindowWidth': 940,
+        'toolbarCanCollapse': True,
+        'toolbar_Basic': [
+            ['Source', '-', 'Bold', 'Italic']
+        ],
+        'toolbar_YourCustomToolbarConfig': [
+            {'name': 'document', 'items': ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates']},
+            {'name': 'clipboard', 'items': ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
+            {'name': 'editing', 'items': ['Find', 'Replace', '-', 'SelectAll']},
+            {'name': 'forms',
+             'items': ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton',
+                       'HiddenField']},
+            '/', # put this to force next toolbar on new line
+            {'name': 'basicstyles',
+             'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']},
+            {'name': 'paragraph',
+             'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-',
+                       'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl',
+                       'Language']},
+            {'name': 'links', 'items': ['Link', 'Unlink', 'Anchor']},
+            {'name': 'insert',
+             'items': ['codesnippet','youtube','Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe']},
+            '/',
+            {'name': 'styles', 'items': ['Styles', 'Format', 'Font', 'FontSize']},
+            {'name': 'colors', 'items': ['TextColor', 'BGColor']},
+            {'name': 'tools', 'items': ['Maximize', 'ShowBlocks']},
+            # {'name': 'about', 'items': ['About']},
+
+            {'name': 'yourcustomtools', 'items': [
+                # put the name of your editor.ui.addButton here
+                'Preview',
+                'youtube',
+                'codesnippet',
+                'widget',
+            ]},
+        ],
+        'toolbar': 'YourCustomToolbarConfig',  # put selected toolbar config here
+        'toolbarGroups': [{ 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] }],
+        # 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
+        'tabSpaces': 4,
+        'extraPlugins': ','.join([
+            'youtube',
+            'codesnippet',
+            'widget',
+            'uploadimage', # the upload image feature
+            # your extra plugins here
+            'youtube',
+            'div',
+            'autolink',
+            'autoembed',
+            'embedsemantic',
+            'autogrow',
+            # 'devtools',
+            'widget',
+            'lineutils',
+            'clipboard',
+            'dialog',
+            'dialogui',
+            'elementspath'
+        ]),
+        
+}}
+
+
+#<< ===================   END Settings.py =================== >>
+
+
+
+
+
+
+# #Tiny API Key 
+# TINYMCE_JS_URL = os.path.join(MEDIA_URL, "tinymce/tinymce.min.js")
+# # TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, "tinymce")
+
+# TINYMCE_SPELLCHECKER = True
+# TINYMCE_COMPRESSOR = False
+# TINYMCE_DEFAULT_CONFIG = {
+#     # 'selector':'form-group',
+#     "height": "520px",
+#     "width": "1280px",
+#     #  /* enable title field in the Image dialog*/
+#     'image_title': 'true',
+#     # /* enable automatic uploads of images represented by blob or data URIs*/
+#     'automatic_uploads': 'true',
+
+#     'file_picker_types': 'image',
+
+#     "menubar": "file edit view insert format tools table help",
+
+#     'quickbars_selection_toolbar': 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+
+#     "plugins": "advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code "
+
+#     "fullscreen insertdatetime media table paste code help wordcount spellchecker codesample",
+
+#     "toolbar1": "undo redo | forecolor bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft "
+
+#     "aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist",
+
+#     'toolbar2': "fullscreen  preview save print | insertfile image media pageembed template link anchor | "
+
+#     "backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | "
+
+#     "a11ycheck ltr rtl | showcomments addcomment code codesample |",
+
+#     "custom_undo_redo_levels": 10,
+
+#     'codesample_global_prismjs': 'true',
+
+#     'toolbar_mode': 'sliding',
+    
+#     # "language": "en-Us",  # To force a specific language instead of the Django current language.
+# }
+#<< Start FileBrowser >>
+# site.storage.location
+# #Main FileBrowser Directory
+# DIRECTORY = getattr(yurilima, "FILEBROWSER_DIRECTORY", 'uploads/')
+# #VERSIONS_BASEDIR 
+# VERSIONS_BASEDIR = getattr(yurilima, 'FILEBROWSER_VERSIONS_BASEDIR', '_versions')
+# #VERSION_QUALITY
+# VERSION_QUALITY = getattr(yurilima, 'FILEBROWSER_VERSION_QUALITY', 90)
+# #ADMIN_VERSIONS
+# ADMIN_VERSIONS = getattr(yurilima, 'FILEBROWSER_ADMIN_VERSIONS', ['thumbnail', 'small', 'medium', 'big', 'large'])
+# #ADMIN_THUMBNAIL
+# ADMIN_THUMBNAIL = getattr(yurilima, 'FILEBROWSER_ADMIN_THUMBNAIL', 'admin_thumbnail')
+
+
+# EXTENSIONS = getattr(yurilima, "FILEBROWSER_EXTENSIONS", {
+#     'Image': ['.jpg','.jpeg','.gif','.png','.tif','.tiff'],
+#     'Document': ['.pdf','.doc','.rtf','.txt','.xls','.csv'],
+#     'Video': ['.mov','.wmv','.mpeg','.mpg','.avi','.rm'],
+#     'Audio': ['.mp3','.mp4','.wav','.aiff','.midi','.m4p']
+# })
+# SELECT_FORMATS = getattr(yurilima, "FILEBROWSER_SELECT_FORMATS", {
+#     'file': ['Image','Document','Video','Audio'],
+#     'image': ['Image'],
+#     'document': ['Document'],
+#     'media': ['Video','Audio'],
+# })
+# TINYMCE_FILEBROWSER= True
+#<< End FileBrowser >>
 
 
 

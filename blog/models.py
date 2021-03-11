@@ -1,7 +1,8 @@
 from django.db import models
 from django.conf import settings
 from django.urls import reverse
-from tinymce import models as tinymce_models
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 # Create your models here.
 class Painel(models.Model):
@@ -31,7 +32,7 @@ class Post(models.Model):
     title = models.CharField(max_length=100, blank=False)
     slug = models.SlugField(max_length=100 ,null=True)
     #===============================================================================
-    content_post = tinymce_models.HTMLField(null=True, blank=True, verbose_name='Content')
+    content_post = RichTextUploadingField(null=True, blank=True, verbose_name='Content')
     contact_number = models.CharField(max_length=20,blank=True, help_text='If you have another way to comunicate.')
     #===============================================================================
     date_posted = models.DateTimeField(auto_now_add= True)
