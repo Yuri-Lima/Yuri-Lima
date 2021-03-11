@@ -12,12 +12,13 @@
 
 > ### https://www.yurilima.com.br/
 
-> ### My first prject:
+> ### My first project:
 1. **Personal Painel Blog**:
   I am building an aplication to show post from hashtag. For while this is only a simple example, 
   because my real intentions is create a new blog with totaly new propuse. 
   For more details about it you can take a look at on https://www.yurilima.com.br/blog.
   There you can follow week by week. Some new features is being added.
+  
 1. **Professional Profile**: 
   For more details about it you can take a look at on https://www.yurilima.com.br/yurilima.
 
