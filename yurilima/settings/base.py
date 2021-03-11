@@ -64,7 +64,6 @@ INSTALLED_APPS = (
     'google_analytics',
     'ckeditor',
     'ckeditor_uploader',
-    'reset_migrations',
 ]
 
 )
