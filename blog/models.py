@@ -32,7 +32,13 @@ class Post(models.Model):
     title = models.CharField(max_length=100, blank=False)
     slug = models.SlugField(max_length=100 ,null=True)
     #===============================================================================
-    content_post = RichTextUploadingField(null=True, blank=True, verbose_name='Content')
+    content_post = RichTextUploadingField(null=True, blank=True, verbose_name='Content', 
+                                external_plugin_resources= [(
+                                    'youtube',
+                                    '/static/ckeditor/youtube/',
+                                    'plugin.js',
+                                )],
+                                )
     contact_number = models.CharField(max_length=20,blank=True, help_text='If you have another way to comunicate.')
     #===============================================================================
     date_posted = models.DateTimeField(auto_now_add= True)
