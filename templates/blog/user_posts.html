@@ -24,7 +24,7 @@
             </div>
             <h2><a class="article-title" href="{{post.get_absolute_url}}">{{ post.title|title }}</a></h2>
             <!-- <p class="article-content">{{ post.content|linebreaks|truncatewords:20 }}</p> -->
-            <p class="article-content">{{ post.content_post|safe|linebreaks|truncatewords:20 }}</p>
+            <p class="article-content">{{ post.content_post|safe|truncatechars_html:25 }}</p>
             </div>
         </article>
     {% endfor %}
