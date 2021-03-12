@@ -17,16 +17,22 @@
                 <small class="text-white"><b>Last Updated: </b> {{ object.date_updated|date:'N d, Y H:i:s' }}</small>
             </div>
         </div>
-    </div>    
-</div>
-<div class="d-flex flex-row">
-    <div class="ml-3 p-2 align-self-end">
+    </div>
+    <div class="ml-2 p-1 align-self-end">
         {% if object.author == user %}
-            <a class="btn btn-info btn-sm m-1 p-2" href="{% url 'post-update' object.id %}">Update</a>
-            <a class="btn btn-danger btn-sm m-1 p-2" href="{% url 'post-delete' object.id %}">Delete</a>
+            <a class="btn btn-info btn-sm m-1 p-1" href="{% url 'post-update' object.id %}">Update</a>
+            <a class="btn btn-danger btn-sm m-1 p-1" href="{% url 'post-delete' object.id %}">Delete</a>
+        {% endif %}
+    </div> 
+</div>
+<!-- <div class="d-flex flex-row">
+    <div class="ml-2 p-1 align-self-end">
+        {% if object.author == user %}
+            <a class="btn btn-info btn-sm m-1 p-1" href="{% url 'post-update' object.id %}">Update</a>
+            <a class="btn btn-danger btn-sm m-1 p-1" href="{% url 'post-delete' object.id %}">Delete</a>
         {% endif %}
     </div>
-</div>
+</div> -->
 
 
 <div class="d-flex flex-column">
@@ -37,6 +43,5 @@
         <p class="article-content">{{ object.content_post|safe }}</p>
     </div>
 </div>
-
-    
+ 
 {% endblock content %}

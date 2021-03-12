@@ -13,7 +13,7 @@
             </ul>
         </div>
         <h2><a class="article-title" href="{{post.get_absolute_url}}">{{ post.title|title }}</a></h2>
-        <p class="article-content">{{ post.content_post|safe|linebreaks|truncatechars_html:10|cut:"  " }}</p>
+        <p class="article-content">{{ post.content_post|safe|truncatechars_html:10|cut:"  " }}</p>
         </div>
     </article>
 {% endfor %}
