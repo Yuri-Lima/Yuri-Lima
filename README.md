@@ -10,14 +10,17 @@
 - 😄 Pronouns: Power of will
 
 
-> ### We are goint to see some exemples that i'll develop.
+> ### https://www.yurilima.com.br/
 
-> ### My first prject:
-1. **Personal Painel Blog**:
-  I am building an aplication to show post from hashtag. For while this is only a simple example, 
-  because my real intentions is create a new blog with totaly new propuse. 
-  For more details about it you can take a look at on https://www.yurilima.com.br/.
+> ### My first project:
+1. **Personal Board Blog**:
+  I am building an application to show post from the hashtag. For while this is only a simple example, 
+  because my real intentions are creating a new blog with a totally new propose. 
+  For more details about it, you can take a look at https://www.yurilima.com.br/blog.
   There you can follow week by week. Some new features is being added.
+  
+1. **Professional Profile**: 
+  For more details about it you can take a look at on https://www.yurilima.com.br/yurilima.
 
 If you want to give some piece of advices, please, fell free to getting in touch.
   
