@@ -1,0 +1,17 @@
+
+    <div class="card my-4">
+        <h5 class="card-header">{{object.painel}}</h5>
+        <div class="card-body">
+        <div class="row">
+            <div class="col-lg-6">
+            <ul class="list-unstyled mb-0">
+                {% for p in painel_list.post_set.all %}
+                <li>
+                <a href="{% url 'painel-detail' object.id %}">{{p.title|truncatechars_html:10|cut:" "}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+            </div>
+        </div>
+        </div>
+    </div>

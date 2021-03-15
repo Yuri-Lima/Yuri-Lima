@@ -151,6 +151,7 @@
       <!-- Covid Content -->
       {% include 'blog/covid.html' %}
       <!-- End Content -->
+      
           <main role="main" class="container">
             <div class="row">
               <div class="col">
@@ -165,6 +166,11 @@
                       <!-- All in here -->
                 {% endblock %}
               </div>
+              {% if paineis %}
+              <!-- Sidebar Content -->
+              {% include 'painel/sidebar.html' %}
+              <!-- End Content -->
+              {% endif %}
             </div>
           </main>
     </div>

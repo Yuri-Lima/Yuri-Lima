@@ -111,7 +111,7 @@ class PainelCreate(LoginRequiredMixin,CreateView):
 class PainelDetail(DetailView):#(LoginRequiredMixin,DetailView):
     model: Painel 
     template_name = 'painel/painel_detail.html'
-
+    # context_object_name = 'paineis'
     def get_object(self, queryset=None): #https://levelup.gitconnected.com/django-quick-tips-get-absolute-url-1c22321f806b
         return Painel.objects.get(hashtag=self.kwargs.get("hashtag"))
 
@@ -203,7 +203,7 @@ class PostDetailView(DetailView):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of all the books
-        context['painel_list'] = Painel.objects.all()
+        context['painel_list'] = Painel.objects.get(pk=self.kwargs.get("pk"))
         return context
 
 class PostCreateView(LoginRequiredMixin,CreateView):

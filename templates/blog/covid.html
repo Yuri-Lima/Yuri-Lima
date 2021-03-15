@@ -6,13 +6,12 @@
           <div class="d-flex flex-row">
           {% if covid %}
             {% for x in covid %}
-            <h8>{{ x.country }} Cases - 
+            <h8>Lastest {{ x.country }} Cases - 
             <span
                class="txt-rotate"
                data-period="1000"
                data-rotate='[ "Confirmed: {{ x.confirmed|intcomma }}", "Recovered: {{ x.recovered|intcomma }}", "Deaths: {{ x.deaths|intcomma }}"]'></span>
-               {% now "Y-M-d" as last_update %}
-               - Last Update {{ last_update }}</h8>
+               </h8>
             {% endfor %}
           {% endif %}
           </div>
@@ -21,3 +20,5 @@
     </div>
   </div>
 
+  <!-- {% now "Y-M-d" as last_update %}
+  - Last Update {{ last_update }} -->
