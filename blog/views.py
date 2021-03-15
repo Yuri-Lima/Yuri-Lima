@@ -203,7 +203,7 @@ class PostDetailView(DetailView):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of all the books
-        context['painel_list'] = Painel.objects.get(pk=self.kwargs.get("pk"))
+        context['painel_list'] = Painel.objects.all()#i Dont need it. Remenber to delete it, For study if a want to.
         return context
 
 class PostCreateView(LoginRequiredMixin,CreateView):
