@@ -7,7 +7,7 @@
             <ul class="list-unstyled mb-0">
                 {% for p in painel_list.post_set.all %}
                 <li>
-                <a href="{% url 'painel-detail' object.id %}">{{p.title|truncatechars_html:10|cut:" "}}</a>
+                <a href="{% url 'post-detail' p.id %}">{{p.title|truncatechars_html:10|cut:" "}}</a>
                 </li>
                 {% endfor %}
             </ul>
