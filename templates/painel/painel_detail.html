@@ -1,24 +1,25 @@
 {% extends 'blog/index.html' %}
 
+
 {% block content %}
 
-<div class="media-body">
-    <div class="d-flex p-0 bg-secondary text-white rounded">
-        <div class="p-1 mr-auto align-self-center">
-            <small class="text-white mr-2"><b>Hastag: </b><a class=" text-white mr-2" href="{% url 'painel-detail' painel.hashtag %}">{{object.hashtag}}</a></small>
-        <small class="text-white mr-2"><b>Created by: </b><a class="text-white mr-2" href="{% url 'user-painel' painel.created_by.username %}">{{object.created_by.username|capfirst}} <i class="bx bx-link bx-tada"></i></a></small>
-        <small class="text-white mr-2"><b>Posted: </b><a class="text-white mr-2" href="#">{{object.painel_date_posted|date:'N d, Y H:i:s'}}</a></small>
+    <!-- <div class="media-body"> -->
+        <div class="d-flex p-0 bg-secondary text-white rounded">
+            <div class="p-1 mr-auto align-self-center">
+                <small class="text-white mr-2"><b>Hastag: </b><a class=" text-white mr-2" href="{% url 'painel-detail' painel.hashtag %}">{{object.hashtag}}</a></small>
+                <small class="text-white mr-2"><b>Created by: </b><a class="text-white mr-2" href="{% url 'user-painel' painel.created_by.username %}">{{object.created_by.username|capfirst}} <i class="bx bx-link bx-tada"></i></a></small>
+                <small class="text-white mr-2"><b>Posted: </b><a class="text-white mr-2" href="#">{{object.painel_date_posted|date:'N d, Y H:i:s'}}</a></small>
+            </div>
+            
+            {% if painel.created_by == user %}
+                <div class="ml-auto p-1 align-self-center">
+                    <small><a class="btn btn-info btn-sm mt-0 mb-0 p-1" href="{% url 'painel-update' painel.id %}">Update</a></small> 
+                </div>
+                <div class="ml-2 p-1 align-self-center">
+                    <small><a class="btn btn-danger btn-sm mt-1 mb-1 p-1" href="{% url 'painel-delete' painel.id %}">Delete</a></small>
+                </div>
+            {% endif %}
         </div>
-        
-        {% if painel.created_by == user %}
-    <div class="ml-auto p-1 align-self-center">
-        <small><a class="btn btn-info btn-sm mt-0 mb-0 p-1" href="{% url 'painel-update' painel.id %}">Update</a></small> 
-    </div>
-    <div class="ml-2 p-1 align-self-center">
-        <small><a class="btn btn-danger btn-sm mt-1 mb-1 p-1" href="{% url 'painel-delete' painel.id %}">Delete</a></small>
-    </div>
-    {% endif %}
-    </div>
     <div class="p-2 mb-auto" style="height: 15px;"></div>
     {% for post in posts_by_hashtag %}
         <article class="media content-section"> 
