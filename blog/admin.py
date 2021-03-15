@@ -11,6 +11,6 @@ class PainelAdmin(admin.ModelAdmin):
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     model = Post
-    fields = ('author','painel','title','slug','content_post','contact_number',)
+    fields = ('author','painel','title','content_post','contact_number',)
     list_display = ('__str__','author','painel',)
     
