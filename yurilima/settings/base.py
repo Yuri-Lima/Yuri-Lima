@@ -187,11 +187,12 @@ SERVER_EMAIL = "y.m.lima19@gmail.com"  # ditto (default from-email for Django er
 
 #AWS S3 Buckets Config
 # https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html
-# https://github.com/etianen/django-s3-storage#file-storage-settings
+# https://testdriven.io/blog/storing-django-static-and-media-files-on-amazon-s3/
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+#he response can be cached by browsers and intermediary caches for up to 1 day (60 seconds x 60 minutes x 24 hours)
 AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 AWS_S3_FILE_OVERWRITE = False
 # AWS_DEFAULT_ACL = None
