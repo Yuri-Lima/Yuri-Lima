@@ -32,6 +32,10 @@ from yurilimacv.sitemaps import YuriLimaCvViewSitemap
 from users.sitemaps import UsersViewSitemap
 from blog.sitemaps import BoardViewSitemap, PostViewSitemap
 from emails.sitemaps import EmailViewSitemap
+#CKeditor
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import never_cache
+from ckeditor_uploader import views as ckeditor_views
 
 #Dict Sitemaps
 # https://www.youtube.com/watch?v=xAXMqiPSY34
@@ -63,8 +67,10 @@ urlpatterns = [
     #Index
     path('', views.index_view),
     
-    #Blog richtextfield >> ckeditor <<
-    path('ckeditor/', include('ckeditor_uploader.urls')),
+    #Blog CKeditor  richtextfield >> ckeditor <<
+    # path('ckeditor/', include('ckeditor_uploader.urls')),
+    re_path(r'^ckeditor/upload/', login_required(ckeditor_views.upload), name='ckeditor_upload'),
+    re_path(r'^ckeditor/browse/', never_cache(login_required(ckeditor_views.browse)), name='ckeditor_browse'),
 
     #Google Analytics >> google_analytics << https://pypi.org/project/django-google-analytics-app/
     re_path('djga/', include('google_analytics.urls')),

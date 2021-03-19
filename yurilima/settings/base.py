@@ -64,6 +64,7 @@ INSTALLED_APPS = (
     'google_analytics',
     'ckeditor',
     'ckeditor_uploader',
+    'reset_migrations',
 ]
 
 )
@@ -186,20 +187,27 @@ SERVER_EMAIL = "y.m.lima19@gmail.com"  # ditto (default from-email for Django er
 
 #AWS S3 Buckets Config
 # https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html
+# https://github.com/etianen/django-s3-storage#file-storage-settings
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 AWS_QUERYSTRING_AUTH = False
+# AWS_S3_BUCKET_AUTH = False
+# AWS_S3_GZIP = True
+# AWS_IS_GZIPPED = True
+AWS_S3_REGION_NAME = 'eu-west-1'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
 
 
 GOOGLE_ANALYTICS = {
     'google_analytics_id': 'G-J4BGZKBT6W',
 }
 
-CKEDITOR_UPLOAD_PATH = "ckuploads/" #os.path.join(MEDIA_URL, "ckuploads/")
+CKEDITOR_UPLOAD_PATH = 'ckuploads/'
+CKEDITOR_UPLOAD_SLUGIFY_FILENAME = False
 CKEDITOR_ALLOW_NONIMAGE_FILES = False # image files only
 CKEDITOR_CONFIGS = {
     'default': {
