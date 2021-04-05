@@ -14,10 +14,8 @@
 
 > ### My first project:
 1. **Personal Board Blog**:
-  I am building an application to show post from the hashtag. For while this is only a simple example, 
-  because my real intentions are creating a new blog with a totally new propose. 
+  I have done an application to show post from the hashtag related oin each board.
   For more details about it, you can take a look at https://www.yurilima.com.br/blog.
-  There you can follow week by week. Some new features is being added.
   
 1. **Professional Profile**: 
   For more details about it you can take a look at on https://www.yurilima.com.br/yurilima.
@@ -28,6 +26,6 @@ If you want to give some piece of advices, please, fell free to getting in touch
 
 > **Atention** If you go email me, please put as subject the name of the project, in this case: **(WebSite Yuri Lima) Requests**
 
-|  Name |  Email | Mobile  |
+|  Name |  Email | Mobile/Whatsapp  |
 |-------|--------|---------|
 |  Yuri Lima | y.m.lima19@gmail.com  | +353 83 419.1605  |
