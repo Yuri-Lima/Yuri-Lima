@@ -28,15 +28,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-#MIME type Django
-# mimetypes.add_type("text/css", ".css", True)
-# mimetypes.add_type("text/scss", ".scss", True)
-# mimetypes.add_type("text/plain", ".js", True)
-# mimetypes.add_type("text/javascript", ".js", True)
-# mimetypes.add_type("application/javascript", ".js", True)
-# mimetypes.add_type("application/x-javascript", ".js", True)
-
-ALLOWED_HOSTS = ['yurilima.herokuapp.com','www.yurilima.com.br', '127.0.0.1']
+ALLOWED_HOSTS = ['.herokuapp.com','.yurilima.com.br', '127.0.0.1']
 
 # Application definition
 INSTALLED_APPS = (
@@ -282,87 +274,4 @@ CKEDITOR_CONFIGS = {
         ]),
         
 }}
-
-
 #<< ===================   END Settings.py =================== >>
-
-
-
-
-
-
-# #Tiny API Key 
-# TINYMCE_JS_URL = os.path.join(MEDIA_URL, "tinymce/tinymce.min.js")
-# # TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, "tinymce")
-
-# TINYMCE_SPELLCHECKER = True
-# TINYMCE_COMPRESSOR = False
-# TINYMCE_DEFAULT_CONFIG = {
-#     # 'selector':'form-group',
-#     "height": "520px",
-#     "width": "1280px",
-#     #  /* enable title field in the Image dialog*/
-#     'image_title': 'true',
-#     # /* enable automatic uploads of images represented by blob or data URIs*/
-#     'automatic_uploads': 'true',
-
-#     'file_picker_types': 'image',
-
-#     "menubar": "file edit view insert format tools table help",
-
-#     'quickbars_selection_toolbar': 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
-
-#     "plugins": "advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code "
-
-#     "fullscreen insertdatetime media table paste code help wordcount spellchecker codesample",
-
-#     "toolbar1": "undo redo | forecolor bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft "
-
-#     "aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist",
-
-#     'toolbar2': "fullscreen  preview save print | insertfile image media pageembed template link anchor | "
-
-#     "backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | "
-
-#     "a11ycheck ltr rtl | showcomments addcomment code codesample |",
-
-#     "custom_undo_redo_levels": 10,
-
-#     'codesample_global_prismjs': 'true',
-
-#     'toolbar_mode': 'sliding',
-    
-#     # "language": "en-Us",  # To force a specific language instead of the Django current language.
-# }
-#<< Start FileBrowser >>
-# site.storage.location
-# #Main FileBrowser Directory
-# DIRECTORY = getattr(yurilima, "FILEBROWSER_DIRECTORY", 'uploads/')
-# #VERSIONS_BASEDIR 
-# VERSIONS_BASEDIR = getattr(yurilima, 'FILEBROWSER_VERSIONS_BASEDIR', '_versions')
-# #VERSION_QUALITY
-# VERSION_QUALITY = getattr(yurilima, 'FILEBROWSER_VERSION_QUALITY', 90)
-# #ADMIN_VERSIONS
-# ADMIN_VERSIONS = getattr(yurilima, 'FILEBROWSER_ADMIN_VERSIONS', ['thumbnail', 'small', 'medium', 'big', 'large'])
-# #ADMIN_THUMBNAIL
-# ADMIN_THUMBNAIL = getattr(yurilima, 'FILEBROWSER_ADMIN_THUMBNAIL', 'admin_thumbnail')
-
-
-# EXTENSIONS = getattr(yurilima, "FILEBROWSER_EXTENSIONS", {
-#     'Image': ['.jpg','.jpeg','.gif','.png','.tif','.tiff'],
-#     'Document': ['.pdf','.doc','.rtf','.txt','.xls','.csv'],
-#     'Video': ['.mov','.wmv','.mpeg','.mpg','.avi','.rm'],
-#     'Audio': ['.mp3','.mp4','.wav','.aiff','.midi','.m4p']
-# })
-# SELECT_FORMATS = getattr(yurilima, "FILEBROWSER_SELECT_FORMATS", {
-#     'file': ['Image','Document','Video','Audio'],
-#     'image': ['Image'],
-#     'document': ['Document'],
-#     'media': ['Video','Audio'],
-# })
-# TINYMCE_FILEBROWSER= True
-#<< End FileBrowser >>
-
-
-
-# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
