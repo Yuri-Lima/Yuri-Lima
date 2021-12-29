@@ -14,7 +14,6 @@ from decouple import config
 from pathlib import Path
 import os
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -26,9 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+# DEBUG = config('DEBUG', default=True, cast=bool)
+DEBUG = False
 
-ALLOWED_HOSTS = ['.herokuapp.com','.yurilima.com.br', '127.0.0.1']
+ALLOWED_HOSTS = ['.herokuapp.com', '.yurilima.com.br', 'localhost']
 
 # Application definition
 INSTALLED_APPS = (
@@ -96,11 +96,24 @@ WSGI_APPLICATION = 'yurilima.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django.db.backends.mysql',
+        # "LOCATION": [config('DATABASE_URL')],
+        'NAME': 'sql_resume_yuril',
+        'USER': 'sql_resume_yuril',
+        'PASSWORD': 'E8Bc4E8zY6BKYHcZ',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        # 'OPTIONS': {'charset':'utf8'},
+    }   
 }
 
 
@@ -135,6 +148,16 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+""" Security Session """
+# if not DEBUG:
+SECURE_SSL_REDIRECT = False
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
+# CSRF_COOKIE_SAMESITE = 'None'
+# SESSION_COOKIE_SAMESITE = 'None'
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'http')
+# BASE_URL = "https://www.sharepay.com.br"
 
 
 # Static files (CSS, JavaScript, Images)
