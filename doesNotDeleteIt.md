@@ -48,6 +48,7 @@
     sudo systemctl start gunicorn_yurilima
     sudo systemctl enable gunicorn_yurilima
     sudo systemctl status gunicorn_yurilima
+    sudo systemctl restart gunicorn_yurilima
     gunicorn yurilima.wsgi --preload --log-file - -b 0.0.0.0:8041
 
     proxy: http://unix:/www/wwwroot/resume.yurilima.com.br/Yuri-Lima/yurilima.sock

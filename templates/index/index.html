@@ -68,13 +68,16 @@
                     </div>
                 </div>
             </a>
-            <a href="{% url 'painel-list' %}">
+            {% comment %} {% url 'painel-list' %} {% endcomment %}
+            <a href="/">
                 <div class="p-2">
                     <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
                         <div class="card-header">Blog</div>
                         <div class="card-body">
-                        <h5 class="card-title">Personal and Public Posts</h5>
-                        <p class="card-text">Enjoy your time and read some interesting posts.</p>
+                        {% comment %} <h5 class="card-title">Personal and Public Posts</h5> {% endcomment %}
+                        <h5 class="card-title">Comming Soon!!</h5>
+                        <p class="card-text">You will read some interesting posts. Very soon!</p>
+                        {% comment %} <p class="card-text">Enjoy your time and read some interesting posts.</p> {% endcomment %}
                         </div>
                     </div>
                 </div>
