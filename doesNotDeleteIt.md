@@ -28,16 +28,16 @@
     https://selmiabderrahim.medium.com/how-to-deploy-your-django-app-on-ovh-vps-with-nginx-ssl-certificate-domain-name-4da01aa5e44a
 
 # Create a service for Gunicorn to run on VPS under Nginx
-    1 - sudo nano /etc/systemd/system/gunicorn_yurilima.service
+    1 - sudo nano /etc/systemd/system/yurilimaWebSite.service
 
     [Unit]
-    Description=gunicorn_yurilima daemon  
+    Description=gunicorn_yurilima_website daemon  
     After=network.target
 
     [Service]
-    User=root
+    User=yurilima
     Group=root
-    WorkingDirectory=/www/wwwroot/resume.yurilima.com.br/Yuri-Lima
+    WorkingDirectory=/www/wwwroot/projects/Yuri
     ExecStart=/www/wwwroot/resume.yurilima.com.br/Yuri-Lima/venv1/bin/gunicorn --access-logfile - --workers 3 --bind unix:/www/wwwroot/resume.yurilima.com.br/Yuri-Lima/yurilima.sock yurilima.wsgi:application
 
     [Install]
@@ -45,10 +45,11 @@
 
 # Usefull Commands
     systemctl daemon-reload
-    sudo systemctl start gunicorn_yurilima
-    sudo systemctl enable gunicorn_yurilima
-    sudo systemctl status gunicorn_yurilima
-    sudo systemctl restart gunicorn_yurilima
+    sudo systemctl start yurilimaWebSite
+    sudo systemctl enable yurilimaWebSite
+    sudo systemctl status yurilimaWebSite
+    sudo systemctl restart yurilimaWebSite
+    sudo systemctl stop yurilimaWebSite
     gunicorn yurilima.wsgi --preload --log-file - -b 0.0.0.0:8041
 
     proxy: http://unix:/www/wwwroot/resume.yurilima.com.br/Yuri-Lima/yurilima.sock

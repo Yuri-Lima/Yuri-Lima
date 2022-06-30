@@ -28,7 +28,9 @@ SECRET_KEY = config('SECRET_KEY')
 # DEBUG = config('DEBUG', default=True, cast=bool)
 DEBUG = False
 
-ALLOWED_HOSTS = ['.herokuapp.com', '.yurilima.com.br', 'localhost']
+ALLOWED_HOSTS = ['.herokuapp.com', '.yurilima.com.br', 'localhost', '127.0.0.1', 'www.yurilima.com.br']
+
+DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
 # Application definition
 INSTALLED_APPS = (
@@ -107,11 +109,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         # "LOCATION": [config('DATABASE_URL')],
-        'NAME': 'sql_resume_yuril',
-        'USER': 'sql_resume_yuril',
-        'PASSWORD': 'E8Bc4E8zY6BKYHcZ',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT'),
         # 'OPTIONS': {'charset':'utf8'},
     }   
 }
@@ -151,12 +153,14 @@ USE_TZ = True
 
 """ Security Session """
 # if not DEBUG:
-SECURE_SSL_REDIRECT = False
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
-# CSRF_COOKIE_SAMESITE = 'None'
-# SESSION_COOKIE_SAMESITE = 'None'
-# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'http')
+# SECURE_SSL_REDIRECT = False
+# SESSION_COOKIE_SECURE = False
+# CSRF_COOKIE_SECURE = True
+# CSRF_COOKIE_SAMESITE = True
+# CSRF_COOKIE_DOMAIN = True
+# SESSION_COOKIE_SAMESITE = True
+CSRF_TRUSTED_ORIGINS = ['https://*.yurilima.com.br']
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # BASE_URL = "https://www.sharepay.com.br"
 
 

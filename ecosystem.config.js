@@ -4,30 +4,14 @@ module.exports = {
     {
       name:'YuriLima_WebSite',
       script: 'manage.py',
-      args: ["runserver", "127.0.0.1:8041"],
+      args: ["runserver", "127.0.0.1:8042"], 
       exec_mode: "fork",
-      instances: "1",
       wait_ready: true, 
-      autorestart: false, 
-      max_restarts: 5, 
-      interpreter : "/usr/bin/python3",
-      watch: '.'
+      autorestart: false,
+      interpreter : "/www/wwwroot/projects/Yuri/env/bin/python3",
+      watch: false
     },
-  ],
-  deploy : 
-  {
-    production : 
-    {
-      user : 'SSH_USERNAME',
-      host : 'SSH_HOSTMACHINE',
-      ref  : 'origin/main',
-      repo : 'https://github.com/Yuri-Lima/Yuri-Lima.git',
-      path : '/www/wwwroot/resume.yurilima.com.br/Yuri-Lima',
-      'pre-deploy-local': '',
-      'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --env production',
-      'pre-setup': ''
-    }
-  }
+  ]
 };
 
 // "apps": [{

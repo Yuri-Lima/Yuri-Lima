@@ -1,16 +1,15 @@
 {
     "apps": [{
         "name": "YuriLima_WebSite",
-        "cwd" :"/www/wwwroot/resume.yurilima.com.br/Yuri-Lima",
-        "script": "gunicorn",
-        "args": ["yurilima.wsgi", "--preload --log-file - -b 127.0.0.1:8041"], 
+        "cwd" :"/www/wwwroot/projects/Yuri",
+        "script": " source env/bin/activate && gunicorn yurilima.wsgi --preload --log-file -w 10 --threads=3 --bind 127.0.0.1:8041",
         "exec_mode": "fork",
         "instances": "1",
         "wait_ready": true,
-        "autorestart": false,
+        "autorestart": true,
         "max_restarts": 5,
-        "interpreter": "/bin/python3",
-        "watch": ".", 
+        "interpreter": "/www/wwwroot/projects/Yuri/env/bin/python3",
+        "watch": false, 
         "repo" : "https://github.com/Yuri-Lima/Yuri-Lima.git"
     }]
 }
