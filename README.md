@@ -7,12 +7,12 @@
 - 📫 How to reach me: +353 083 419 1605 (Dublin/Irlanda | Ardee/Irlanda)
 - 😄 Pronouns: Power of will
 
-> ### https://www.yurilima.com.br/
+> ### https://yurilima.com.br/
 
 > ### Portifolio:
 >   
 1. **Professional Profile**: 
-  For more details about it you can take a look at on https://www.yurilima.com.br/yurilima.
+  For more details about it you can take a look at on https://yurilima.com.br/yurilima.
 
 If you want to give some piece of advices, please, fell free to getting in touch.
   
