@@ -2,7 +2,7 @@
 <!-- Task Lists -->
 # WebSite Yuri Lima
 ### Hi there 👋
-- 👯 I’m looking to collaborate with the communities of Nodejs | Reactjs | JS | Python | Django
+- 👯 I’m looking to collaborate with the communities of NodeJS|TS
 - 💬 Ask me about whatever you want, i will be glad to anwser you anytime
 - 📫 How to reach me: +353 083 419 1605 (Dublin/Irlanda | Ardee/Irlanda)
 - 😄 Pronouns: Power of will
