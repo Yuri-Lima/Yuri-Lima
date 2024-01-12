@@ -1,6 +1,6 @@
 <!-- Headings --> <!-- Strong --> <!-- Italics --> <!-- Blockquote --> <!-- Links --> <!-- UL --> <!-- OL --> <!-- Images --> <!-- Code Blocks --> <!-- Tables -->
 <!-- Task Lists -->
-# WebSite Yuri Lima
+# Yuri Lima
 ### Hi there 👋
 - 👯 I’m looking to collaborate with the communities of NodeJS|TS|NestJs|Angular
 - 💬 Ask me about whatever you want, i will be glad to anwser you anytime
