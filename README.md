@@ -10,19 +10,22 @@ I work across the full backend lifecycle — designing APIs, modeling data, and 
 
 - **Backend at scale** — TypeScript, Node.js, NestJS, GraphQL & REST, PostgreSQL, Firebase.
 - **AI / LLM engineering** — RAG pipelines, vector search (pgvector), multi-provider LLM orchestration, and the Model Context Protocol (MCP).
-- **Frontend when it counts** — Angular, with side work in Flutter for mobile.
+- **Frontend** — Angular.
 
 ### Featured work
 
+- **ZenthOs** — an "operating system for AI agents": a NestJS kernel handling agent scheduling, persistent memory, sandboxed tool access, identity, observability, and guardrails — paired with a local Python ML inference bridge and an Angular agent-factory dashboard. Architecture and planning done with AI assistance. (Private project.)
 - **ContractAI** — a contract-review assistant built on a RAG pipeline: pgvector embeddings, swappable LLM providers, and S3-compatible document storage. Architecture and planning done with AI assistance. (Portfolio project.)
 
 ### Built with AI coding agents
 
-- **Whenote** — a Flutter + Firebase app (timed letters, time capsules, emotional social feed) built end-to-end with AI coding agents. Includes Firestore security rules, AI moderation, and indexed user-search at scale.
+> **100% vibe-coded** — built end-to-end by AI coding agents.
+
+- **Whenote** — a Flutter + Firebase app (timed letters, time capsules, emotional social feed) with Firestore security rules, AI moderation, and indexed user-search at scale.
 
 ### Tech I reach for
 
-`TypeScript` · `Node.js` · `NestJS` · `GraphQL` · `PostgreSQL` / `pgvector` · `Firebase` · `Angular` · `Flutter` · `AWS` · `Docker` · `Python`
+`TypeScript` · `Node.js` · `NestJS` · `GraphQL` · `PostgreSQL` / `pgvector` · `Firebase` · `Angular` · `AWS` · `Docker` · `Python`
 
 ### Let's connect
 
