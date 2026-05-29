@@ -1,36 +1,54 @@
-# Hi, I'm Yuri Lima 👋
+<h1 align="center">Yuri Lima</h1>
+<p align="center">
+  <b>Senior Software &amp; AI Engineer</b> · 14 years · Oviedo, Spain<br/>
+  Platform engineering meets applied AI — RAG/LLM systems, multi-tenant platforms, agent runtimes
+</p>
 
-**Senior Software & AI Engineer** — building production backends and, more recently, LLM/RAG systems · based in Asturias, Spain 🇪🇸
-
-I work across the full backend lifecycle — designing APIs, modeling data, and shipping reliable services — with a current focus on retrieval-augmented generation, LLM tooling, and agent workflows.
-
----
-
-### What I do
-
-- **Backend at scale** — TypeScript, Node.js, NestJS, GraphQL & REST, PostgreSQL, Firebase.
-- **AI / LLM engineering** — RAG pipelines, vector search (pgvector), multi-provider LLM orchestration, and the Model Context Protocol (MCP).
-- **Frontend** — Angular.
-
-### Featured work
-
-- **ZenthOs** — an "operating system for AI agents": a NestJS kernel handling agent scheduling, persistent memory, sandboxed tool access, identity, observability, and guardrails — paired with a local Python ML inference bridge and an Angular agent-factory dashboard. Architecture and planning done with AI assistance. (Private project.)
-- **ContractAI** — a contract-review assistant built on a RAG pipeline: pgvector embeddings, swappable LLM providers, and S3-compatible document storage. Architecture and planning done with AI assistance. (Portfolio project.)
-
-### Built with AI coding agents
-
-> **100% vibe-coded** — built end-to-end by AI coding agents.
-
-- **Whenote** — a Flutter + Firebase app (timed letters, time capsules, emotional social feed) with Firestore security rules, AI moderation, and indexed user-search at scale.
-
-### Tech I reach for
-
-`TypeScript` · `Node.js` · `NestJS` · `GraphQL` · `PostgreSQL` / `pgvector` · `Firebase` · `Angular` · `AWS` · `Docker` · `Python`
-
-### Let's connect
-
-Portfolio: https://yurilima.info
+<p align="center">
+  <a href="https://yurilima.info"><img src="https://img.shields.io/badge/Portfolio-yurilima.info-7c9eff?style=flat-square&logo=cloudflare&logoColor=white" alt="Portfolio"/></a>
+  <a href="https://linkedin.com/in/yuri-matos-de-lima"><img src="https://img.shields.io/badge/LinkedIn-yuri--matos--de--lima-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
+  <a href="mailto:y.m.lima19@gmail.com"><img src="https://img.shields.io/badge/Email-contact-EA4335?style=flat-square&logo=gmail&logoColor=white" alt="Email"/></a>
+</p>
 
 ---
 
-Open to senior backend & AI engineering roles.
+### About
+
+Senior engineer with 14 years across software, embedded, and AI systems. I work at the intersection of platform engineering and applied AI — building the infrastructure that makes large systems and AI features reliable.
+
+- Architecting a large-scale multi-tenant ERP at CTS KG — NestJS 11 · Angular · GraphQL · PostgreSQL · BullMQ
+- Leading the AI workstream: built an MCP (Model Context Protocol) server exposing internal tools to AI agents, plus an embedded AI assistant
+- Building RAG / LLM systems — citation-grounded responses, semantic caching, multi-provider orchestration, vector search
+- Started in embedded — C/C++ on FreeRTOS — which still shapes how I think about latency, memory, and constraints in AI pipelines
+- Portuguese (native) · English (fluent) · Spanish (intermediate)
+
+### What I'm building
+
+**ContractAI Review** (portfolio) — RAG-based legal assistant where every answer carries mandatory citations, confidence scoring, and jurisdiction-aware reasoning. NestJS + pgvector + BullMQ; multi-provider LLM behind an adapter; document parsers behind a factory; semantic cache; per-tenant token budgets; encryption at rest; automated retention.
+
+**Zenth / ZenthOs** (in progress) — multi-agent runtime: NestJS kernel + Python neural bridge for local embeddings. Sandboxed tool execution with tiered trust, protocol-first JSON Schema / OpenAPI contracts.
+
+**MCP server @ CTS KG** — exposes internal ERP tools to AI agents via the Model Context Protocol.
+
+### Stack
+
+TypeScript · NestJS · Angular · Node.js · Python · GraphQL · PostgreSQL · Redis · Docker · Ansible
+
+**AI/ML:** RAG pipelines · embeddings · vector DBs (pgvector) · semantic caching · multi-provider LLM orchestration · MCP · agent runtimes
+
+**Earlier:** C/C++ · FreeRTOS · embedded firmware
+
+### GitHub stats
+
+<p>
+  <img height="165" src="https://github-readme-stats.vercel.app/api?username=Yuri-Lima&show_icons=true&hide_border=true&theme=tokyonight&count_private=true" alt="GitHub stats"/>
+  <img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Yuri-Lima&layout=compact&hide_border=true&theme=tokyonight&langs_count=8" alt="Top languages"/>
+</p>
+
+### Reach me
+
+- Portfolio: https://yurilima.info
+- LinkedIn: https://linkedin.com/in/yuri-matos-de-lima
+- Email: y.m.lima19@gmail.com
+
+<sub>Open to senior backend / full-stack (NestJS · Angular · Postgres) and AI/RAG/LLM engineering roles — remote, or hybrid in Madrid / Barcelona / Bilbao.</sub>
