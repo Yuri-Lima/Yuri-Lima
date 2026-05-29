@@ -14,8 +14,11 @@ I work across the full backend lifecycle — designing APIs, modeling data, and 
 
 ### Featured work
 
-- **ContractAI** — a contract-review assistant built on a RAG pipeline: pgvector embeddings, swappable LLM providers, and S3-compatible document storage. (Portfolio project.)
-- **Whenote** — a Flutter + Firebase app with Firestore security rules, AI moderation, and user-search at scale.
+- **ContractAI** — a contract-review assistant built on a RAG pipeline: pgvector embeddings, swappable LLM providers, and S3-compatible document storage. Architecture and planning done with AI assistance. (Portfolio project.)
+
+### Built with AI coding agents
+
+- **Whenote** — a Flutter + Firebase app (timed letters, time capsules, emotional social feed) built end-to-end with AI coding agents. Includes Firestore security rules, AI moderation, and indexed user-search at scale.
 
 ### Tech I reach for
 
